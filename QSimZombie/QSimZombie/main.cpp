@@ -1,10 +1,10 @@
-#include "QZombieSim.h"
+#include "QSimZombie.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	QZombieSim w;
+	QSimZombie w;
 	w.show();
 	return a.exec();
 }

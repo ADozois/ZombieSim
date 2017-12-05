@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="QSimZombie">
+    <qresource prefix="/QSimZombie">
+        <file alias="Icon">Resources/ZIcon.png</file>
     </qresource>
 </RCC>

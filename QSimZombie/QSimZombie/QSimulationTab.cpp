@@ -43,6 +43,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 
 	/* Simulation View goes in mLeftLayout */
+	//Add simulation graphic view in this layout!*************************
 	mMainLayout->addLayout(mLeftLayout);
 
 

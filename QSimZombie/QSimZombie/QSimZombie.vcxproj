@@ -100,6 +100,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParamSim.cpp" />
     <ClCompile Include="QParametersTab.cpp" />
     <ClCompile Include="QSimulationTab.cpp" />
     <ClCompile Include="QSimZombie.cpp" />
@@ -131,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
+    <ClInclude Include="ParamSim.h" />
     <CustomBuild Include="QParametersTab.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing QParametersTab.h...</Message>

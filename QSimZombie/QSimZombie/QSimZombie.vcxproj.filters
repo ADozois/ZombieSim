@@ -72,6 +72,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QParametersTab.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="ParamSim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -96,6 +99,9 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParamSim.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

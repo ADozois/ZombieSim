@@ -101,6 +101,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParamSim.cpp" />
+    <ClCompile Include="QHumanoid.cpp" />
     <ClCompile Include="QParametersTab.cpp" />
     <ClCompile Include="QSimulationTab.cpp" />
     <ClCompile Include="QSimZombie.cpp" />
@@ -133,6 +134,20 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
     <ClInclude Include="ParamSim.h" />
+    <CustomBuild Include="QHumanoid.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Command>
+    </CustomBuild>
     <CustomBuild Include="QParametersTab.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing QParametersTab.h...</Message>

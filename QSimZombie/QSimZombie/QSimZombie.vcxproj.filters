@@ -75,6 +75,15 @@
     <ClCompile Include="ParamSim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QHumanoid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QHumanoid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QHumanoid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -93,6 +102,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="QParametersTab.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QHumanoid.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

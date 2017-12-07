@@ -64,6 +64,8 @@ private:
 	int mViewWidth;
 	int mNbrCity;
 	int mMeanAge;
+	int mPregnancyTime;
+
 	double mVirusResistance;
 	double mMeanVirusForce;
 	double mProbNewMilitary;
@@ -72,8 +74,8 @@ private:
 	double mProbInfection;
 	double mComssumptionRateEnergieHuman;
 	double mComssumptionRateEnergieZombie;
-	int mPregnancyTime;
 	double mProbSpeed;
+
 };
 
 #endif

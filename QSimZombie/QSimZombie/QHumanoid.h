@@ -10,7 +10,6 @@ class QRandom;
 
 class QHumanoid : public QGraphicsItem
 {
-	//Q_OBJECT
 
 public:
 	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent = nullptr);

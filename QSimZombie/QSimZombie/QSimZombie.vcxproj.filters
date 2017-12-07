@@ -75,13 +75,10 @@
     <ClCompile Include="ParamSim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QHumanoid.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QHumanoid.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="QHumanoid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QRandom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,6 +110,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ParamSim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRandom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

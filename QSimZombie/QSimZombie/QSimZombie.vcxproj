@@ -103,6 +103,7 @@
     <ClCompile Include="ParamSim.cpp" />
     <ClCompile Include="QHumanoid.cpp" />
     <ClCompile Include="QParametersTab.cpp" />
+    <ClCompile Include="QRandom.cpp" />
     <ClCompile Include="QSimulationTab.cpp" />
     <ClCompile Include="QSimZombie.cpp" />
     <ClCompile Include="QStatisticsTab.cpp" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
     <ClInclude Include="ParamSim.h" />
+    <ClInclude Include="QRandom.h" />
     <CustomBuild Include="QHumanoid.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </Message>

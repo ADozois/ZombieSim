@@ -3,8 +3,10 @@
 
 
 RandomRealUnif::RandomRealUnif(double a, double b)
+	:mA{ a },
+	mB{ b }
 {
-	mUniform = new std::uniform_real_distribution<double>(a, b);
+	mUniform = new std::uniform_real_distribution<double>(mA, mB);
 }
 
 

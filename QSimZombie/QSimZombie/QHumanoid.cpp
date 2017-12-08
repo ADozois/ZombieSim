@@ -5,12 +5,12 @@ const QList<QString> QHumanoid::mNameList{"Antoine","Guillaume","Olivier"};
 
 QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent)
 	: QGraphicsItem(parent),
-	mEnergy(100),
-	mViewRay(viewRay),
-	mRotationAngle(rotationAngle),
-	mWalkSpeed(walkSpeed),
-	mRunSpeed(runSpeed),
-	mClosestHuman(nullptr)
+	mEnergy{ 100 },
+	mViewRay{ viewRay },
+	mRotationAngle{ rotationAngle },
+	mWalkSpeed{ walkSpeed },
+	mRunSpeed{ runSpeed },
+	mClosestHuman{ nullptr }
 {
 
 }

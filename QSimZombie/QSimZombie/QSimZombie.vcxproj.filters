@@ -28,9 +28,6 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="GCN Classes">
-      <UniqueIdentifier>{1eb523a4-e9eb-4b55-875e-1abd9082e6d1}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,22 +76,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Environnement.cpp">
-      <Filter>GCN Classes</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Environnement.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Environnement.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VueEnvironnement.cpp">
-      <Filter>GCN Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_VueEnvironnement.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_VueEnvironnement.cpp">
-      <Filter>Generated Files</Filter>
+    <ClCompile Include="TimeLord.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +102,7 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="Environnement.h">
-      <Filter>GCN Classes</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VueEnvironnement.h">
-      <Filter>GCN Classes</Filter>
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +110,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ParamSim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeLord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

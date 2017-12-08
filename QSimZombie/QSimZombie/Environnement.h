@@ -2,23 +2,19 @@
 #define ENVIRONNEMENT_H
 
 #include <QGraphicsScene>
-#include <qlist.h>
+#include <Qlist>
+class ParamSim;
 
-class Environnement : public QGraphicsScene {
+class Environnement {
 
-	Q_OBJECT
 
 private:
-	//QList<Humanoide> mEntities;
-	QList<QGraphicsItem*> mEntities;
-	int mEntityCount;
+	QGraphicsScene * mScene;
+	
 
 public:
-	Environnement(QObject *parent = Q_NULLPTR);
-	//void addHumanoide(Humanoide newHumanoide);
-	void addHumanoide(QGraphicsItem * newHumanoide);
-
-
+	Environnement(ParamSim *parameters);
+	QGraphicsScene *scene() { return mScene; }
 };
 
 

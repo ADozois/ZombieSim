@@ -1,7 +1,10 @@
 #include "QSimulationTab.h"
 
-#include <qgraphicsscene.h>
-#include <qgraphicsview.h>
+#include <Qgraphicsscene>
+#include <Qgraphicsview>
+
+#include "Environnement.h"
+#include "ParamSim.h"
 
 QSimulationTab::QSimulationTab(QWidget *parent)
 	: QWidget(parent)
@@ -47,19 +50,24 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	/* Simulation View goes in mLeftLayout */
 	//Add simulation graphic view in this layout!*************************
-	QGraphicsScene* scene = new QGraphicsScene;
-	QGraphicsView* view = new QGraphicsView;
-	view->setScene(scene);
-
-
-	QBrush greenBrush(Qt::green);
-	QBrush blueBrush(Qt::blue);
-	QPen outlinePen(Qt::black);
-	outlinePen.setWidth(2);
-
 	
-	QGraphicsRectItem *rectangle = scene->addRect(0, 0, 80, 100, outlinePen, blueBrush);
-	//scene->addRect(0, 0, 0.5, 0.5);
+	ParamSim *parameters;
+	parameters = new ParamSim();
+	Environnement *mMonde;
+	mMonde = new Environnement(parameters);
+
+	QGraphicsView* view = new QGraphicsView;
+	view->setScene(mMonde->scene());
+
+
+	//QBrush greenBrush(Qt::green);
+	//QBrush blueBrush(Qt::blue);
+	//QPen outlinePen(Qt::black);
+	//outlinePen.setWidth(2);
+
+	//
+	//QGraphicsRectItem *rectangle = scene->addRect(0, 0, 80, 100, outlinePen, blueBrush);
+	////scene->addRect(0, 0, 0.5, 0.5);
 
 	
 	mLeftLayout->addWidget(view);

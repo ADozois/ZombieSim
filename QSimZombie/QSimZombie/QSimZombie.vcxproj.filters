@@ -87,6 +87,9 @@
     <ClCompile Include="RandomIntUnif.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RandomNorm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -125,6 +128,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RandomIntUnif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomNorm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

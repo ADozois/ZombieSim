@@ -8,8 +8,8 @@ class QRandom
 public:
 	QRandom();
 	virtual ~QRandom();
-	virtual double GenerateReal() = 0;
-	virtual int GenerateInt() = 0;
+	std::random_device &Rd();
+	std::mt19937 &Mt();
 
 private:
 	static std::random_device mRd;

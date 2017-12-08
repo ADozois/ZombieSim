@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include <QGraphicsItem>
-#include<QVector2D>
+#include <QVector2D>
+#include "RandomIntUnif.h"
+#include "RandomNorm.h"
 
 class Human;
 class QRandom;
@@ -17,7 +19,13 @@ public:
 
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+	void advance(int phase) override;
 
+protected:
+	void ReduceEnergy();
+	void ReduceEnergy(int loss);
+	void AddEnergy();
+	void AddEnergy(int gain);
 
 private:
 	int mEnergy;
@@ -32,9 +40,21 @@ private:
 
 	const Human * mClosestHuman;
 
-	static QRandom *mSpeedGenerator;
-	static QRandom *mNameGenerator;
+	static RandomNorm *mRunGenerator;
+	static RandomNorm *mWalkGenerator;
+	static RandomIntUnif *mNameGenerator;
+	static QRectF mRectF;
+
 	static const QList<QString> mNameList;
+	static const double mWalkDev;
+	static const double mRunDev;
+	static const int mBeginName;
+	static const int mEndName;
+	static const double mRectP1;
+	static const double mRectP2;
+	static const double mRectH;
+	static const double mRectW;
+	static const double mPenWidth;
 };
 
 #endif // !Q_HUMANOID_H

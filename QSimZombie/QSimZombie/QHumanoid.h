@@ -20,12 +20,17 @@ public:
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void advance(int phase) override;
-
-protected:
 	void ReduceEnergy();
 	void ReduceEnergy(int loss);
 	void AddEnergy();
 	void AddEnergy(int gain);
+	int Energy();
+	qreal ViewRay();
+	qreal RunSpeed();
+	qreal WalkSpeed();
+	QString Name();
+	qreal RotationAngle();
+	QVector2D MouvementDirection();
 
 private:
 	int mEnergy;
@@ -36,7 +41,7 @@ private:
 	QRectF *mBoundingBox;
 	QString mName;
 	qreal mRotationAngle;
-	QVector2D mMovementDirection;
+	QVector2D mMouvementDirection;
 
 	const Human * mClosestHuman;
 

@@ -71,3 +71,38 @@ void QHumanoid::AddEnergy(int gain)
 	mEnergy += gain;
 }
 
+int QHumanoid::Energy()
+{
+	return mEnergy;
+}
+
+qreal QHumanoid::ViewRay()
+{
+	return mViewRay;
+}
+
+qreal QHumanoid::RunSpeed()
+{
+	return mRunSpeed;
+}
+
+qreal QHumanoid::WalkSpeed()
+{
+	return mWalkSpeed;
+}
+
+QString QHumanoid::Name()
+{
+	return mName;
+}
+
+qreal QHumanoid::RotationAngle()
+{
+	return mRotationAngle;
+}
+
+QVector2D QHumanoid::MouvementDirection()
+{
+	return mMouvementDirection;
+}
+

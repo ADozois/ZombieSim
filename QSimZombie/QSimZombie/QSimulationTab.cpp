@@ -14,7 +14,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	//Group box
 	mSimGroupBox = new QGroupBox(tr("Simulation Controls"));
-//	mWorldGroupBox = new QGroupBox(tr("World View"));
+	//	mWorldGroupBox = new QGroupBox(tr("World View"));
 	
 	//Buttons
 	mPlayButton = new QPushButton("Play");
@@ -28,30 +28,28 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	//Images
 	QImage myImage;
 	myImage.load(":/QSimZombie/Icon");
-
 	mIconLabel->setPixmap(QPixmap::fromImage(myImage));
 	mIconLabel->setAlignment(Qt::AlignRight);
-	
-	//Setup
-	mSimGroupBox->setLayout(mSimGroupBoxLayout);
-	
-	//Buttons
+
+	/* Simulation View goes in mLeftLayout */
+	//Add simulation graphic view in this layout!*************************
+	mMainLayout->addLayout(mLeftLayout);
+	mMainLayout->setStretchFactor(mLeftLayout,3); //Make the left layout occupy 3 times as much space as the right layout.
+
+	//Rest of setup
+	mMainLayout->addLayout(mRightLayout);
+
+	//Add Buttons to groupbox
 	mSimGroupBoxLayout->addWidget(mPlayButton);
 	mSimGroupBoxLayout->addWidget(mPauseButton);
 	mSimGroupBoxLayout->addWidget(mStepButton);
 	mSimGroupBoxLayout->addWidget(mStopButton);
 
-
-	/* Simulation View goes in mLeftLayout */
-	//Add simulation graphic view in this layout!*************************
-	mMainLayout->addLayout(mLeftLayout);
-
-
-	//Rest of setup
-	mMainLayout->addLayout(mRightLayout);
-
+	//Set a groupbox inner layout
+	mSimGroupBox->setLayout(mSimGroupBoxLayout);
+	
+	//Layout that's on the right for the buttons...
 	//mRightLayout->addWidget(mIconLabel); //Icon on the right?
-
 	mRightLayout->addStretch();
 	mRightLayout->addLayout(mPushRightLayout);
 	mPushRightLayout->addStretch();
@@ -59,5 +57,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 
 
+
+	//set this layout
 	setLayout(mMainLayout);
 }

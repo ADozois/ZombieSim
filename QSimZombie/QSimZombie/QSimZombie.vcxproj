@@ -110,6 +110,7 @@
     <ClCompile Include="RandomIntUnif.cpp" />
     <ClCompile Include="RandomNorm.cpp" />
     <ClCompile Include="RandomRealUnif.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -142,6 +143,7 @@
     <ClInclude Include="RandomIntUnif.h" />
     <ClInclude Include="RandomNorm.h" />
     <ClInclude Include="RandomRealUnif.h" />
+    <ClInclude Include="Zombie.h" />
     <CustomBuild Include="QHumanoid.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </Message>

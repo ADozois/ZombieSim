@@ -9,9 +9,6 @@ public:
 	void advance(int phase) override;
 	bool attack(QGraphicsItem * Human);
 
-signals:
-	void eat(QGraphicsItem * human);
-
 private:
 	static RandomIntUnif * mDeathGenerator;
 

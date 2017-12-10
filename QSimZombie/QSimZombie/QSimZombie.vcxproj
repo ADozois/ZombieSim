@@ -99,6 +99,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QStatisticsTab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParamSim.cpp" />
     <ClCompile Include="QHumanoid.cpp" />
@@ -138,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
+    <ClInclude Include="Human.h" />
     <ClInclude Include="ParamSim.h" />
     <ClInclude Include="QRandom.h" />
     <ClInclude Include="RandomIntUnif.h" />

@@ -102,6 +102,9 @@
     <ClCompile Include="Military.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Children.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -158,6 +161,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Military.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Children.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

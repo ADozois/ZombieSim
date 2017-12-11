@@ -69,6 +69,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Children.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_QParametersTab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -140,6 +141,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Children.h" />
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="HumanSpecifier.h" />

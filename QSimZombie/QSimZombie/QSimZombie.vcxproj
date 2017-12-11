@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="HumanSpecifier.h" />
     <ClInclude Include="ParamSim.h" />
     <ClInclude Include="QRandom.h" />
     <ClInclude Include="RandomIntUnif.h" />

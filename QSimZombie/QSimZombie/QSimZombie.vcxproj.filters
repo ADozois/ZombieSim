@@ -151,5 +151,8 @@
     <ClInclude Include="Virus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HumanSpecifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

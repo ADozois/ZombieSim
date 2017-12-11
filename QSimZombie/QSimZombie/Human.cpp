@@ -1,13 +1,13 @@
 #include "Human.h"
 
-RandomNorm * mResistanceGenerator{nullptr};
-const double mResistanceMean{50.0};
-const double mResistanceDeviation{0.2};
-RandomNorm * mDeathAgeGenerator{nullptr};
-const double mDeathAgeMean{80.0};
-const double mDeathAgeDeviation{0.3};
+RandomNorm * Human::mResistanceGenerator{nullptr};
+const double Human::mResistanceMean{50.0};
+const double Human::mResistanceDeviation{0.2};
+RandomNorm * Human::mDeathAgeGenerator{nullptr};
+const double Human::mDeathAgeMean{80.0};
+const double Human::mDeathAgeDeviation{0.3};
 
-Human::Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age = 0, QGraphicsItem *parent)
+Human::Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age, QGraphicsItem *parent)
 	:QHumanoid(viewRay, rotationAngle, walkSpeed, runSpeed, parent),
 	mAge{age}
 {

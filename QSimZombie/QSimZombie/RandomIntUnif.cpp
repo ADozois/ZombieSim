@@ -28,3 +28,8 @@ int RandomIntUnif::Generate()
 {
 	return (*mUniform)(QRandom::Mt());
 }
+
+int RandomIntUnif::Generate(int a, int b)
+{
+	return std::uniform_int_distribution<int>{a, b}(std::mt19937(std::random_device()));
+}

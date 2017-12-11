@@ -9,6 +9,8 @@ public:
 	double Std();
 	double Generate();
 
+	static double Generate(double mean, double dev);
+
 private:
 	double mMean;
 	double mStd;

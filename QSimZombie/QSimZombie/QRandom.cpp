@@ -4,16 +4,6 @@ std::random_device QRandom::mRd;
 std::mt19937 QRandom::mMt(QRandom::mRd());
 
 
-QRandom::QRandom()
-{
-	
-}
-
-QRandom::~QRandom()
-{
-
-}
-
 std::random_device & QRandom::Rd()
 {
 	return mRd;

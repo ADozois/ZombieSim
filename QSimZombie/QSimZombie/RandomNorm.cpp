@@ -31,5 +31,5 @@ double RandomNorm::Generate()
 
 double RandomNorm::Generate(double mean, double dev)
 {
-	return std::normal_distribution<double>{mean, dev}(std::mt19937(std::random_device()));
+	return std::normal_distribution<double>{mean, dev}(std::mt19937(std::random_device{}()));
 }

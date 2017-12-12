@@ -31,5 +31,5 @@ double RandomRealUnif::Generate()
 
 double RandomRealUnif::Generate(double a, double b)
 {
-	return std::uniform_real_distribution<double>{a, b}(std::mt19937(std::random_device()));
+	return std::uniform_real_distribution<double>{a, b}(std::mt19937(std::random_device{}()));
 }

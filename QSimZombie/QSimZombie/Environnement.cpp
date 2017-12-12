@@ -8,8 +8,6 @@ Environnement::Environnement(ParamSim *parameters)
 	mScene = new QGraphicsScene;
 
 
-	QBrush greenBrush(Qt::green);
-	QPen outlinePen(Qt::black);
 	//On cree 10 cercles juste pour dire
 	for (int i = 0; i < 10; ++i)
 	{

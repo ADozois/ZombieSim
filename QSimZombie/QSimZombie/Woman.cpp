@@ -1,9 +1,9 @@
 #include "Woman.h"
 #include "Children.h"
 
-int mMaxChildren{ 5 };
-const int mEndFertility{ 40 };
-const int mFertilityTime{ 20 };
+int Woman::mMaxChildren{ 5 };
+const int Woman::mEndFertility{ 40 };
+const int Woman::mFertilityTime{ 20 };
 
 Woman::Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age, QGraphicsItem *parent)
 	:Human(viewRay, rotationAngle, walkSpeed, runSpeed, age, parent),

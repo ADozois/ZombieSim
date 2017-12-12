@@ -105,6 +105,9 @@
     <ClCompile Include="Children.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Woman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -164,6 +167,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Children.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Woman.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

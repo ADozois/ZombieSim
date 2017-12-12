@@ -1,5 +1,6 @@
 #include "Children.h"
 #include "RandomIntUnif.h"
+#include "Woman.h"
 
 RandomIntUnif * Children::mDistribution{nullptr};
 int Children::mBegin{0};
@@ -12,7 +13,12 @@ const int Children::mAgeBeginChildren{ 0 };
 const int Children::mAgeEndChildren{ 18 };
 
 Children::Children()
-	:mMother{nullptr}
+	:Children(nullptr)
+{	
+}
+
+Children::Children(Woman * mother)
+	:mMother{mother}
 {
 	mDistribution = new RandomIntUnif(mBegin, mEnd);
 	if (mDistribution->Generate() >= mWomanProb)

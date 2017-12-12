@@ -10,6 +10,7 @@ class Children : public HumanSpecifier
 {
 public:
 	Children();
+	Children(Woman * mother);
 	~Children() = default;
 
 	void advance(int phase) override;

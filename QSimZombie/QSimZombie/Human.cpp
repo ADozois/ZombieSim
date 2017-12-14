@@ -23,6 +23,7 @@ Human::~Human()
 
 void Human::advance(int phase)
 {
+
 }
 
 bool Human::IsDead()

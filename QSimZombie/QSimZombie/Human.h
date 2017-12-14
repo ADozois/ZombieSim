@@ -2,6 +2,7 @@
 #define HUMAIN_H
 
 #include "QHumanoid.h"
+#include "HumanSpecifier.h"
 
 class Zombie;
 class Woman;
@@ -28,6 +29,7 @@ private:
 	int mAge;
 	int mDeathAge;
 	int mVirusResistance;
+	HumanSpecifier* mSpecifier;
 
 	static RandomNorm * mResistanceGenerator;
 	static const double mResistanceMean;

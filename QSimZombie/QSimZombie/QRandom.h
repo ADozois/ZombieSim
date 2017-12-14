@@ -6,8 +6,8 @@
 class QRandom
 {
 public:
-	QRandom();
-	virtual ~QRandom();
+	QRandom() = default;
+	virtual ~QRandom() = default;
 	std::random_device &Rd();
 	std::mt19937 &Mt();
 

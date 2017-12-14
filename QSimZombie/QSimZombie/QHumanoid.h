@@ -14,6 +14,7 @@ class QHumanoid : public QGraphicsItem
 {
 
 public:
+	QHumanoid() = delete;
 	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 

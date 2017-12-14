@@ -11,6 +11,8 @@ public:
 	double A();
 	double B();
 	double Generate();
+	
+	static double Generate(double a, double b);
 
 private:
 	double mA;

@@ -11,6 +11,8 @@ public:
 	int B();
 	int Generate();
 
+	static int Generate(int a, int b);
+
 private:
 	int mA;
 	int mB;

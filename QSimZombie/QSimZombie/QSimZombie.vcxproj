@@ -68,8 +68,7 @@
       <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Charts.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Environnement.cpp" />
+  <ItemGroup>    
     <ClCompile Include="GeneratedFiles\Debug\moc_QParametersTab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -100,7 +99,11 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QStatisticsTab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+	<ClCompile Include="Environnement.cpp" />
+    <ClCompile Include="Children.cpp" />
+    <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Military.cpp" />
     <ClCompile Include="ParamSim.cpp" />
     <ClCompile Include="QHumanoid.cpp" />
     <ClCompile Include="QParametersTab.cpp" />
@@ -112,6 +115,9 @@
     <ClCompile Include="RandomIntUnif.cpp" />
     <ClCompile Include="RandomNorm.cpp" />
     <ClCompile Include="RandomRealUnif.cpp" />
+    <ClCompile Include="Virus.cpp" />
+    <ClCompile Include="Woman.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -153,12 +159,19 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </Command>
     </CustomBuild>
+    <ClInclude Include="Children.h" />
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
+    <ClInclude Include="Human.h" />
+    <ClInclude Include="HumanSpecifier.h" />
+    <ClInclude Include="Military.h" />
     <ClInclude Include="ParamSim.h" />
     <ClInclude Include="QRandom.h" />
     <ClInclude Include="RandomIntUnif.h" />
     <ClInclude Include="RandomNorm.h" />
     <ClInclude Include="RandomRealUnif.h" />
+    <ClInclude Include="Virus.h" />
+    <ClInclude Include="Woman.h" />
+    <ClInclude Include="Zombie.h" />
     <CustomBuild Include="QHumanoid.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </Message>

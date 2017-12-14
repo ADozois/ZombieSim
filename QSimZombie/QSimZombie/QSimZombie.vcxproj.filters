@@ -79,6 +79,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TimeLord.cpp">
+	<Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QHumanoid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QRandom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomRealUnif.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomIntUnif.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomNorm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -102,6 +117,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="Environnement.h">
+	<Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QHumanoid.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -113,6 +131,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimeLord.h">
+	<Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRandom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomRealUnif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomIntUnif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomNorm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

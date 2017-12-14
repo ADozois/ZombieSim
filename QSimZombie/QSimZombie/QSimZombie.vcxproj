@@ -102,11 +102,16 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParamSim.cpp" />
+    <ClCompile Include="QHumanoid.cpp" />
     <ClCompile Include="QParametersTab.cpp" />
+    <ClCompile Include="QRandom.cpp" />
     <ClCompile Include="QSimulationTab.cpp" />
     <ClCompile Include="QSimZombie.cpp" />
     <ClCompile Include="QStatisticsTab.cpp" />
     <ClCompile Include="TimeLord.cpp" />
+    <ClCompile Include="RandomIntUnif.cpp" />
+    <ClCompile Include="RandomNorm.cpp" />
+    <ClCompile Include="RandomRealUnif.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -150,6 +155,24 @@
     </CustomBuild>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
     <ClInclude Include="ParamSim.h" />
+    <ClInclude Include="QRandom.h" />
+    <ClInclude Include="RandomIntUnif.h" />
+    <ClInclude Include="RandomNorm.h" />
+    <ClInclude Include="RandomRealUnif.h" />
+    <CustomBuild Include="QHumanoid.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Command>
+    </CustomBuild>
     <CustomBuild Include="QParametersTab.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing QParametersTab.h...</Message>

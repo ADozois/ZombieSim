@@ -68,8 +68,7 @@
       <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Charts.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Children.cpp" />
+  <ItemGroup>    
     <ClCompile Include="GeneratedFiles\Debug\moc_QParametersTab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -100,6 +99,8 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QStatisticsTab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+	<ClCompile Include="Environnement.cpp" />
+    <ClCompile Include="Children.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="QSimulationTab.cpp" />
     <ClCompile Include="QSimZombie.cpp" />
     <ClCompile Include="QStatisticsTab.cpp" />
+    <ClCompile Include="TimeLord.cpp" />
     <ClCompile Include="RandomIntUnif.cpp" />
     <ClCompile Include="RandomNorm.cpp" />
     <ClCompile Include="RandomRealUnif.cpp" />
@@ -142,6 +144,21 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TimeLord.h" />
+    <CustomBuild Include="Environnement.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="Children.h" />
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
     <ClInclude Include="Human.h" />

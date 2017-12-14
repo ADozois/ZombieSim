@@ -75,6 +75,12 @@
     <ClCompile Include="ParamSim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Environnement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeLord.cpp">
+	<Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="QHumanoid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -128,6 +134,9 @@
     <CustomBuild Include="QParametersTab.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="Environnement.h">
+	<Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="QHumanoid.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -138,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="ParamSim.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeLord.h">
+	<Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QRandom.h">
       <Filter>Header Files</Filter>

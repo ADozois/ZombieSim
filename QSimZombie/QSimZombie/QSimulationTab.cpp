@@ -1,5 +1,11 @@
 #include "QSimulationTab.h"
 
+#include <Qgraphicsscene>
+#include <Qgraphicsview>
+
+#include "Environnement.h"
+#include "ParamSim.h"
+
 QSimulationTab::QSimulationTab(QWidget *parent)
 	: QWidget(parent)
 {
@@ -44,18 +50,41 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	/* Simulation View goes in mLeftLayout */
 	//Add simulation graphic view in this layout!*************************
-	mMainLayout->addLayout(mLeftLayout);
+	
+	ParamSim *parameters;
+	parameters = new ParamSim();
+	Environnement *mMonde;
+	mMonde = new Environnement(parameters);
+
+	QGraphicsView* view = new QGraphicsView;
+	view->setScene(mMonde->scene());
 
 
-	//Rest of setup
-	mMainLayout->addLayout(mRightLayout);
+	//QBrush greenBrush(Qt::green);
+	//QBrush blueBrush(Qt::blue);
+	//QPen outlinePen(Qt::black);
+	//outlinePen.setWidth(2);
+
+	//
+	//QGraphicsRectItem *rectangle = scene->addRect(0, 0, 80, 100, outlinePen, blueBrush);
+	////scene->addRect(0, 0, 0.5, 0.5);
+
+	
+	mLeftLayout->addWidget(view);
+	
 
 	//mRightLayout->addWidget(mIconLabel); //Icon on the right?
 
-	mRightLayout->addStretch();
-	mRightLayout->addLayout(mPushRightLayout);
 	mPushRightLayout->addStretch();
 	mPushRightLayout->addWidget(mSimGroupBox);
+
+	mRightLayout->addLayout(mPushRightLayout);
+	mRightLayout->addStretch();
+	
+	
+
+	mMainLayout->addLayout(mLeftLayout);
+	mMainLayout->addLayout(mRightLayout);
 
 
 

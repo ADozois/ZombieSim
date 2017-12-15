@@ -1,4 +1,6 @@
 #include "QHumanoid.h"
+#include "ParamSim.h"
+#include <QPainter>
 #include <random>
 
 RandomNorm *QHumanoid::mRunGenerator {nullptr};
@@ -6,28 +8,31 @@ RandomNorm *QHumanoid::mWalkGenerator {nullptr};
 RandomIntUnif *QHumanoid::mNameGenerator {nullptr};
 const QList<QString> QHumanoid::mNameList{"Antoine","Guillaume","Olivier"};
 const double QHumanoid::mWalkDev{0.1};
+const double QHumanoid::mOffsetRun{ 5 };
 const double QHumanoid::mRunDev{0.1};
-const int QHumanoid::mBeginName{1};
-const int QHumanoid::mEndName{3};
+const int QHumanoid::mBeginName{0};
+const int QHumanoid::mEndName{2};
 const double QHumanoid::mRectP1{5.0};
 const double QHumanoid::mRectP2{5.0};
 const double QHumanoid::mRectH{10.0};
 const double QHumanoid::mRectW{10.0};
 const double QHumanoid::mPenWidth{1.0};
-QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
+//QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
 
 
-QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent)
+QHumanoid::QHumanoid(double x, double y, QGraphicsItem *parent)
 	: QGraphicsItem(parent),
 	mEnergy{ 100 },
-	mViewRay{ viewRay },
-	mRotationAngle{ rotationAngle },
+	mViewRay{ ParamSim::ViewRay() },
+	mRotationAngle{ ParamSim::RotationAngle() },
 	mWalkSpeed{ 0.0 },
 	mRunSpeed{ 0.0 },
-	mClosestHuman{ nullptr }
+	mClosestHuman{ nullptr },
+	mPosition{x, y},
+	mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW))
 {
-	mRunGenerator = new RandomNorm(runSpeed, runSpeed*mRunDev);
-	mWalkGenerator = new RandomNorm(walkSpeed, walkSpeed*mWalkDev);
+	mRunGenerator = new RandomNorm(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mRunDev);
+	mWalkGenerator = new RandomNorm(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mWalkDev);
 	mNameGenerator = new RandomIntUnif(mBeginName, mEndName);
 	mWalkSpeed = mWalkGenerator->Generate();
 	mRunSpeed = mRunGenerator->Generate();
@@ -45,6 +50,7 @@ QRectF QHumanoid::boundingRect() const
 
 void QHumanoid::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	painter->drawEllipse(mPosition.x(), mPosition.y(), 10, 10);
 }
 
 void QHumanoid::advance(int phase)
@@ -104,5 +110,10 @@ qreal QHumanoid::RotationAngle()
 QVector2D QHumanoid::MouvementDirection()
 {
 	return mMouvementDirection;
+}
+
+QVector2D QHumanoid::Position()
+{
+	return mPosition;
 }
 

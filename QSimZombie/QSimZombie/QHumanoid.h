@@ -15,7 +15,7 @@ class QHumanoid : public QGraphicsItem
 
 public:
 	QHumanoid() = delete;
-	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent = nullptr);
+	QHumanoid(double x, double y, QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 
 	QRectF boundingRect() const;
@@ -32,6 +32,7 @@ public:
 	QString Name();
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
+	QVector2D Position();
 
 private:
 	int mEnergy;
@@ -43,16 +44,18 @@ private:
 	QString mName;
 	qreal mRotationAngle;
 	QVector2D mMouvementDirection;
+	QVector2D mPosition;
+	QRectF mRectF;
 
 	const Human * mClosestHuman;
 
 	static RandomNorm *mRunGenerator;
 	static RandomNorm *mWalkGenerator;
 	static RandomIntUnif *mNameGenerator;
-	static QRectF mRectF;
 
 	static const QList<QString> mNameList;
 	static const double mWalkDev;
+	static const double mOffsetRun;
 	static const double mRunDev;
 	static const int mBeginName;
 	static const int mEndName;

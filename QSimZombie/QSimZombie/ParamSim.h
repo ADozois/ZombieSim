@@ -19,6 +19,8 @@ public:
 	static int ViewWidth(void) { return mViewWidth; }
 	static int NbrCity(void) { return mNbrCity; }
 	static int MeanAge(void) { return mMeanAge; }
+	static double ViewRay();
+	static double RotationAngle();
 	static double VirusResistance(void) { return mVirusResistance; }
 	static double MeanVirusForce(void) { return mMeanVirusForce; }
 	static double ProbNewMilitary(void) { return mProbNewMilitary; }
@@ -41,6 +43,8 @@ public:
 	static void setViewWidth(int width);
 	static void setNbrCity(int nbr);
 	static void setMeanAge(int mean);
+	static void setViewRay(double viewRay);
+	static void setRotationAngle(double rotationAngle);
 	static void setVirusResistance(double resistance);
 	static void setMeanVirusForce(double meanForce);
 	static void setProbNewMilitary(double probMil);
@@ -66,6 +70,8 @@ private:
 	static int mMeanAge;
 	static int mPregnancyTime;
 	
+	static double mViewRay;
+	static double mRotationAngle;
 	static double mVirusResistance;
 	static double mMeanVirusForce;
 	static double mProbNewMilitary;

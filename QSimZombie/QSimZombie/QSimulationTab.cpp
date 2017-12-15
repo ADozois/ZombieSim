@@ -20,7 +20,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	//Group box
 	mSimGroupBox = new QGroupBox(tr("Simulation Controls"));
-//	mWorldGroupBox = new QGroupBox(tr("World View"));
+	//	mWorldGroupBox = new QGroupBox(tr("World View"));
 	
 	//Buttons
 	mPlayButton = new QPushButton("Play");
@@ -34,19 +34,8 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	//Images
 	QImage myImage;
 	myImage.load(":/QSimZombie/Icon");
-
 	mIconLabel->setPixmap(QPixmap::fromImage(myImage));
 	mIconLabel->setAlignment(Qt::AlignRight);
-	
-	//Setup
-	mSimGroupBox->setLayout(mSimGroupBoxLayout);
-	
-	//Buttons
-	mSimGroupBoxLayout->addWidget(mPlayButton);
-	mSimGroupBoxLayout->addWidget(mPauseButton);
-	mSimGroupBoxLayout->addWidget(mStepButton);
-	mSimGroupBoxLayout->addWidget(mStopButton);
-
 
 	/* Simulation View goes in mLeftLayout */
 	//Add simulation graphic view in this layout!*************************
@@ -58,6 +47,8 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	QGraphicsView* view = new QGraphicsView;
 	view->setScene(mMonde->scene());
+	mMainLayout->addLayout(mLeftLayout);
+	mMainLayout->setStretchFactor(mLeftLayout,3); //Make the left layout occupy 3 times as much space as the right layout.
 
 
 	//QBrush greenBrush(Qt::green);
@@ -73,8 +64,18 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mLeftLayout->addWidget(view);
 	
 
+	//Add Buttons to groupbox
+	mSimGroupBoxLayout->addWidget(mPlayButton);
+	mSimGroupBoxLayout->addWidget(mPauseButton);
+	mSimGroupBoxLayout->addWidget(mStepButton);
+	mSimGroupBoxLayout->addWidget(mStopButton);
+	//Set a groupbox inner layout
+	mSimGroupBox->setLayout(mSimGroupBoxLayout);
+	
+	//Layout that's on the right for the buttons...
 	//mRightLayout->addWidget(mIconLabel); //Icon on the right?
-
+	mRightLayout->addStretch();
+	mRightLayout->addLayout(mPushRightLayout);
 	mPushRightLayout->addStretch();
 	mPushRightLayout->addWidget(mSimGroupBox);
 
@@ -88,5 +89,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 
 
+
+	//set this layout
 	setLayout(mMainLayout);
 }

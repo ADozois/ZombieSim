@@ -72,6 +72,48 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QParametersTab.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="ParamSim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Environnement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeLord.cpp">
+	<Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QHumanoid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QRandom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomRealUnif.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomIntUnif.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomNorm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Virus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Military.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Children.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Woman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -92,10 +134,55 @@
     <CustomBuild Include="QParametersTab.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="Environnement.h">
+	<Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QHumanoid.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QSimZombie.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParamSim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeLord.h">
+	<Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRandom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomRealUnif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomIntUnif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomNorm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Virus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanSpecifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Military.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Children.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Woman.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

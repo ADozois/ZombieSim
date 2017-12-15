@@ -10,7 +10,7 @@ class Virus;
 class Human : public QHumanoid
 {
 public:
-	Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age = 0, QGraphicsItem *parent = nullptr);
+	Human(double x, double y, int age = 0, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
 	bool IsDead();

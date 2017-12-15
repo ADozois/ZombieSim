@@ -8,7 +8,7 @@ class Children;
 class Woman : public Human
 {
 public:
-	Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age = 18, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, int age = 0, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();

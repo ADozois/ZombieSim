@@ -7,8 +7,8 @@ RandomNorm * Human::mDeathAgeGenerator{nullptr};
 const double Human::mDeathAgeMean{80.0};
 const double Human::mDeathAgeDeviation{0.3};
 
-Human::Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age, QGraphicsItem *parent)
-	:QHumanoid(viewRay, rotationAngle, walkSpeed, runSpeed, parent),
+Human::Human(double x, double y, int age, QGraphicsItem *parent)
+	:QHumanoid(x, y, parent),
 	mAge{age}
 {
 	mResistanceGenerator = new RandomNorm(mResistanceMean, mResistanceMean*mResistanceDeviation);

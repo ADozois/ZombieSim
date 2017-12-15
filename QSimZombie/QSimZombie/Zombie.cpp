@@ -6,8 +6,8 @@ const int Zombie::mBegin{0};
 const int Zombie::mEnd{10};
 const int Zombie::mAttackThreshold{5};
 
-Zombie::Zombie(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem * parent)
-	: QHumanoid(viewRay, rotationAngle, walkSpeed, runSpeed, parent)
+Zombie::Zombie(double x, double y, QGraphicsItem * parent)
+	: QHumanoid(x, y, parent)
 {
 	mDeathGenerator = new RandomIntUnif(mBegin, mEnd);
 }

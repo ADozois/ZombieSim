@@ -5,8 +5,8 @@ int Woman::mMaxChildren{ 5 };
 const int Woman::mEndFertility{ 40 };
 const int Woman::mFertilityTime{ 20 };
 
-Woman::Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age, QGraphicsItem *parent)
-	:Human(viewRay, rotationAngle, walkSpeed, runSpeed, age, parent),
+Woman::Woman(double x, double y, int age, QGraphicsItem *parent)
+	:Human(x, y, age, parent),
 	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime}

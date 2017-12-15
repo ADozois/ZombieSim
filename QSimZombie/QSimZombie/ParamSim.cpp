@@ -1,5 +1,29 @@
 #include "ParamSim.h"
 
+int ParamSim::mNbrZombie{ 0 };
+int ParamSim::mNbrHuman{ 0 };
+int ParamSim::mNbrWoman{ 0 };
+int ParamSim::mNbrMilitary{ 0 };
+int ParamSim::mNbrVirus{ 0 };
+int ParamSim::mSceneHeight{ 0 };
+int ParamSim::mSceneWidth{ 0 };
+int ParamSim::mViewHeight{ 0 };
+int ParamSim::mViewWidth{ 0 };
+int ParamSim::mNbrCity{ 0 };
+int ParamSim::mMeanAge{ 0 };
+int ParamSim::mPregnancyTime{ 0 };
+
+double ParamSim::mVirusResistance{ 0.0 };
+double ParamSim::mMeanVirusForce{ 0.0 };
+double ParamSim::mProbNewMilitary{ 0.0 };
+double ParamSim::mProbReproduction{ 0.0 };
+double ParamSim::mProbWoman{ 0.0 };
+double ParamSim::mProbInfection{ 0.0 };
+double ParamSim::mComssumptionRateEnergieHuman{ 0.0 };
+double ParamSim::mComssumptionRateEnergieZombie{ 0.0 };
+double ParamSim::mProbSpeed{ 0.0 };
+
+
 void ParamSim::setNbrZombie(int nbr) {
 	mNbrZombie = nbr;
 }

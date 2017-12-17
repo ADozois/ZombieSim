@@ -2,6 +2,11 @@
 #include "ParamSim.h"
 #include <QPainter>
 #include <random>
+#include "Environnement.h"
+
+
+
+
 
 RandomNorm *QHumanoid::mRunGenerator { nullptr };
 RandomNorm *QHumanoid::mWalkGenerator { nullptr };
@@ -24,7 +29,7 @@ const double QHumanoid::mOpacityHumanoid{ 0.60 };
 //QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
 
 
-QHumanoid::QHumanoid(double x, double y, QGraphicsItem *parent)
+QHumanoid::QHumanoid(double x, double y, Environnement *currentEnvironnement, humanoideType typeOfHumanoide, QGraphicsItem *parent)
 	: QGraphicsItem(parent),
 	mEnergy{ 100 },
 	mViewRay{ ParamSim::ViewRay() },
@@ -32,6 +37,8 @@ QHumanoid::QHumanoid(double x, double y, QGraphicsItem *parent)
 	mWalkSpeed{ 0.0 },
 	mRunSpeed{ 0.0 },
 	mClosestHuman{ nullptr },
+	mEnvironnement{currentEnvironnement},
+	mHumanoideType{typeOfHumanoide},
 	mPosition{x, y},
 	mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW)),
 	mBrushColor{mHumanoidColor},
@@ -59,8 +66,14 @@ void QHumanoid::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 	InitializeVisual(painter);
 }
 
+void QHumanoid::advance(int phase, int index)
+{
+
+}
+
 void QHumanoid::advance(int phase)
 {
+	advance(phase, 0);
 }
 
 void QHumanoid::ReduceEnergy()

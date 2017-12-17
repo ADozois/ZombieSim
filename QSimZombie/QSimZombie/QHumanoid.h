@@ -9,18 +9,24 @@
 
 class Human;
 class QRandom;
+class Environnement;
 
 class QHumanoid : public QGraphicsItem
 {
 
 public:
+
+	enum class humanoideType { human, zombi, woman, children, military };
+
 	QHumanoid() = delete;
-	QHumanoid(double x, double y, QGraphicsItem *parent = nullptr);
+	QHumanoid(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 
+	
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void advance(int phase) override;
+	virtual void advance(int phase, int index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
 	void ReduceEnergy();
 	void ReduceEnergy(int loss);
 	void AddEnergy();
@@ -32,6 +38,11 @@ public:
 	QString Name();
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
+	humanoideType who() { return mHumanoideType; }
+
+	
+
+protected:
 	QVector2D Position();
 
 
@@ -48,6 +59,8 @@ protected:
 	QString mName;
 	qreal mRotationAngle;
 	QVector2D mMouvementDirection;
+	Environnement * mEnvironnement;
+	humanoideType mHumanoideType;
 	QVector2D mPosition;
 	QRectF mRectF;
 	QColor mBrushColor;
@@ -55,6 +68,7 @@ protected:
 
 	const Human * mClosestHuman;
 
+private:
 	static RandomNorm *mRunGenerator;
 	static RandomNorm *mWalkGenerator;
 	static RandomIntUnif *mNameGenerator;

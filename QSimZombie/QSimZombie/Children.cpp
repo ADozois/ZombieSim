@@ -34,8 +34,13 @@ Children::Children(Woman * mother)
 	}
 }
 
+void Children::advance(int phase, int index)
+{
+}
+
 void Children::advance(int phase)
 {
+	advance(phase, 0);
 }
 
 int Children::AgeBegin()

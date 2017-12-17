@@ -7,8 +7,9 @@ const int Woman::mEndFertility{ 40 };
 const int Woman::mFertilityTime{ 20 };
 const QColor Woman::mWomanColor{ 242, 229, 135 };
 
-Woman::Woman(double x, double y, int age, bool military, bool infection, QGraphicsItem *parent)
-	:Human(x, y, age, military, infection,parent),
+
+Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infection, QGraphicsItem *parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, age, military, infection,parent),
 	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime}
@@ -20,6 +21,15 @@ Woman::Woman(double x, double y, int age, bool military, bool infection, QGraphi
 
 Woman::~Woman()
 {
+}
+
+void Woman::advance(int phase, int index)
+{
+}
+
+void Woman::advance(int phase)
+{
+	advance(phase, 0);
 }
 
 Children * Woman::GiveBirth()

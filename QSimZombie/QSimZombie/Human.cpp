@@ -1,4 +1,5 @@
 #include "Human.h"
+#include "Environnement.h"
 #include "Children.h"
 #include "Military.h"
 #include "Virus.h"
@@ -13,8 +14,8 @@ const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
 
 
-Human::Human(double x, double y, int age, bool military, bool infected, QGraphicsItem *parent)
-	:QHumanoid(x, y, parent),
+Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infected, QGraphicsItem *parent)
+	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide,parent),
 	mAge{age},
 	mSpecifier{nullptr},
 	mVirus{nullptr},
@@ -31,8 +32,8 @@ Human::Human(double x, double y, int age, bool military, bool infected, QGraphic
 	}
 }
 
-Human::Human(double x, double y, bool becomeMilitary, bool infected, QGraphicsItem * parent)
-	:QHumanoid(x, y, parent),
+Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary, bool infected, QGraphicsItem *parent)
+	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, parent),
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
@@ -51,9 +52,36 @@ Human::~Human()
 	DeleteSpecifier();
 }
 
+void Human::advance(int phase, int index)
+{
+	if (!phase)
+	{
+		//On fait le advance du specifier si l'humain à un specifier
+		if (mSpecifier)
+		{
+			mSpecifier->advance(phase,index);
+		}
+		else {
+			if (IsDead())
+			{
+				mEnvironnement->addDeathHumanoid(index);
+			}
+			else
+			{
+				//mEnvironnement
+				//	//On fait la logique pour zombi le plus proche et humain le plus proche
+				//	if (mEnvironnement->getDistanceToClosestZombie() == )
+			}
+
+		}
+	}
+}
+
 void Human::advance(int phase)
 {
+	advance(phase, 0);
 }
+
 
 bool Human::IsDead()
 {

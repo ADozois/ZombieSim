@@ -2,20 +2,24 @@
 #define HUMAIN_H
 
 #include "QHumanoid.h"
+#include "HumanSpecifier.h"
 
 
 class Zombie;
 class Woman;
 class Virus;
 class HumanSpecifier;
+class Environnement;
 
 class Human : public QHumanoid
 {
 public:
-	Human(double x, double y, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
-	Human(double x, double y, bool becomeMilitary = false, bool infected = false, QGraphicsItem *parent = nullptr);
+	Human() = delete;
+	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
+	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary = false, bool infected = false, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
+	void advance(int phase, int index) override;
 	bool IsDead();
 	void Reproduction();
 
@@ -45,13 +49,13 @@ protected:
 	int mAge;
 	int mDeathAge;
 	int mVirusResistance;
+	HumanSpecifier* mSpecifier;
 	bool mWillBeocmeMilitary;
 	bool mMilitary;
 	bool mChildren;
-
-	HumanSpecifier * mSpecifier;
 	Virus * mVirus;
 
+private:
 	static RandomNorm * mResistanceGenerator;
 	static const double mResistanceMean;
 	static const double mResistanceDeviation;

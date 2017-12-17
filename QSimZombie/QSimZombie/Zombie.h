@@ -4,9 +4,10 @@ class Zombie : public QHumanoid
 {
 public:
 	Zombie() = delete;
-	Zombie(double x, double y, QGraphicsItem *parent = nullptr);
+	Zombie(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
 	~Zombie() = default;
 	void advance(int phase) override;
+	void advance(int phase, int index) override;
 	bool attack(QGraphicsItem * Human);
 
 private:

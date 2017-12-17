@@ -14,6 +14,7 @@ public:
 	~Children() = default;
 
 	void advance(int phase) override;
+	void advance(int phase, int index) override;
 	static int AgeBegin();
 	static int AgeEnd();
 	void LosingMother();

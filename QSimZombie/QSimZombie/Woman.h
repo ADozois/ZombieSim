@@ -8,12 +8,13 @@ class Children;
 class Woman : public Human
 {
 public:
-	Woman(double x, double y, int age = 0, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, int age = 0, bool military = false, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();
 	bool Reproduction();
 	void LosingChild(Children * child);
+
 
 
 private:
@@ -26,6 +27,7 @@ private:
 	
 	static const int mEndFertility;
 	static const int mFertilityTime;
+	static const QColor mWomanColor;
 };
 
 

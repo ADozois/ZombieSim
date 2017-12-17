@@ -117,6 +117,7 @@
     <ClCompile Include="QSimulationTab.cpp" />
     <ClCompile Include="QSimZombie.cpp" />
     <ClCompile Include="QStatisticsTab.cpp" />
+    <ClCompile Include="QStatSim.cpp" />
     <ClCompile Include="TimeLord.cpp" />
     <ClCompile Include="RandomIntUnif.cpp" />
     <ClCompile Include="RandomNorm.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="infoForAdvance.h" />
+    <ClInclude Include="QStatSim.h" />
     <ClInclude Include="TimeLord.h" />
     <CustomBuild Include="Environnement.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing Environnement.h...</Message>

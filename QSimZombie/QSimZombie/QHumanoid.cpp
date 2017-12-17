@@ -3,20 +3,24 @@
 #include <QPainter>
 #include <random>
 
-RandomNorm *QHumanoid::mRunGenerator {nullptr};
-RandomNorm *QHumanoid::mWalkGenerator {nullptr};
-RandomIntUnif *QHumanoid::mNameGenerator {nullptr};
-const QList<QString> QHumanoid::mNameList{"Antoine","Guillaume","Olivier"};
-const double QHumanoid::mWalkDev{0.1};
+RandomNorm *QHumanoid::mRunGenerator { nullptr };
+RandomNorm *QHumanoid::mWalkGenerator { nullptr };
+RandomIntUnif *QHumanoid::mNameGenerator { nullptr };
+const QList<QString> QHumanoid::mNameList{ "Antoine","Guillaume","Olivier" };
+const double QHumanoid::mWalkDev{ 0.1 };
 const double QHumanoid::mOffsetRun{ 5 };
-const double QHumanoid::mRunDev{0.1};
-const int QHumanoid::mBeginName{0};
-const int QHumanoid::mEndName{2};
-const double QHumanoid::mRectP1{5.0};
-const double QHumanoid::mRectP2{5.0};
-const double QHumanoid::mRectH{10.0};
-const double QHumanoid::mRectW{10.0};
-const double QHumanoid::mPenWidth{1.0};
+const double QHumanoid::mRunDev{ 0.1 };
+const int QHumanoid::mBeginName{ 0 };
+const int QHumanoid::mEndName{ 2 };
+const double QHumanoid::mRectP1{ 5.0 };
+const double QHumanoid::mRectP2{ 5.0 };
+const double QHumanoid::mRectH{ 10.0 };
+const double QHumanoid::mRectW{ 10.0 };
+const double QHumanoid::mPenWidth{ 2.0 };
+const QColor QHumanoid::mHumanoidColor{ Qt::black };
+const QColor QHumanoid::mContourColor{ Qt::black };
+const int QHumanoid::mSizeHumanoid{ 10 };
+const double QHumanoid::mOpacityHumanoid{ 0.60 };
 //QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
 
 
@@ -29,7 +33,9 @@ QHumanoid::QHumanoid(double x, double y, QGraphicsItem *parent)
 	mRunSpeed{ 0.0 },
 	mClosestHuman{ nullptr },
 	mPosition{x, y},
-	mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW))
+	mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW)),
+	mBrushColor{mHumanoidColor},
+	mPenColor{mContourColor}
 {
 	mRunGenerator = new RandomNorm(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mRunDev);
 	mWalkGenerator = new RandomNorm(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mWalkDev);
@@ -50,7 +56,7 @@ QRectF QHumanoid::boundingRect() const
 
 void QHumanoid::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
-	painter->drawEllipse(mPosition.x(), mPosition.y(), 10, 10);
+	InitializeVisual(painter);
 }
 
 void QHumanoid::advance(int phase)
@@ -115,5 +121,16 @@ QVector2D QHumanoid::MouvementDirection()
 QVector2D QHumanoid::Position()
 {
 	return mPosition;
+}
+
+void QHumanoid::InitializeVisual(QPainter * painter)
+{
+	QPen pen(Qt::FlatCap);
+	pen.setWidth(mPenWidth);
+	pen.setColor(mPenColor);
+	painter->setPen(pen);
+	painter->setOpacity(mOpacityHumanoid);
+	painter->setBrush(mBrushColor);
+	painter->drawEllipse(mPosition.x(), mPosition.y(), mSizeHumanoid, mSizeHumanoid);
 }
 

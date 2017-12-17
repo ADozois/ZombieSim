@@ -34,7 +34,11 @@ public:
 	QVector2D MouvementDirection();
 	QVector2D Position();
 
-private:
+
+protected:
+	void InitializeVisual(QPainter * painter);
+
+protected:
 	int mEnergy;
 	qreal mViewRay;
 	qreal mRunSpeed;
@@ -46,6 +50,8 @@ private:
 	QVector2D mMouvementDirection;
 	QVector2D mPosition;
 	QRectF mRectF;
+	QColor mBrushColor;
+	QColor mPenColor;
 
 	const Human * mClosestHuman;
 
@@ -64,6 +70,10 @@ private:
 	static const double mRectH;
 	static const double mRectW;
 	static const double mPenWidth;
+	static const QColor mHumanoidColor;
+	static const QColor mContourColor;
+	static const int mSizeHumanoid;
+	static const double mOpacityHumanoid;
 };
 
 #endif // !Q_HUMANOID_H

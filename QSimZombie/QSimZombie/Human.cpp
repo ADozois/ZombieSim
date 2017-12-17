@@ -47,6 +47,21 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	CreateChild();
 }
 
+Human::Human(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool becomeMilitary, bool infected, QGraphicsItem * parent)
+	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, runSpeed, walkSpeed, viewRay, parent),
+	mAge{ 0 },
+	mSpecifier{ nullptr },
+	mVirus{ nullptr },
+	mWillBeocmeMilitary{ becomeMilitary }
+{
+	BaseHumanInit();
+	if (infected)
+	{
+		CreateVirus();
+	}
+	CreateChild();
+}
+
 Human::~Human()
 {
 	DeleteSpecifier();

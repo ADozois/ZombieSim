@@ -20,6 +20,7 @@ public:
 
 	QHumanoid() = delete;
 	QHumanoid(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
+	QHumanoid(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide,qreal runSpeed, qreal walkSpeed, qreal viewRay , QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 
 	
@@ -71,10 +72,12 @@ protected:
 private:
 	static RandomNorm *mRunGenerator;
 	static RandomNorm *mWalkGenerator;
+	static RandomNorm *mRayGenerator;
 	static RandomIntUnif *mNameGenerator;
 
 	static const QList<QString> mNameList;
 	static const double mWalkDev;
+	static const double mRayDev;
 	static const double mOffsetRun;
 	static const double mRunDev;
 	static const int mBeginName;

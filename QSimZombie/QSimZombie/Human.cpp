@@ -12,30 +12,43 @@ const double Human::mDeathAgeMean{80.0};
 const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
 
+
 Human::Human(double x, double y, int age, bool military, bool infected, QGraphicsItem *parent)
 	:QHumanoid(x, y, parent),
 	mAge{age},
 	mSpecifier{nullptr},
-	mVirus{nullptr}
+	mVirus{nullptr},
+	mWillBeocmeMilitary{false}
 {
-	mBrushColor = mHumanColor;
-	mPenColor = mHumanColor;
-	mResistanceGenerator = new RandomNorm(mResistanceMean, mResistanceMean*mResistanceDeviation);
-	mDeathAgeGenerator = new RandomNorm(mDeathAgeMean, mDeathAgeMean*mDeathAgeDeviation);
-	mVirusResistance = mResistanceGenerator->Generate();
-	mDeathAge = mDeathAgeGenerator->Generate();
+	BaseHumanInit();
     if(military)
 	{
-		mSpecifier = new Military();
+		CreateMilitary();
 	}
 	if (infected)
 	{
-		mVirus = new Virus();
+		CreateVirus();
 	}
+}
+
+Human::Human(double x, double y, bool becomeMilitary, bool infected, QGraphicsItem * parent)
+	:QHumanoid(x, y, parent),
+	mAge{ 0 },
+	mSpecifier{ nullptr },
+	mVirus{ nullptr },
+	mWillBeocmeMilitary{ becomeMilitary }
+{
+	BaseHumanInit();
+	if (infected)
+	{
+		CreateVirus();
+	}
+	CreateChild();
 }
 
 Human::~Human()
 {
+	DeleteSpecifier();
 }
 
 void Human::advance(int phase)
@@ -103,6 +116,57 @@ void Human::InfectedPainter(QPainter * painter)
 	}
 }
 
+void Human::DeleteSpecifier()
+{
+	if (mSpecifier)
+	{
+		delete[] mSpecifier;
+		mSpecifier = nullptr;
+	}
+}
+
+void Human::BaseHumanInit()
+{
+	mBrushColor = mHumanColor;
+	mPenColor = mHumanColor;
+	mResistanceGenerator = new RandomNorm(mResistanceMean, mResistanceMean*mResistanceDeviation);
+	mDeathAgeGenerator = new RandomNorm(mDeathAgeMean, mDeathAgeMean*mDeathAgeDeviation);
+	mVirusResistance = mResistanceGenerator->Generate();
+	mDeathAge = mDeathAgeGenerator->Generate();
+}
+
+void Human::CreateMilitary()
+{
+	if (mSpecifier)
+	{
+		throw std::exception("Le pointeur est déjà utilisé par une autre instance");
+	}
+	else
+	{
+		mSpecifier = new Military();
+	}
+}
+
+void Human::CreateVirus()
+{
+	if (!mVirus)
+	{
+		mVirus = new Virus();
+	}
+}
+
+void Human::CreateChild()
+{
+	if (mSpecifier)
+	{
+		throw std::exception("Le pointeur est déjà utilisé par une autre instance");
+	}
+	else
+	{
+		mSpecifier = new Children();
+	}
+}
+
 void Human::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
 	if (mSpecifier)
@@ -116,4 +180,34 @@ void Human::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, Q
 	}
 	InfectedPainter(painter);
 	InitializeVisual(painter);
+}
+
+bool Human::IsBecomingZombie(bool biteByZombie)
+{
+	if (mVirus->IsBecomingZombit() || biteByZombie)
+	{
+		DeleteSpecifier();
+		return true;
+	}
+	return false;
+}
+
+void Human::IsBecomingAdult()
+{
+	if (mAge >= Children::AgeEnd())
+	{
+		DeleteSpecifier();
+		if (mWillBeocmeMilitary)
+		{
+			CreateMilitary();
+		}
+	}
+}
+
+void Human::IsRetiring()
+{
+	if (mAge >= Military::AgeEnd())
+	{
+		DeleteSpecifier();
+	}
 }

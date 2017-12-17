@@ -8,6 +8,7 @@ struct infoForAdvance {
 	Human *closestHuman{ nullptr };
 	qreal distanceToClosestZombie{ DBL_MAX };
 	qreal distanceToClosestHuman{ DBL_MAX };
+	int numberOfCloseHumain{ 0 };
 };
 
 

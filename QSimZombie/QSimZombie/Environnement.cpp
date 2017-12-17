@@ -2,7 +2,7 @@
 
 #include <QGraphicsEllipseItem>
 
-
+const double Environnement::mDensityRadius{ 3.0 };
 
 Environnement::Environnement(ParamSim *parameters)
 {
@@ -29,12 +29,10 @@ Environnement::Environnement(ParamSim *parameters)
 	//Certain sont enfant, certain sont militaire, certain sont contaminé
 }
 
-void Environnement::advance(int phase)
+void Environnement::advance()
 {
-	if (!phase)
-	{
 		//On calcul les données qui nous seront nécessaire pour chacun des humanoïde dans la scene
-		advanceInfoList.clear();
+		mAdvanceInfoList.clear();
 		//On récupère tous les items de la scene (donc tous les humanoides)
 		QList<QGraphicsItem *> currentListOfHumanoides = mScene->items();
 		//On alloue la mémoire pour le tableau qui contiendra la distance entre chaque humanoide
@@ -43,43 +41,91 @@ void Environnement::advance(int phase)
 		//On rempli la table avec la distance entre chaque éléments
 
 		//On regarde les distance avec le premier hors de la boucle pour évité de toujours faire la vérification si c'est le premier (pour évité de recalculer les distance déjà calculé
-		QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[0]);		
-		for (int j{ 0 }; j<currentListOfHumanoides.size(); ++j)
+		QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[0]);
+		infoForAdvance* firstHumanoideInfo;
+		for (int j{ 1 }; j<currentListOfHumanoides.size(); ++j)
 		{
-			infoForAdvance* currentInfo;
 			QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[j]);
 			distTable[j] = pow(currentHumanoide->pos().x() - comparedHumanoide->pos().x(), 2) + pow(currentHumanoide->pos().y() - comparedHumanoide->pos().y(), 2);
-			if (comparedHumanoide->who() == ZOMBI)
-			{
-				if (distTable[j] < currentInfo->distanceToClosestZombie)
-				{
-					currentInfo->closestZombie = dynamic_cast<Zombie *>(comparedHumanoide);
-					currentInfo->distanceToClosestZombie = distTable[j];
-				}
-				
-			}
-			else {
-				if (distTable[j] < currentInfo->distanceToClosestHuman)
-				{
-					currentInfo->closestHuman = dynamic_cast<Human *>(comparedHumanoide);
-					currentInfo->distanceToClosestHuman = distTable[j];
-				}
-			}
+			distTable[j*currentListOfHumanoides.size()] = distTable[j];
+			getInformation(comparedHumanoide, distTable[j], *firstHumanoideInfo);
+			
 		}
+		//On place l'information pour cet humanoide dans le tableau
+		mAdvanceInfoList.append(firstHumanoideInfo);
 
 
 		for (int i{ 1 };i<currentListOfHumanoides.size();++i)
 		{
 			//On choisit l'humanoide regardé
 			QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[i]);
+			infoForAdvance* currentInfo;
 
-			for (auto const& j : currentListOfHumanoides)
+			for (int j{ i - 1 }; j>-1; --j)
 			{
+				QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[j]);
+				getInformation(comparedHumanoide, distTable[i*currentListOfHumanoides.size() + j], *currentInfo);
 
 			}
+
+			for (int j{ i+1 }; j<currentListOfHumanoides.size(); ++j)
+			{
+				QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[j]);
+				distTable[i*currentListOfHumanoides.size()+j] = pow(currentHumanoide->pos().x() - comparedHumanoide->pos().x(), 2) + pow(currentHumanoide->pos().y() - comparedHumanoide->pos().y(), 2);
+				distTable[j*currentListOfHumanoides.size() + i] = distTable[i*currentListOfHumanoides.size() + j];
+				getInformation(comparedHumanoide, distTable[i*currentListOfHumanoides.size() + j], *currentInfo);
+			}
+
+			mAdvanceInfoList.append(currentInfo);
 		}
 		
 
 		//On appel le advance de tous les humanoïdes
+		for (int humanoidIndex{ 0 }; humanoidIndex < currentListOfHumanoides.size(); ++humanoidIndex)
+		{
+			QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[humanoidIndex]);
+			comparedHumanoide->advance(0, humanoidIndex);
+		}
+
+		//On détruit les humanoides qui sont mort ce tic-ci
+		for (auto deadIndex : mDeathList)
+		{
+			delete deadIndex;
+			deadIndex = nullptr;
+		}
+		//On claire la list
+		mDeathList.clear();
+}
+
+
+void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance, infoForAdvance &infoToFill) {
+	if (comparedHumanoide->who() == QHumanoid::humanoideType::zombi)
+	{
+		if (distance< infoToFill.distanceToClosestZombie)
+		{
+			infoToFill.closestZombie = dynamic_cast<Zombie *>(comparedHumanoide);
+			infoToFill.distanceToClosestZombie = distance;
+		}
+
 	}
+	else {
+		if (distance < infoToFill.distanceToClosestHuman)
+		{
+			infoToFill.closestHuman = dynamic_cast<Human *>(comparedHumanoide);
+			infoToFill.distanceToClosestHuman = distance;
+		}
+		if (distance < mDensityRadius)
+		{
+			++infoToFill.numberOfCloseHumain;
+		}
+	}
+
+}
+
+
+void Environnement::addDeathHumanoid(int index) 
+{ 
+	QList<QGraphicsItem *> currentListOfHumanoides = mScene->items();
+	mDeathList.append(currentListOfHumanoides[index]);
+
 }

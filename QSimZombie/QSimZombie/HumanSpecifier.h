@@ -11,6 +11,7 @@ public:
 
 public slots:
 	virtual void advance(int phase) = 0;
+	virtual void advance(int phase, int index) = 0;
 };
 
 

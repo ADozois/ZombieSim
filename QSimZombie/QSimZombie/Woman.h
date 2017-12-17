@@ -8,13 +8,14 @@ class Children;
 class Woman : public Human
 {
 public:
-	Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, int age = 0, HumanSpecifier *humainSpecifier = nullptr, QGraphicsItem *parent = nullptr);
+	Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, HumanSpecifier *humainSpecifier = nullptr, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();
 	bool Reproduction();
 	void LosingChild(Children * child);
 	void advance(int phase) override;
+	void advance(int phase, int index) override;
 
 
 private:

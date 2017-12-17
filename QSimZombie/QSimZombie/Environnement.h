@@ -14,19 +14,24 @@ class Environnement : public QObject {
 
 private:
 	QGraphicsScene * mScene;
-	QList<infoForAdvance*> advanceInfoList;
-	
+	QList<infoForAdvance*> mAdvanceInfoList;
+	QList<QGraphicsItem *> mDeathList;
 
+	void getInformation(QHumanoid * comparedHumanoide, qreal distance, infoForAdvance &infoToFill);
+	
+	static const double mDensityRadius;
 public:
 	Environnement(ParamSim *parameters);
 	QGraphicsScene *scene() { return mScene; }
-	Zombie* getClosestZombie(int index) { return advanceInfoList[index]->closestZombie; }
-	Human* getClosestHuman(int index) { return advanceInfoList[index]->closestHuman; }
-	double getDistanceToClosestZombie(int index) { return advanceInfoList[index]->distanceToClosestZombie; }
-	double getDistanceToclosestHuman(int index) { return advanceInfoList[index]->distanceToClosestHuman; }
+	Zombie* getClosestZombie(int index) { return mAdvanceInfoList[index]->closestZombie; }
+	Human* getClosestHuman(int index) { return mAdvanceInfoList[index]->closestHuman; }
+	qreal getDistanceToClosestZombie(int index) { return mAdvanceInfoList[index]->distanceToClosestZombie; }
+	qreal getDistanceToclosestHuman(int index) { return mAdvanceInfoList[index]->distanceToClosestHuman; }
+	int getHumainDensity(int index) { return mAdvanceInfoList[index]->numberOfCloseHumain; }
+	void addDeathHumanoid(int index);
 
 public slots:
-	void advance(int phase);
+	void advance();
 };
 
 

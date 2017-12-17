@@ -18,7 +18,7 @@ const double QHumanoid::mPenWidth{1.0};
 QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
 
 
-QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed,Environnement *currentEnvironnement, QGraphicsItem *parent)
+QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed,Environnement *currentEnvironnement, humanoideType typeOfHumanoide, QGraphicsItem *parent)
 	: QGraphicsItem(parent),
 	mEnergy{ 100 },
 	mViewRay{ viewRay },
@@ -26,7 +26,8 @@ QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal 
 	mWalkSpeed{ 0.0 },
 	mRunSpeed{ 0.0 },
 	mClosestHuman{ nullptr },
-	mEnvironnement{currentEnvironnement}
+	mEnvironnement{currentEnvironnement},
+	mHumanoideType{typeOfHumanoide}
 {
 	mRunGenerator = new RandomNorm(runSpeed, runSpeed*mRunDev);
 	mWalkGenerator = new RandomNorm(walkSpeed, walkSpeed*mWalkDev);
@@ -49,8 +50,14 @@ void QHumanoid::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 {
 }
 
+void QHumanoid::advance(int phase, int index)
+{
+
+}
+
 void QHumanoid::advance(int phase)
 {
+	advance(phase, 0);
 }
 
 void QHumanoid::ReduceEnergy()

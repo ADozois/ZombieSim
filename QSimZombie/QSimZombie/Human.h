@@ -11,16 +11,16 @@ class Virus;
 class Human : public QHumanoid
 {
 public:
-	Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt,int age = 0, HumanSpecifier *humainSpecifier = nullptr, QGraphicsItem *parent = nullptr);
+	Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide,int age = 0, HumanSpecifier *humainSpecifier = nullptr, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
+	void advance(int phase, int index) override;
 	bool IsDead();
 	void Reproduction();
 
 	int Age();
 	int DeathAge();
 	int VirusResistance();
-	int calculateAllDistance(Environnement * environnement, Zombie *closestZombi);
 
 protected:
 	bool IsPossibleMate(Woman * woman);

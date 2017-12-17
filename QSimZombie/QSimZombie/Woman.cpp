@@ -5,8 +5,8 @@ int Woman::mMaxChildren{ 5 };
 const int Woman::mEndFertility{ 40 };
 const int Woman::mFertilityTime{ 20 };
 
-Woman::Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, int age, HumanSpecifier *humainSpecifier, QGraphicsItem *parent)
-	:Human(viewRay, rotationAngle, walkSpeed, runSpeed, currentEnvironnemnt, age, humainSpecifier, parent),
+Woman::Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, HumanSpecifier *humainSpecifier, QGraphicsItem *parent)
+	:Human(viewRay, rotationAngle, walkSpeed, runSpeed, currentEnvironnemnt, typeOfHumanoide, age, humainSpecifier, parent),
 	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime}
@@ -18,20 +18,13 @@ Woman::~Woman()
 {
 }
 
-void Human::advance(int phase)
+void Woman::advance(int phase, int index)
 {
-	if (!phase)
-	{
-		//On fait le advance du specifier si l'humain à un specifier
-		if (mSpecifier)
-		{
-			mSpecifier->advance;
-		}
-		else {
+}
 
-		}
-	}
-
+void Woman::advance(int phase)
+{
+	advance(phase, 0);
 }
 
 Children * Woman::GiveBirth()

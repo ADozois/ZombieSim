@@ -15,13 +15,18 @@ class QHumanoid : public QGraphicsItem
 {
 
 public:
+
+	enum class humanoideType { human, zombi, woman, children, military };
+
 	QHumanoid() = delete;
-	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, QGraphicsItem *parent = nullptr);
+	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 
+	
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void advance(int phase) override;
+	virtual void advance(int phase, int index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
 	void ReduceEnergy();
 	void ReduceEnergy(int loss);
 	void AddEnergy();
@@ -33,6 +38,9 @@ public:
 	QString Name();
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
+	humanoideType who() { return mHumanoideType; }
+
+	
 
 protected:
 
@@ -46,6 +54,7 @@ protected:
 	qreal mRotationAngle;
 	QVector2D mMouvementDirection;
 	Environnement * mEnvironnement;
+	humanoideType mHumanoideType;
 
 	const Human * mClosestHuman;
 

@@ -13,6 +13,7 @@ public:
 	~Military() = default;
 
 	void advance(int phase) override;
+	void advance(int phase, int index) override;
 	bool Kill(Zombie * zombie);
 	int AgeBegin();
 	int AgeEnd();

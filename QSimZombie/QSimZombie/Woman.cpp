@@ -7,13 +7,14 @@ const int Woman::mEndFertility{ 40 };
 const int Woman::mFertilityTime{ 20 };
 const QColor Woman::mWomanColor{ 242, 229, 135 };
 
-Woman::Woman(double x, double y, int age, bool military, QGraphicsItem *parent)
-	:Human(x, y, age, military,parent),
+Woman::Woman(double x, double y, int age, bool military, bool infection, QGraphicsItem *parent)
+	:Human(x, y, age, military, infection,parent),
 	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime}
 {
-	mPainterColor = mWomanColor;
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
 }
 
 

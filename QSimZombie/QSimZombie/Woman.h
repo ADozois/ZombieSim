@@ -8,7 +8,7 @@ class Children;
 class Woman : public Human
 {
 public:
-	Woman(double x, double y, int age = 0, bool military = false, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, int age = 0, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();

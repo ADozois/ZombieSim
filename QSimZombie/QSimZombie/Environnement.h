@@ -15,6 +15,7 @@ class Environnement {
 private:
 	QGraphicsScene * mScene;
 	RandomNorm * mPeopleDispertion;
+	RandomIntUnif * mProbabilityType;
 	RandomIntUnif * mHeightDispertion;
 	RandomIntUnif * mWidthDispertion;
 	RandomIntUnif * mPopulationDistribution;
@@ -24,6 +25,9 @@ private:
 	void CreateCity(int nbrPeople);
 	int FindPeoplePerCity(int totalHuman, int nbrCity);
 	void initializeWorld();
+
+	static const int mProbBegin;
+	static const int mProbEnd;
 
 public:
 	Environnement(ParamSim *parameters);

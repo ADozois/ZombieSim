@@ -5,7 +5,11 @@
 #include "ParamSim.h"
 #include "QHumanoid.h"
 #include "Human.h"
+#include "Woman.h"
 
+
+const int Environnement::mProbBegin{ 0 };
+const int Environnement::mProbEnd{ 100 };
 
 
 Environnement::Environnement(ParamSim *parameters)
@@ -14,12 +18,10 @@ Environnement::Environnement(ParamSim *parameters)
 {
 	mScene = new QGraphicsScene(0, 0, 800, 200);
 	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
+	mProbabilityType = new RandomIntUnif(mProbBegin, mProbEnd);
 	mHeightDispertion = new RandomIntUnif(0, ParamSim::SceneHeight());
 	mWidthDispertion = new RandomIntUnif(0, ParamSim::SceneWidth());
 
-	//On cree 10 cercles juste pour dire
-	
-	
 	initializeWorld();
 
 	
@@ -32,7 +34,7 @@ Environnement::Environnement(ParamSim *parameters)
 	//On Trouve la position (aléatoire) de chacune des villes
 
 	//On peuple les villes en créant les humains dans chacun des groupes
-	//Certain sont enfant, certain sont militaire, certain sont contaminé
+	//Certain sont militaire, certain sont contaminé
 }
 
 Environnement::~Environnement()
@@ -44,12 +46,34 @@ Environnement::~Environnement()
 
 inline void Environnement::CreateCity(int nbrPeople)
 {
-	int x = mWidthDispertion->Generate();
-	int y = mHeightDispertion->Generate();
+	QHumanoid * newItem{ nullptr };
+	int x{ mWidthDispertion->Generate() };
+	int y{ mHeightDispertion->Generate() };
+	bool virus{ false };
+	bool military{ false };
+	int age{ 0 };
 	for (int i = 0; i < nbrPeople; i++)
 	{
-		QHumanoid * newItem = new Human(x + mPeopleDispertion->Generate(),y + mPeopleDispertion->Generate());
+		if (mProbabilityType->Generate() <= ParamSim::ProbInfection())
+		{
+			virus = true;
+		}
+		if (mProbabilityType->Generate() <= ParamSim::ProbNewMilitary())
+		{
+			military = true;
+		}
+		age = mProbabilityType->Generate();
+		if (mProbabilityType->Generate() <= ParamSim::ProbWoman())
+		{
+			newItem = new Woman(x + mPeopleDispertion->Generate(), y + mPeopleDispertion->Generate(), age, military, virus);
+		}
+		else
+		{
+			newItem = new Human(x + mPeopleDispertion->Generate(), y + mPeopleDispertion->Generate(), age, military, virus);
+		}
 		mScene->addItem(newItem);
+		military = false;
+		virus = false;
 	}
 }
 

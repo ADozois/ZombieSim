@@ -19,7 +19,7 @@ public:
 	enum class humanoideType { human, zombi, woman, children, military };
 
 	QHumanoid() = delete;
-	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
+	QHumanoid(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 
 	
@@ -43,7 +43,13 @@ public:
 	
 
 protected:
+	QVector2D Position();
 
+
+protected:
+	void InitializeVisual(QPainter * painter);
+
+protected:
 	int mEnergy;
 	qreal mViewRay;
 	qreal mRunSpeed;
@@ -55,6 +61,10 @@ protected:
 	QVector2D mMouvementDirection;
 	Environnement * mEnvironnement;
 	humanoideType mHumanoideType;
+	QVector2D mPosition;
+	QRectF mRectF;
+	QColor mBrushColor;
+	QColor mPenColor;
 
 	const Human * mClosestHuman;
 
@@ -62,10 +72,10 @@ private:
 	static RandomNorm *mRunGenerator;
 	static RandomNorm *mWalkGenerator;
 	static RandomIntUnif *mNameGenerator;
-	static QRectF mRectF;
 
 	static const QList<QString> mNameList;
 	static const double mWalkDev;
+	static const double mOffsetRun;
 	static const double mRunDev;
 	static const int mBeginName;
 	static const int mEndName;
@@ -74,6 +84,10 @@ private:
 	static const double mRectH;
 	static const double mRectW;
 	static const double mPenWidth;
+	static const QColor mHumanoidColor;
+	static const QColor mContourColor;
+	static const int mSizeHumanoid;
+	static const double mOpacityHumanoid;
 };
 
 #endif // !Q_HUMANOID_H

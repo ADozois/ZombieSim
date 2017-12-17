@@ -1,16 +1,21 @@
 #include "Woman.h"
 #include "Children.h"
+#include <QPainter>
 
 int Woman::mMaxChildren{ 5 };
 const int Woman::mEndFertility{ 40 };
 const int Woman::mFertilityTime{ 20 };
+const QColor Woman::mWomanColor{ 242, 229, 135 };
 
-Woman::Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, HumanSpecifier *humainSpecifier, QGraphicsItem *parent)
-	:Human(viewRay, rotationAngle, walkSpeed, runSpeed, currentEnvironnemnt, typeOfHumanoide, age, humainSpecifier, parent),
+
+Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infection, QGraphicsItem *parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, age, military, infection,parent),
 	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime}
 {
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
 }
 
 
@@ -66,3 +71,4 @@ void Woman::LosingChild(Children * child)
 		i++;
 	}
 }
+

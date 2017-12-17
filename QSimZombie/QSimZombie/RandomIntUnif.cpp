@@ -3,7 +3,8 @@
 
 
 RandomIntUnif::RandomIntUnif(int a, int b)
-	:mA{a},
+	:QRandom(),
+	mA{a},
 	mB{b}
 {
 	mUniform = new std::uniform_int_distribution<int>(mA, mB);

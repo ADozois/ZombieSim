@@ -15,8 +15,8 @@ public:
 
 	void advance(int phase) override;
 	void advance(int phase, int index) override;
-	int AgeBegin();
-	int AgeEnd();
+	static int AgeBegin();
+	static int AgeEnd();
 	void LosingMother();
 	Woman * Mother();
 

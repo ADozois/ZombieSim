@@ -3,7 +3,8 @@
 
 
 RandomNorm::RandomNorm(double mean, double std_dev)
-	:mMean{mean},
+	:QRandom(),
+	mMean{mean},
 	mStd{std_dev}
 {
 	mNormal = new std::normal_distribution<double>(mMean, mStd);

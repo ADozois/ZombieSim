@@ -11,6 +11,8 @@
 #include <QPixmap>
 #include <QIcon>
 #include <QImage>
+#include <QSizePolicy>
+
 class QSimulationTab : public QWidget
 {
 	Q_OBJECT
@@ -42,6 +44,9 @@ protected:
 
 	//Label
 	QLabel *mIconLabel;
+
+	//Size policy
+	QSizePolicy *mSizePolicy;
 };
 
 

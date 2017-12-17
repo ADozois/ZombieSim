@@ -1,20 +1,28 @@
 #include "Environnement.h"
-
 #include <QGraphicsEllipseItem>
+#include "RandomIntUnif.h"
+#include "RandomNorm.h"
+#include "ParamSim.h"
+#include "QHumanoid.h"
+#include "Human.h"
+#include "Woman.h"
+
 
 const double Environnement::mDensityRadius{ 3.0 };
+const int Environnement::mProbBegin{ 0 };
+const int Environnement::mProbEnd{ 100 };
 
 Environnement::Environnement(ParamSim *parameters)
+	:mMeanPeopleDispertion{ 0 },
+	mDevPeopleDispertion{ 10 }
 {
-	mScene = new QGraphicsScene;
+	mScene = new QGraphicsScene(0, 0, 800, 200);
+	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
+	mProbabilityType = new RandomIntUnif(mProbBegin, mProbEnd);
+	mHeightDispertion = new RandomIntUnif(0, ParamSim::SceneHeight());
+	mWidthDispertion = new RandomIntUnif(0, ParamSim::SceneWidth());
 
-
-	//On cree 10 cercles juste pour dire
-	for (int i = 0; i < 10; ++i)
-	{
-		QGraphicsEllipseItem * newItem = new QGraphicsEllipseItem(-50 + i * 20, -50 + 1 * 20, 10, 10);
-		mScene->addItem(newItem);
-	}
+	initializeWorld();
 
 	
 
@@ -42,7 +50,7 @@ void Environnement::advance()
 
 		//On regarde les distance avec le premier hors de la boucle pour évité de toujours faire la vérification si c'est le premier (pour évité de recalculer les distance déjà calculé
 		QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[0]);
-		infoForAdvance* firstHumanoideInfo;
+		infoForAdvance* firstHumanoideInfo{ nullptr };
 		for (int j{ 1 }; j<currentListOfHumanoides.size(); ++j)
 		{
 			QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[j]);
@@ -128,4 +136,59 @@ void Environnement::addDeathHumanoid(int index)
 	QList<QGraphicsItem *> currentListOfHumanoides = mScene->items();
 	mDeathList.append(currentListOfHumanoides[index]);
 
+}
+
+Environnement::~Environnement()
+{
+	delete mPeopleDispertion;
+	delete mHeightDispertion;
+	delete mWidthDispertion;
+}
+
+inline void Environnement::CreateCity(int nbrPeople)
+{
+	QHumanoid * newItem{ nullptr };
+	int x{ mWidthDispertion->Generate() };
+	int y{ mHeightDispertion->Generate() };
+	bool virus{ false };
+	bool military{ false };
+	int age{ 0 };
+	for (int i = 0; i < nbrPeople; i++)
+	{
+		if (mProbabilityType->Generate() <= ParamSim::ProbInfection())
+		{
+			virus = true;
+		}
+		if (mProbabilityType->Generate() <= ParamSim::ProbNewMilitary())
+		{
+			military = true;
+		}
+		age = mProbabilityType->Generate();
+		if (mProbabilityType->Generate() <= ParamSim::ProbWoman())
+		{
+			newItem = new Woman(x + mPeopleDispertion->Generate(), y + mPeopleDispertion->Generate(),this,QHumanoid::humanoideType::woman, age, military, virus);
+		}
+		else
+		{
+			newItem = new Human(x + mPeopleDispertion->Generate(), y + mPeopleDispertion->Generate(), this, QHumanoid::humanoideType::human, age, military, virus);
+		}
+		mScene->addItem(newItem);
+		military = false;
+		virus = false;
+	}
+}
+
+inline int Environnement::FindPeoplePerCity(int totalHuman, int nbrCity)
+{
+	return std::floor(totalHuman/nbrCity);
+}
+
+void Environnement::initializeWorld()
+{
+	int nbrPeoplePerCity = FindPeoplePerCity(ParamSim::NbrHuman(), ParamSim::NbrCity());
+
+	for (int i = 0; i < ParamSim::NbrCity(); i++)
+	{
+		CreateCity(nbrPeoplePerCity);
+	}
 }

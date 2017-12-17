@@ -13,7 +13,7 @@ int ParamSim::mNbrCity{ 5 };
 int ParamSim::mMeanAge{ 0 };
 int ParamSim::mPregnancyTime{ 0 };
 
-double ParamSim::mViewRay{ 0.0 };
+double ParamSim::mViewRay{ 10.0 };
 double ParamSim::mRotationAngle{ 0.0 };
 double ParamSim::mVirusResistance{ 0.0 };
 double ParamSim::mMeanVirusForce{ 0.0 };

@@ -18,6 +18,26 @@ Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mPenColor = mWomanColor;
 }
 
+Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, bool military, bool infection, QGraphicsItem * parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, military, infection, parent),
+	mReproduction{ false },
+	mCountChildren{ 0 },
+	mTickRemaining{ mFertilityTime }
+{
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
+}
+
+Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military, bool infection, QGraphicsItem * parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, runSpeed, walkSpeed, viewRay, military, infection, parent),
+	mReproduction{ false },
+	mCountChildren{ 0 },
+	mTickRemaining{ mFertilityTime }
+{
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
+}
+
 
 Woman::~Woman()
 {

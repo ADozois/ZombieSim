@@ -9,10 +9,12 @@
 
 
 RandomNorm *QHumanoid::mRunGenerator { nullptr };
-RandomNorm *QHumanoid::mWalkGenerator { nullptr };
+RandomNorm *QHumanoid::mWalkGenerator{ nullptr };
+RandomNorm *QHumanoid::mRayGenerator { nullptr };
 RandomIntUnif *QHumanoid::mNameGenerator { nullptr };
 const QList<QString> QHumanoid::mNameList{ "Antoine","Guillaume","Olivier" };
 const double QHumanoid::mWalkDev{ 0.1 };
+const double QHumanoid::mRayDev{ 0.3 };
 const double QHumanoid::mOffsetRun{ 5 };
 const double QHumanoid::mRunDev{ 0.1 };
 const int QHumanoid::mBeginName{ 0 };
@@ -32,23 +34,37 @@ const double QHumanoid::mOpacityHumanoid{ 0.60 };
 QHumanoid::QHumanoid(double x, double y, Environnement *currentEnvironnement, humanoideType typeOfHumanoide, QGraphicsItem *parent)
 	: QGraphicsItem(parent),
 	mEnergy{ 100 },
-	mViewRay{ ParamSim::ViewRay() },
+	mViewRay{ 0.0 },
 	mRotationAngle{ ParamSim::RotationAngle() },
 	mWalkSpeed{ 0.0 },
 	mRunSpeed{ 0.0 },
 	mClosestHuman{ nullptr },
-	mEnvironnement{currentEnvironnement},
-	mHumanoideType{typeOfHumanoide},
-	mPosition{x, y},
-	mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW)),
-	mBrushColor{mHumanoidColor},
-	mPenColor{mContourColor}
+	mEnvironnement{ currentEnvironnement },
+	mHumanoideType{ typeOfHumanoide },
+	mPosition{ x, y },
+	mRectF{ QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW) },
+	mBrushColor{ mHumanoidColor },
+	mPenColor{ mContourColor }
 {
-	mRunGenerator = new RandomNorm(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mRunDev);
+	mRunGenerator = new RandomNorm(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mRayDev);
+	mRayGenerator = new RandomNorm(ParamSim::ViewRay(), ParamSim::ViewRay()*mRunDev);
 	mWalkGenerator = new RandomNorm(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mWalkDev);
 	mNameGenerator = new RandomIntUnif(mBeginName, mEndName);
 	mWalkSpeed = mWalkGenerator->Generate();
 	mRunSpeed = mRunGenerator->Generate();
+	mViewRay = mRayGenerator->Generate();
+	mName = mNameList.at(mNameGenerator->Generate());
+}
+
+QHumanoid::QHumanoid(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, QGraphicsItem * parent)
+{
+	mRunGenerator = new RandomNorm(0, runSpeed*mRunDev);
+	mRayGenerator = new RandomNorm(0, viewRay*mRunDev);
+	mWalkGenerator = new RandomNorm(0, (runSpeed + mOffsetRun)*mWalkDev);
+	mNameGenerator = new RandomIntUnif(mBeginName, mEndName);
+	mWalkSpeed = runSpeed + mWalkGenerator->Generate();
+	mViewRay = viewRay + mRayGenerator->Generate();
+	mRunSpeed = runSpeed + mRunGenerator->Generate();
 	mName = mNameList.at(mNameGenerator->Generate());
 }
 

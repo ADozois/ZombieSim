@@ -10,6 +10,8 @@ class Woman : public Human
 public:
 	Woman() = delete;
 	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();

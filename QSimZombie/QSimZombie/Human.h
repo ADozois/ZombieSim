@@ -17,6 +17,7 @@ public:
 	Human() = delete;
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary = false, bool infected = false, QGraphicsItem *parent = nullptr);
+	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
 	void advance(int phase, int index) override;
@@ -33,7 +34,6 @@ public:
 
 
 protected:
-	bool IsPossibleMate(Woman * woman);
 	bool VirusTransmission();
 	void MilitaryPainter(QPainter * painter);
 	void ChildrenPainter(QPainter * painter);

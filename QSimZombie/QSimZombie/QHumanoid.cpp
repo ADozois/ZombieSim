@@ -1,5 +1,6 @@
 #include "QHumanoid.h"
 #include <random>
+#include "Environnement.h"
 
 RandomNorm *QHumanoid::mRunGenerator {nullptr};
 RandomNorm *QHumanoid::mWalkGenerator {nullptr};
@@ -17,14 +18,15 @@ const double QHumanoid::mPenWidth{1.0};
 QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
 
 
-QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent)
+QHumanoid::QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed,Environnement *currentEnvironnement, QGraphicsItem *parent)
 	: QGraphicsItem(parent),
 	mEnergy{ 100 },
 	mViewRay{ viewRay },
 	mRotationAngle{ rotationAngle },
 	mWalkSpeed{ 0.0 },
 	mRunSpeed{ 0.0 },
-	mClosestHuman{ nullptr }
+	mClosestHuman{ nullptr },
+	mEnvironnement{currentEnvironnement}
 {
 	mRunGenerator = new RandomNorm(runSpeed, runSpeed*mRunDev);
 	mWalkGenerator = new RandomNorm(walkSpeed, walkSpeed*mWalkDev);

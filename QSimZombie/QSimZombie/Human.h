@@ -11,7 +11,7 @@ class Virus;
 class Human : public QHumanoid
 {
 public:
-	Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age = 0, QGraphicsItem *parent = nullptr);
+	Human(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt,int age = 0, HumanSpecifier *humainSpecifier = nullptr, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
 	bool IsDead();
@@ -20,17 +20,19 @@ public:
 	int Age();
 	int DeathAge();
 	int VirusResistance();
+	int calculateAllDistance(Environnement * environnement, Zombie *closestZombi);
 
 protected:
 	bool IsPossibleMate(Woman * woman);
 	bool VirusTransmission();
 
-private:
+protected:
 	int mAge;
 	int mDeathAge;
 	int mVirusResistance;
 	HumanSpecifier* mSpecifier;
 
+private:
 	static RandomNorm * mResistanceGenerator;
 	static const double mResistanceMean;
 	static const double mResistanceDeviation;

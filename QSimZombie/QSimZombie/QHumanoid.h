@@ -9,13 +9,14 @@
 
 class Human;
 class QRandom;
+class Environnement;
 
 class QHumanoid : public QGraphicsItem
 {
 
 public:
 	QHumanoid() = delete;
-	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, QGraphicsItem *parent = nullptr);
+	QHumanoid(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, Environnement *currentEnvironnemnt, QGraphicsItem *parent = nullptr);
 	~QHumanoid();
 
 	QRectF boundingRect() const;
@@ -33,7 +34,8 @@ public:
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
 
-private:
+protected:
+
 	int mEnergy;
 	qreal mViewRay;
 	qreal mRunSpeed;
@@ -43,9 +45,11 @@ private:
 	QString mName;
 	qreal mRotationAngle;
 	QVector2D mMouvementDirection;
+	Environnement * mEnvironnement;
 
 	const Human * mClosestHuman;
 
+private:
 	static RandomNorm *mRunGenerator;
 	static RandomNorm *mWalkGenerator;
 	static RandomIntUnif *mNameGenerator;

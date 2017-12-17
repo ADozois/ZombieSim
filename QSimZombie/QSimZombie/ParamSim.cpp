@@ -5,7 +5,7 @@ int ParamSim::mNbrHuman{ 100 };
 int ParamSim::mNbrWoman{ 0 };
 int ParamSim::mNbrMilitary{ 0 };
 int ParamSim::mNbrVirus{ 0 };
-int ParamSim::mSceneHeight{ 200 };
+int ParamSim::mSceneHeight{ 500 };
 int ParamSim::mSceneWidth{ 800 };
 int ParamSim::mViewHeight{ 0 };
 int ParamSim::mViewWidth{ 0 };
@@ -17,24 +17,14 @@ double ParamSim::mViewRay{ 0.0 };
 double ParamSim::mRotationAngle{ 0.0 };
 double ParamSim::mVirusResistance{ 0.0 };
 double ParamSim::mMeanVirusForce{ 0.0 };
-double ParamSim::mProbNewMilitary{ 0.0 };
+double ParamSim::mProbNewMilitary{ 20.0 };
 double ParamSim::mProbReproduction{ 0.0 };
-double ParamSim::mProbWoman{ 0.0 };
-double ParamSim::mProbInfection{ 0.0 };
+double ParamSim::mProbWoman{ 50.0 };
+double ParamSim::mProbInfection{ 20.0 };
 double ParamSim::mComssumptionRateEnergieHuman{ 0.0 };
 double ParamSim::mComssumptionRateEnergieZombie{ 0.0 };
 double ParamSim::mProbSpeed{ 10.0 };
 
-
-double ParamSim::ViewRay()
-{
-	return mViewRay;
-}
-
-double ParamSim::RotationAngle()
-{
-	return mRotationAngle;
-}
 
 void ParamSim::setNbrZombie(int nbr) {
 	mNbrZombie = nbr;

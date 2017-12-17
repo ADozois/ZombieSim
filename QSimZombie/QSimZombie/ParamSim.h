@@ -19,8 +19,8 @@ public:
 	static int ViewWidth(void) { return mViewWidth; }
 	static int NbrCity(void) { return mNbrCity; }
 	static int MeanAge(void) { return mMeanAge; }
-	static double ViewRay();
-	static double RotationAngle();
+	static double ViewRay() { return mViewRay; };
+	static double RotationAngle() { return mRotationAngle; };
 	static double VirusResistance(void) { return mVirusResistance; }
 	static double MeanVirusForce(void) { return mMeanVirusForce; }
 	static double ProbNewMilitary(void) { return mProbNewMilitary; }

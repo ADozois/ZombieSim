@@ -8,7 +8,7 @@
 #include "Woman.h"
 
 
-const double Environnement::mDensityRadius{ 3.0 };
+const double Environnement::mDensityRadius{ 200 };
 const int Environnement::mProbBegin{ 0 };
 const int Environnement::mProbEnd{ 100 };
 
@@ -113,6 +113,7 @@ void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance
 		{
 			infoToFill.closestZombie = dynamic_cast<Zombie *>(comparedHumanoide);
 			infoToFill.distanceToClosestZombie = distance;
+			infoToFill.currentPositionClosestZombi = comparedHumanoide->pos();
 		}
 
 	}
@@ -121,6 +122,7 @@ void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance
 		{
 			infoToFill.closestHuman = dynamic_cast<Human *>(comparedHumanoide);
 			infoToFill.distanceToClosestHuman = distance;
+			infoToFill.currentPositionClosestHuman = comparedHumanoide->pos();
 		}
 		if (distance < mDensityRadius)
 		{

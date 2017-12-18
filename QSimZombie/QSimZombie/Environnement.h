@@ -46,6 +46,8 @@ public:
 	Human* getClosestHuman(int index) { return mAdvanceInfoList[index]->closestHuman; }
 	qreal getDistanceToClosestZombie(int index) { return mAdvanceInfoList[index]->distanceToClosestZombie; }
 	qreal getDistanceToclosestHuman(int index) { return mAdvanceInfoList[index]->distanceToClosestHuman; }
+	QPointF getClosestZombiPos(int index) { return mAdvanceInfoList[index]->currentPositionClosestZombi; }
+	QPointF getClosestHumanPos(int index) { return mAdvanceInfoList[index]->currentPositionClosestHuman; }
 	int getHumainDensity(int index) { return mAdvanceInfoList[index]->numberOfCloseHumain; }
 	void addDeathHumanoid(int index);
 

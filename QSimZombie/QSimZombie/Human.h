@@ -14,6 +14,9 @@ class Environnement;
 class Human : public QHumanoid
 {
 public:
+
+	enum class movementSpeed{walk,run};
+
 	Human() = delete;
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary = false, bool infected = false, QGraphicsItem *parent = nullptr);
@@ -43,6 +46,10 @@ protected:
 	void CreateMilitary();
 	void CreateVirus();
 	void CreateChild();
+	void moveInDirection(movementSpeed movementSpeed);
+	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
+	void setDirectionTo(QPointF positionTo);
+	void setDirectionFrom(QPointF positionFrom);
 
 
 protected:

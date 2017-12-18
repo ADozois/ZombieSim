@@ -4,6 +4,7 @@
 #include "Military.h"
 #include "Virus.h"
 #include <QPainter>
+#include "ParamSim.h"
 
 RandomNorm * Human::mResistanceGenerator{nullptr};
 const double Human::mResistanceMean{50.0};
@@ -83,9 +84,44 @@ void Human::advance(int phase, int index)
 			}
 			else
 			{
-				//mEnvironnement
-				//	//On fait la logique pour zombi le plus proche et humain le plus proche
-				//	if (mEnvironnement->getDistanceToClosestZombie() == )
+				//Le zombi mange l'humain
+				if (mEnvironnement->getDistanceToClosestZombie(index) <= mEatingRange)
+				{
+					mEnvironnement->addDeathHumanoid(index);
+				}
+				else if (mIsTurning) {
+					//On est en train de tourner et on continue donc a faire le tournant pré-déterminé
+					mMovementDirection = mTurningDirection[mTurningAtPosition];
+					++mTurningAtPosition;
+					moveInDirection(movementSpeed::run);
+					if (mTurningAtPosition > mNumberOfTurningDirection)
+					{
+						mIsTurning = false;
+					}
+				}
+				else if(mEnvironnement->getDistanceToClosestZombie(index)<=mViewRaySq){
+					//Zombi est visible, court dans le sens inverse					
+					QPointF zombiPos = mEnvironnement->getClosestZombiPos(index);
+					setDirectionFrom(zombiPos);
+					moveInDirection(movementSpeed::run);
+				}
+				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mEatingRange) {
+					//Si très près d'un autre humain, transmission de virus et s'éloigne de lui en marchant
+					VirusTransmission();
+					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
+					setDirectionFrom(humanPos);
+					moveInDirection(movementSpeed::walk);
+				}
+				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mViewRaySq) {
+					//Si humain visible, marche vers lui
+					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
+					setDirectionFrom(humanPos);
+					moveInDirection(movementSpeed::walk);
+				}
+				else {
+					//Si humain et zombi trop loin pour les voir, marche dans la direction qu'il allait déjà
+					moveInDirection(movementSpeed::walk);
+				}
 			}
 
 		}
@@ -97,6 +133,76 @@ void Human::advance(int phase)
 	advance(phase, 0);
 }
 
+void Human::moveInDirection(movementSpeed movementSpeed)
+{
+	if (movementSpeed == movementSpeed::run)
+	{
+		if (mEnergy)
+		{
+			QPointF newPosition(pos().x() + mMovementDirection.x()*mRunSpeed, pos().y() + mMovementDirection.y()*mRunSpeed);
+			checkForWalls(newPosition,mRunSpeed);
+			this->setPos(newPosition);
+			ReduceEnergy();
+		}
+		else
+		{
+			QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
+			checkForWalls(newPosition,mWalkSpeed);
+			this->setPos(newPosition);
+		}
+	}
+	else {
+		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
+		checkForWalls(newPosition,mWalkSpeed);
+		this->setPos(newPosition);
+		AddEnergy();
+	}
+}
+
+void Human::checkForWalls(QPointF &newPosition,qreal movementSpeed)
+{
+	//Si on tourne déjà, on continue dans les direction de tournant donné
+	if (!mIsTurning)
+	{
+		//Si on s'en va dans un mur, on ajuste la direction et on calcul les direction a prendre pour faire le tournant au complet
+		if ((newPosition.x() < mSizeHumanoid * 2) || (newPosition.x() > ParamSim::SceneWidth() - (mSizeHumanoid * 2)) ||
+			(newPosition.y() < mSizeHumanoid*2) || (newPosition.y() > ParamSim::SceneHeight()-(mSizeHumanoid*2)))
+		{
+			mIsTurning = true;
+			//On trouve l'angle de mouvement actuel
+			qreal directionAngle = atan(mMovementDirection.y() / mMovementDirection.x());
+			for (int i{ 0 }; i < mNumberOfTurningDirection; ++i)
+			{
+				qreal newAngle = directionAngle + (mRotationAngle / mNumberOfTurningDirection);
+				QVector2D newDirection(cos(newAngle), sin(newAngle));
+				mTurningDirection[i] = newDirection;
+			}
+			mTurningAtPosition = 1;
+			newPosition = QPointF(pos().x() + mTurningDirection[0].x()*movementSpeed, pos().y() + mTurningDirection[0].y()*movementSpeed);
+			mMovementDirection = mTurningDirection[0];
+		}
+	}
+}
+
+void Human::setDirectionTo(QPointF positionTo)
+{
+	//We set the direction of the entity going to that entity
+	qreal movementX = ( positionTo.x()- pos().x());
+	qreal movementY = ( positionTo.y()- pos().y());
+	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
+	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
+
+}
+
+void Human::setDirectionFrom(QPointF positionFrom)
+{
+	//We set the direction of the entity going away from that point
+	qreal movementX = (pos().x() - positionFrom.x());
+	qreal movementY = (pos().y() - positionFrom.y());
+	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
+	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
+
+}
 
 bool Human::IsDead()
 {

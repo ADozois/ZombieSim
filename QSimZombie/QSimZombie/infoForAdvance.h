@@ -9,6 +9,8 @@ struct infoForAdvance {
 	qreal distanceToClosestZombie{ DBL_MAX };
 	qreal distanceToClosestHuman{ DBL_MAX };
 	int numberOfCloseHumain{ 0 };
+	QPointF currentPositionClosestHuman{ QPointF(0.0,0.0) };
+	QPointF currentPositionClosestZombi{ QPointF(0.0,0.0) };
 };
 
 

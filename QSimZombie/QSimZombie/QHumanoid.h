@@ -40,6 +40,7 @@ public:
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
 	humanoideType who() { return mHumanoideType; }
+	//qreal eatingDistance() { return static_cast<qreal>(mSizeHumanoid); }
 
 	
 
@@ -53,13 +54,14 @@ protected:
 protected:
 	int mEnergy;
 	qreal mViewRay;
+	qreal mViewRaySq;
 	qreal mRunSpeed;
 	qreal mWalkSpeed;
 	QPainter *mPainter;
 	QRectF *mBoundingBox;
 	QString mName;
 	qreal mRotationAngle;
-	QVector2D mMouvementDirection;
+	QVector2D mMovementDirection;
 	Environnement * mEnvironnement;
 	humanoideType mHumanoideType;
 	QVector2D mPosition;
@@ -67,7 +69,15 @@ protected:
 	QColor mBrushColor;
 	QColor mPenColor;
 
-	const Human * mClosestHuman;
+	bool mIsTurning;
+	QVector2D *mTurningDirection;
+	int mTurningAtPosition;
+	static const int mNumberOfTurningDirection{ 5 };
+
+	//const Human * mClosestHuman;
+	static const qreal mEatingRange;
+	static const int mSizeHumanoid;
+	
 
 private:
 	static RandomNorm *mRunGenerator;
@@ -88,9 +98,9 @@ private:
 	static const double mRectW;
 	static const double mPenWidth;
 	static const QColor mHumanoidColor;
-	static const QColor mContourColor;
-	static const int mSizeHumanoid;
+	static const QColor mContourColor;	
 	static const double mOpacityHumanoid;
+	
 };
 
 #endif // !Q_HUMANOID_H

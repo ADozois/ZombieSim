@@ -10,7 +10,7 @@ class Military : public HumanSpecifier
 {
 public:
 	Military();
-	~Military() = default;
+	~Military();
 
 	void advance(int phase) override;
 	void advance(int phase, int index) override;

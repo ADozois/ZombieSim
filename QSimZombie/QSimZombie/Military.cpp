@@ -1,4 +1,5 @@
 #include "Military.h"
+#include "QStatSim.h"
 #include "RandomIntUnif.h"
 
 RandomIntUnif * Military::mKillGenerator{nullptr};
@@ -11,6 +12,12 @@ const int Military::mAgeEndService{40};
 Military::Military()
 {
 	mKillGenerator = new RandomIntUnif(mBeginDist, mEndDist);
+	QStatSim::IncNbrMilitaire();
+}
+
+Military::~Military()
+{
+	QStatSim::DecNbrMilitaire();
 }
 
 

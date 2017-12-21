@@ -1,5 +1,5 @@
 #include "QParametersTab.h"
-
+#include "ParamSim.h"
 
 
 								//QStrings for parameters
@@ -34,6 +34,8 @@ const QString QParametersTab::mAverageVirusStrenghtString{ "Average Virus Streng
 QParametersTab::QParametersTab(QWidget *parent)
 	: QWidget(parent)
 {
+
+	
 										//Create things
 	//Layouts
 	mMainLayout = new QHBoxLayout;
@@ -73,22 +75,27 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mSceneParamGB->setLayout(mSceneParamGBL);
 
 										//Parameter Spinboxes and Sliders
-	//Entity Count
+			//Entity Count
 	mZombieCount = new QSpinBox;
 	mZombieCount->setToolTip("Set the number of roaming zombies");
+	mZombieCount->setRange(entityMinimum, entityMaximum);
 
 	mHumanCount = new QSpinBox;
 	mHumanCount->setToolTip("Set the initial number of humans");
+	mHumanCount->setRange(entityMinimum, entityMaximum);
 
 	mWomanCount = new QSpinBox;
 	mWomanCount->setToolTip("Set the initial number of women");
+	mWomanCount->setRange(entityMinimum, entityMaximum); //Faudra gérer que mWomanCount + mMilitaryCount <= mHumanCount
 
 	mMilitaryCount = new QSpinBox;
 	mMilitaryCount->setToolTip("Set the initial number of military");
+	mMilitaryCount->setRange(entityMinimum, entityMaximum);
 
 	mVirusCount = new QSpinBox;
 	mVirusCount->setToolTip("Set the initial virus count");
-
+	mVirusCount->setRange(entityMinimum, entityMaximum);
+	
 	//Entity Caracteristics
 	mAverageAge = new QSlider(Qt::Horizontal),mAverageAge->setToolTip("Set the initial Average Age");
 	mAverageSpeed = new QSlider(Qt::Horizontal),mAverageSpeed->setToolTip("Set the initial Average Speed");
@@ -140,6 +147,14 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mEnvironmentCarGBL->addRow(mAverageVirusResistanceString, mAverageVirusResistance);
 	mEnvironmentCarGBL->addRow(mHumanEnergyDropRateString, mHumanEnergyDropRate);
 	mEnvironmentCarGBL->addRow(mZombieEnergyDropRateString, mZombieEnergyDropRate);
+
+	//connect(mAverageAge);
+	
+
+
+
+
+
 
 	setLayout(mMainLayout);
 }

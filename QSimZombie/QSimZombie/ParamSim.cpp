@@ -1,4 +1,5 @@
 #include "ParamSim.h"
+#include "QParametersTab.h"
 
 void ParamSim::setNbrZombie(int nbr) {
 	mNbrZombie = nbr;
@@ -81,3 +82,5 @@ void ParamSim::setPregnancyTime(int time) {
 void ParamSim::setProbSpeed(double speed) {
 	mProbSpeed = speed;
 }
+
+

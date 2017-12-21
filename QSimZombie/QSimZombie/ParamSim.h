@@ -1,6 +1,8 @@
-
 #ifndef Q_PARAM_SIM_H
 #define Q_PARAM_SIM_H
+
+
+class QParametersTab;
 
 class ParamSim
 {
@@ -30,6 +32,9 @@ public:
 	int PregnancyTime(void) { return mPregnancyTime; }
 	double ProbSpeed(void) { return mProbSpeed; }
 
+	
+
+
 	void setNbrZombie(int nbr);
 	void setNbrHuman(int nbr);
 	void setNbrWoman(int nbr);
@@ -52,7 +57,7 @@ public:
 	void setPregnancyTime(int time);
 	void setProbSpeed(double speed);
 
-private:
+protected:
 	int mNbrZombie;
 	int mNbrHuman;
 	int mNbrWoman;
@@ -76,6 +81,7 @@ private:
 	double mComssumptionRateEnergieZombie;
 	double mProbSpeed;
 
+	
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "Woman.h"
 #include "Children.h"
+#include "QStatSim.h"
 #include <QPainter>
 
 int Woman::mMaxChildren{ 5 };
@@ -16,6 +17,7 @@ Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 {
 	mBrushColor = mWomanColor;
 	mPenColor = mWomanColor;
+	QStatSim::IncNbrFemme();
 }
 
 Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, bool military, bool infection, QGraphicsItem * parent)
@@ -26,6 +28,8 @@ Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideT
 {
 	mBrushColor = mWomanColor;
 	mPenColor = mWomanColor;
+	QStatSim::IncNbrFemme();
+
 }
 
 Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military, bool infection, QGraphicsItem * parent)
@@ -36,11 +40,14 @@ Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideT
 {
 	mBrushColor = mWomanColor;
 	mPenColor = mWomanColor;
+	QStatSim::IncNbrFemme();
+
 }
 
 
 Woman::~Woman()
 {
+	QStatSim::DecNbrFemme();
 }
 
 void Woman::advance(int phase, int index)

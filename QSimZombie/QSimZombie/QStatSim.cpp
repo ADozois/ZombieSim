@@ -9,8 +9,8 @@ int QStatSim::mNbrFemme{ 0 };
 int QStatSim::mNbrEnfant{ 0 };
 int QStatSim::mNbrMilitaire{ 0 };
 int QStatSim::mNbrMort{ 0 };
-std::map<QString, int> QStatSim::mNbrNomMort{};
-std::map<QString, int> QStatSim::mNbrNomVivant{};
+std::map<QString, int> QStatSim::mNbrNomMort{ { "Antoine", 0 }, { "Guillaume", 0 }, { "Olivier", 0 } };
+std::map<QString, int> QStatSim::mNbrNomVivant{ { "Antoine", 0 },{ "Guillaume", 0 },{ "Olivier", 0 } };
 std::vector<int> QStatSim::mPopEvol{};
 
 
@@ -91,6 +91,11 @@ void QStatSim::SetPopEvol(std::vector<int> value) {
 	mPopEvol = value;
 };
 
+std::map<QString, int> QStatSim::NbrInstance()
+{
+	return std::map<QString, int>{ {"Militaire", mNbrMilitaire}, { "Homme", NbrHomme() }, { "Femme", mNbrFemme }, { "Children", mNbrEnfant }, { "Zombie", mNbrZombie } };
+}
+
 void QStatSim::IncNbrZombie()
 {
 	mNbrZombie++;
@@ -128,7 +133,7 @@ void QStatSim::IncNbrMort()
 
 void QStatSim::IncNbrNomMort(QString name)
 {
-	mNbrNomMort.find(name)->second++;
+	int t = mNbrNomMort.find(name)->second;
 }
 
 void QStatSim::IncNbrNomVivant(QString name)
@@ -198,7 +203,7 @@ qreal QStatSim::PourcentageHumain(void)
 
 qreal QStatSim::PourcentageHomme(void)
 {
-	return 1 - PourcentageFemme() - PourcentageMilitaire();
+	return 1 - PourcentageFemme();
 }
 
 qreal QStatSim::PourcentageFemme(void)

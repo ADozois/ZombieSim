@@ -11,7 +11,7 @@ class Children : public HumanSpecifier
 public:
 	Children();
 	Children(Woman * mother);
-	~Children() = default;
+	~Children();
 
 	void advance(int phase) override;
 	void advance(int phase, int index) override;

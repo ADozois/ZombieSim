@@ -1,7 +1,8 @@
 #include "ParamSim.h"
+#include "QParametersTab.h"
 
 int ParamSim::mNbrZombie{ 0 };
-int ParamSim::mNbrHuman{ 100 };
+int ParamSim::mNbrHuman{ 20 };
 int ParamSim::mNbrWoman{ 0 };
 int ParamSim::mNbrMilitary{ 0 };
 int ParamSim::mNbrVirus{ 0 };
@@ -117,3 +118,5 @@ void ParamSim::setPregnancyTime(int time) {
 void ParamSim::setProbSpeed(double speed) {
 	mProbSpeed = speed;
 }
+
+

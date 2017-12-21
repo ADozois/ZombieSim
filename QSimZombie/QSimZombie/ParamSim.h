@@ -1,6 +1,8 @@
-
 #ifndef Q_PARAM_SIM_H
 #define Q_PARAM_SIM_H
+
+
+class QParametersTab;
 
 class ParamSim
 {
@@ -81,7 +83,7 @@ private:
 	static double mComssumptionRateEnergieHuman;
 	static double mComssumptionRateEnergieZombie;
 	static double mProbSpeed;
-
+	
 };
 
 #endif

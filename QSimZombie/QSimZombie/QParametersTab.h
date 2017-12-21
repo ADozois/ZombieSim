@@ -10,12 +10,16 @@
 #include <QString>
 #include <QFormLayout>
 
+class ParamSim;
+
 class QParametersTab : public QWidget {
 
 	Q_OBJECT
-
+	
 public:
 	QParametersTab(QWidget *parent = Q_NULLPTR);
+
+
 
 protected:
 
@@ -36,21 +40,21 @@ protected:
 	QFormLayout *mEnvironmentCarGBL;
 	QFormLayout *mSceneParamGBL;
 
-	
-									// PARAMETER BUTTONS/SLIDERS
 
-	//Entity quantitites
+	// PARAMETER BUTTONS/SLIDERS
+
+//Entity quantitites
 	QSpinBox *mZombieCount;
 	QSpinBox *mHumanCount;
 	QSpinBox *mWomanCount;
 	QSpinBox *mMilitaryCount;
 	QSpinBox *mVirusCount;
 	QSpinBox *mCityCount;
-	
+
 	//Entity Caracteristics
 	QSlider *mAverageAge;
 	QSlider *mAverageSpeed;
-	
+
 	QSlider *mReproductionProbability;
 	QSlider *mPregnancyDuration;
 	QSlider *mNewMilitaryProbability;
@@ -69,13 +73,16 @@ protected:
 	QSlider *mHumanEnergyDropRate;
 	QSlider *mZombieEnergyDropRate;
 
-									//Labels
-	//Entity count labels
+	//Labels
+//Entity count labels
 	QLabel *mZombieCountLabel;
 	QLabel *mHumanCountLabel;
 	QLabel *mWomanCountLabel;
 	QLabel *mMilitaryCountLabel;
 	QLabel *mVirusCountLabel;
+
+	static const int entityMinimum{ 1 };
+	static const int entityMaximum{ 500 };
 
 									//String
 	//Entity Quantity QString

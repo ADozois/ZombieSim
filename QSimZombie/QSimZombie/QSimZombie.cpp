@@ -29,5 +29,4 @@ QSimZombie::QSimZombie(QWidget *parent)
 
 
 
-
 }

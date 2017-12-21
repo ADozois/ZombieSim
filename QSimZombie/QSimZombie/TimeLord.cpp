@@ -22,6 +22,9 @@ TimeLord::TimeLord()
 
 
 void TimeLord::run() {
+
+
+
 	mTimer->start(mDefaultTime);
 
 }

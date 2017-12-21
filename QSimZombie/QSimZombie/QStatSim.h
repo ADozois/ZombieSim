@@ -10,7 +10,7 @@ class ParamSim;
 class QStatSim
 {
 public:
-	QStatSim() = delete;
+	QStatSim() = default;
 	QStatSim(ParamSim * params);
 	~QStatSim();
 
@@ -27,13 +27,14 @@ public:
 
 	static int NbrZombie() { return mNbrZombie; };
 	static int NbrHumain() { return mNbrHumain; };
-	static int NbrHomme() { return mNbrHomme; };
+	static int NbrHomme() { return mNbrHumain - mNbrFemme; };
 	static int NbrFemme() { return mNbrFemme; };
 	static int NbrEnfant() { return mNbrEnfant; };
 	static int NbrMilitaire() { return mNbrMilitaire; };
 	static int NbrMort() { return mNbrMort; };
 	static std::map<QString, int> NbrNomMort() { return mNbrNomMort; };
 	static std::map<QString, int> NbrNomVivant() { return mNbrNomVivant; };
+	static std::map<QString, int> NbrInstance();
 	static std::vector<int> PopEvol() { return mPopEvol; };
 
 	static void IncNbrZombie();

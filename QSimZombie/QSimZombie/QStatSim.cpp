@@ -91,6 +91,11 @@ void QStatSim::SetPopEvol(std::vector<int> value) {
 	mPopEvol = value;
 };
 
+std::map<QString, int> QStatSim::NbrInstance()
+{
+	return std::map<QString, int>{ {"Militaire", mNbrMilitaire}, { "Homme", NbrHomme() }, { "Femme", mNbrFemme }, { "Children", mNbrEnfant }, { "Zombie", mNbrZombie } };
+}
+
 void QStatSim::IncNbrZombie()
 {
 	mNbrZombie++;
@@ -198,7 +203,7 @@ qreal QStatSim::PourcentageHumain(void)
 
 qreal QStatSim::PourcentageHomme(void)
 {
-	return 1 - PourcentageFemme() - PourcentageMilitaire();
+	return 1 - PourcentageFemme();
 }
 
 qreal QStatSim::PourcentageFemme(void)

@@ -123,6 +123,21 @@
     <ClCompile Include="QStatSim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSimChart.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QSimChart.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QSimChart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimPieChart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimBarChart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -147,6 +162,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="QHumanoid.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QSimChart.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -197,6 +215,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QStatSim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimPieChart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimBarChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

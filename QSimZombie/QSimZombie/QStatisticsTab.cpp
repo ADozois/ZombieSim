@@ -1,5 +1,6 @@
 #include "QStatisticsTab.h"
 #include "SimPieChart.h"
+#include "SimBarChart.h"
 
 
 
@@ -17,8 +18,9 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 	//Charts
 	mChart = new QChart();
 	mChart2 = new QChart();
-	mChart3 = new QChart();
+	mChart3 = new SimBarChart(QStatSim::NbrInstance(), "Nombre de personne par categorie");
 	mChart4 = new SimPieChart(mSimStat.NbrNomVivant(),"Proportion du nombre d'humain selon leur nom");
+	mChart3->CreateChart();
 	mChart4->CreateChart();
 
 	//Series
@@ -44,8 +46,8 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 	mChart2->addAxis(mXAxis2, Qt::AlignBottom);
 	mChart2->addAxis(mYAxis2, Qt::AlignLeft);
 
-	mChart3->addAxis(mXAxis3, Qt::AlignBottom);
-	mChart3->addAxis(mYAxis3, Qt::AlignLeft);
+	//mChart3->addAxis(mXAxis3, Qt::AlignBottom);
+	//mChart3->addAxis(mYAxis3, Qt::AlignLeft);
 
 
 	mXAxis->setRange(0, 30);
@@ -60,16 +62,16 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 
 	*mDataSeries << QPointF(0, 6) << QPointF(9, 4) << QPointF(15, 20) << QPointF(25, 12) << QPointF(29, 26);
 	*mDataSeries2 << QPointF(5, 16) << QPointF(19, 4) << QPointF(15, 20) << QPointF(25, 12) << QPointF(29, 26);
-	CreateBarChart(mSimStat.NbrNomVivant(), mChart3, mDataSeries3, "ttt");
+	//CreateBarChart(mSimStat.NbrNomVivant(), mChart3, mDataSeries3, "ttt");
 	//CreatePieChart(mSimStat.NbrNomVivant(), mChart4, mDataSeries4, "Proportion du nombre d'humain selon leur nom");
 
 	mChart->addSeries(mDataSeries);
 	mChart2->addSeries(mDataSeries2);
-	mChart3->addSeries(mDataSeries3);
+	//mChart3->addSeries(mDataSeries3);
 
 	mChartView = new QChartView(mChart);
 	mChartView2 = new QChartView(mChart2);
-	mChartView3 = new QChartView(mChart3);
+	mChartView3 = new QChartView(mChart3->Chart());
 	mChartView4 = new QChartView(mChart4->Chart());
 
 	mMainLayout->addLayout(mLeftLayout);

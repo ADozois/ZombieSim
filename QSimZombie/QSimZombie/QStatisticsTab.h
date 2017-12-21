@@ -9,11 +9,12 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "QStatSim.h"
+#include "SimPieChart.h"
+#include "SimBarChart.h"
 
 
 using namespace QtCharts;
 
-class SimPieChart;
 
 class QStatisticsTab : public QWidget {
 	
@@ -36,7 +37,7 @@ protected:
 
 	QChart *mChart;
 	QChart *mChart2;
-	QChart *mChart3;
+	SimBarChart *mChart3;
 	SimPieChart *mChart4;
 
 	QChartView *mChartView;

@@ -18,6 +18,8 @@ public:
 protected:
 	void CreateSerie(std::map<QString, int> data) override;
 	void CreateSerie(std::vector<int> data) override;
+	QStringList CreateBarCategory(std::map<QString, int>  data);
+	QStringList mCategory;
 };
 
 #endif // !SIM_BAR_CHART_H

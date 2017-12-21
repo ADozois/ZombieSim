@@ -13,9 +13,16 @@ Military::Military()
 	mKillGenerator = new RandomIntUnif(mBeginDist, mEndDist);
 }
 
-void Military::advance(int phase)
+
+void Military::advance(int phase, int index)
 {
 }
+
+void Military::advance(int phase)
+{
+	advance(phase, 0);
+}
+
 
 bool Military::Kill(Zombie * zombie)
 {

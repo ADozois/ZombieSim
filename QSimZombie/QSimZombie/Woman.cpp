@@ -1,21 +1,55 @@
 #include "Woman.h"
 #include "Children.h"
+#include <QPainter>
 
 int Woman::mMaxChildren{ 5 };
 const int Woman::mEndFertility{ 40 };
 const int Woman::mFertilityTime{ 20 };
+const QColor Woman::mWomanColor{ 242, 229, 135 };
 
-Woman::Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age, QGraphicsItem *parent)
-	:Human(viewRay, rotationAngle, walkSpeed, runSpeed, age, parent),
+
+Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infection, QGraphicsItem *parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, age, military, infection,parent),
 	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime}
 {
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
+}
+
+Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, bool military, bool infection, QGraphicsItem * parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, military, infection, parent),
+	mReproduction{ false },
+	mCountChildren{ 0 },
+	mTickRemaining{ mFertilityTime }
+{
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
+}
+
+Woman::Woman(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military, bool infection, QGraphicsItem * parent)
+	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, runSpeed, walkSpeed, viewRay, military, infection, parent),
+	mReproduction{ false },
+	mCountChildren{ 0 },
+	mTickRemaining{ mFertilityTime }
+{
+	mBrushColor = mWomanColor;
+	mPenColor = mWomanColor;
 }
 
 
 Woman::~Woman()
 {
+}
+
+void Woman::advance(int phase, int index)
+{
+}
+
+void Woman::advance(int phase)
+{
+	advance(phase, 0);
 }
 
 Children * Woman::GiveBirth()
@@ -57,3 +91,4 @@ void Woman::LosingChild(Children * child)
 		i++;
 	}
 }
+

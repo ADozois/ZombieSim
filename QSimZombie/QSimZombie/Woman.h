@@ -8,12 +8,18 @@ class Children;
 class Woman : public Human
 {
 public:
-	Woman(qreal viewRay, qreal rotationAngle, qreal walkSpeed, qreal runSpeed, int age = 18, QGraphicsItem *parent = nullptr);
+	Woman() = delete;
+	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();
 	bool Reproduction();
 	void LosingChild(Children * child);
+	void advance(int phase) override;
+	void advance(int phase, int index) override;
+
 
 
 private:
@@ -26,6 +32,7 @@ private:
 	
 	static const int mEndFertility;
 	static const int mFertilityTime;
+	static const QColor mWomanColor;
 };
 
 

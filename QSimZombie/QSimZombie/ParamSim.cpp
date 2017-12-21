@@ -1,6 +1,32 @@
 #include "ParamSim.h"
 #include "QParametersTab.h"
 
+int ParamSim::mNbrZombie{ 0 };
+int ParamSim::mNbrHuman{ 100 };
+int ParamSim::mNbrWoman{ 0 };
+int ParamSim::mNbrMilitary{ 0 };
+int ParamSim::mNbrVirus{ 0 };
+int ParamSim::mSceneHeight{ 500 };
+int ParamSim::mSceneWidth{ 800 };
+int ParamSim::mViewHeight{ 0 };
+int ParamSim::mViewWidth{ 0 };
+int ParamSim::mNbrCity{ 5 };
+int ParamSim::mMeanAge{ 0 };
+int ParamSim::mPregnancyTime{ 0 };
+
+double ParamSim::mViewRay{ 10.0 };
+double ParamSim::mRotationAngle{ 0.0 };
+double ParamSim::mVirusResistance{ 0.0 };
+double ParamSim::mMeanVirusForce{ 0.0 };
+double ParamSim::mProbNewMilitary{ 20.0 };
+double ParamSim::mProbReproduction{ 0.0 };
+double ParamSim::mProbWoman{ 50.0 };
+double ParamSim::mProbInfection{ 20.0 };
+double ParamSim::mComssumptionRateEnergieHuman{ 0.0 };
+double ParamSim::mComssumptionRateEnergieZombie{ 0.0 };
+double ParamSim::mProbSpeed{ 10.0 };
+
+
 void ParamSim::setNbrZombie(int nbr) {
 	mNbrZombie = nbr;
 }
@@ -42,6 +68,16 @@ void ParamSim::setNbrCity(int nbr) {
 
 void ParamSim::setMeanAge(int mean) {
 	mMeanAge = mean;
+}
+
+void ParamSim::setViewRay(double viewRay)
+{
+	mViewRay = viewRay;
+}
+
+void ParamSim::setRotationAngle(double rotationAngle)
+{
+	mRotationAngle = rotationAngle;
 }
 
 void ParamSim::setVirusResistance(double resistance) {

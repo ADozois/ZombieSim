@@ -15,7 +15,7 @@ TimeLord::TimeLord()
 	mParameters = new ParamSim();
 	mMonde = new Environnement(mParameters);
 
-	QObject::connect(mTimer, &QTimer::timeout, mMonde->scene(), &QGraphicsScene::advance);
+	QObject::connect(mTimer, &QTimer::timeout, mMonde, &Environnement::advance);
 
 }
 

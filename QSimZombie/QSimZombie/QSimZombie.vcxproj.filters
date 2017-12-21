@@ -79,7 +79,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TimeLord.cpp">
-	<Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QHumanoid.cpp">
       <Filter>Source Files</Filter>
@@ -114,6 +114,15 @@
     <ClCompile Include="Woman.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Environnement.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Environnement.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QStatSim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -135,7 +144,7 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="Environnement.h">
-	<Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="QHumanoid.h">
       <Filter>Header Files</Filter>
@@ -149,7 +158,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimeLord.h">
-	<Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QRandom.h">
       <Filter>Header Files</Filter>
@@ -182,6 +191,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Woman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="infoForAdvance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QStatSim.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,7 +3,7 @@
 class RandomNorm : public QRandom
 {
 public:
-	RandomNorm(double mean = 0.0, double std_dev = 0.0);
+	RandomNorm(double mean = 0.0, double std_dev = 1.0);
 	~RandomNorm();
 	double Mean();
 	double Std();

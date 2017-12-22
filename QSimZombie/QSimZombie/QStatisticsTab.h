@@ -1,13 +1,22 @@
 #ifndef Q_STATISTICS_TAB_H
 #define Q_STATISTICS_TAB_H
+
 #include <QtWidgets/QMainWindow>
 #include "QStatisticsTab.h"
 #include <QtCharts>
-using namespace QtCharts;
 #include <QChart>
 #include <QChartView>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include "QStatSim.h"
+#include "SimPieChart.h"
+#include "SimBarChart.h"
+#include "SimLineChart.h"
+
+
+using namespace QtCharts;
+
+
 class QStatisticsTab : public QWidget {
 	
 	Q_OBJECT
@@ -16,22 +25,23 @@ public:
 
 	QStatisticsTab(QWidget *parent = Q_NULLPTR);
 
+
 protected:
 
-	QChart *mChart;
-	QChart *mChart2;
-	QChart *mChart3;
-	QChart *mChart4;
+	SimLineChart *mChartNbrZombie;
+	SimLineChart *mChartPopulation;
+	SimBarChart *mChartInstance;
+	SimPieChart *mChartNames;
 
-	QChartView *mChartView;
-	QChartView *mChartView2;
-	QChartView *mChartView3;
-	QChartView *mChartView4;
+	QChartView *mChartViewZombie;
+	QChartView *mChartViewPop;
+	QChartView *mChartViewInstance;
+	QChartView *mChartViewNames;
 
 	QLineSeries *mDataSeries;
 	QLineSeries *mDataSeries2;
-	QLineSeries *mDataSeries3;
-	QLineSeries *mDataSeries4;
+	QBarSeries *mDataSeries3;
+	QPieSeries *mDataSeries4;
 
 	QValueAxis *mXAxis, *mXAxis2, *mXAxis3, *mXAxis4;
 	QValueAxis *mYAxis, *mYAxis2, *mYAxis3, *mYAxis4;
@@ -45,6 +55,8 @@ protected:
 	QHBoxLayout *mTopLeftLayout;
 	QHBoxLayout *mDownRightLayout;
 	QHBoxLayout *mDownLeftLayout;
+
+	QStatSim mSimStat;
 
 
 };

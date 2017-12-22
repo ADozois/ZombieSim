@@ -1,6 +1,7 @@
 #include "Children.h"
 #include "RandomIntUnif.h"
 #include "Woman.h"
+#include "QStatSim.h"
 
 RandomIntUnif * Children::mDistribution{nullptr};
 int Children::mBegin{0};
@@ -15,6 +16,7 @@ const int Children::mAgeEndChildren{ 18 };
 Children::Children()
 	:Children(nullptr)
 {	
+	QStatSim::IncNbrEnfant();
 }
 
 Children::Children(Woman * mother)
@@ -32,6 +34,12 @@ Children::Children(Woman * mother)
 			mBecomeMilitary = true;
 		}
 	}
+	QStatSim::IncNbrEnfant();
+}
+
+Children::~Children()
+{
+	QStatSim::DecNbrEnfant();
 }
 
 void Children::advance(int phase, int index)

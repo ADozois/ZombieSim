@@ -3,8 +3,9 @@
 #include "Children.h"
 #include "Military.h"
 #include "Virus.h"
-#include <QPainter>
 #include "ParamSim.h"
+#include "QStatSim.h"
+#include <QPainter>
 
 RandomNorm * Human::mResistanceGenerator{nullptr};
 const double Human::mResistanceMean{50.0};
@@ -66,6 +67,9 @@ Human::Human(double x, double y, Environnement * currentEnvironnemnt, humanoideT
 Human::~Human()
 {
 	DeleteSpecifier();
+	QStatSim::DecNbrHumain();
+	QStatSim::DecNbrNomVivant(mName);
+	QStatSim::IncNbrNomMort(mName);
 }
 
 void Human::advance(int phase, int index)
@@ -282,6 +286,8 @@ void Human::BaseHumanInit()
 	mDeathAgeGenerator = new RandomNorm(mDeathAgeMean, mDeathAgeMean*mDeathAgeDeviation);
 	mVirusResistance = mResistanceGenerator->Generate();
 	mDeathAge = mDeathAgeGenerator->Generate();
+	QStatSim::IncNbrHumain();
+	QStatSim::IncNbrNomVivant(mName);
 }
 
 void Human::CreateMilitary()

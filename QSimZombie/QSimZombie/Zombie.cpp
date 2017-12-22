@@ -1,4 +1,5 @@
 #include "Zombie.h"
+#include "QStatSim.h"
 #include <QObject>
 
 RandomIntUnif * Zombie::mDeathGenerator{nullptr};
@@ -11,6 +12,12 @@ Zombie::Zombie(double x, double y, Environnement *currentEnvironnemnt, humanoide
 	: QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, parent)
 {
 	mDeathGenerator = new RandomIntUnif(mBegin, mEnd);
+	QStatSim::IncNbrZombie();
+}
+
+Zombie::~Zombie()
+{
+	QStatSim::DecNbrZombie();
 }
 
 void Zombie::advance(int phase, int index)

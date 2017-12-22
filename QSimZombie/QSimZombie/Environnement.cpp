@@ -16,7 +16,7 @@ Environnement::Environnement(ParamSim *parameters)
 	:mMeanPeopleDispertion{ 0 },
 	mDevPeopleDispertion{ 10 }
 {
-	mScene = new QGraphicsScene(0, 0, 800, 200);
+	mScene = new QGraphicsScene(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
 	mProbabilityType = new RandomIntUnif(mProbBegin, mProbEnd);
 	mHeightDispertion = new RandomIntUnif(0, ParamSim::SceneHeight());
@@ -24,7 +24,6 @@ Environnement::Environnement(ParamSim *parameters)
 
 	initializeWorld();
 
-	
 
 
 	//We create the initial scene with the parameters

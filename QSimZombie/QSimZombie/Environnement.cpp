@@ -70,7 +70,7 @@ void Environnement::advance()
 		{
 			//On choisit l'humanoide regardé
 			QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[i]);
-			infoForAdvance* currentInfo;
+			infoForAdvance* currentInfo{ nullptr };
 
 			for (int j{ i - 1 }; j>-1; --j)
 			{

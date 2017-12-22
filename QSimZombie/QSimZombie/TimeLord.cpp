@@ -44,6 +44,6 @@ void TimeLord::stop() {
 
 void TimeLord::step() {
 
-	QTimer::singleShot(mDefaultTime, mMonde->scene(), &QGraphicsScene::advance);
+	//QTimer::singleShot(mDefaultTime, mMonde->scene(), &Environnement::advance);
 
 }

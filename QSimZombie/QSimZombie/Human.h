@@ -57,6 +57,7 @@ protected:
 	void BaseHumanInit(newHumanParameters *humanParameters);
 	void CreateMilitary();
 	void CreateVirus(double fatherVirusStrenght);
+	void CreateVirus();
 	void CreateChild();
 	
 	

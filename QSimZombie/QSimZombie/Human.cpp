@@ -15,6 +15,8 @@ const double Human::mDeathAgeMean{80.0};
 const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
 
+RandomIntUnif * Human::mVirusKillingSpeed{ nullptr };
+
 //Use to create new humans at the begginning of the simulation
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infected, QGraphicsItem *parent)
 	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide,parent),
@@ -278,6 +280,17 @@ void Human::CreateVirus(double fatherVirusStrenght)
 		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge-1);
 		mDeathAge -= mVirusKillingSpeed->Generate();
 		mVirus = new Virus(fatherVirusStrenght);
+	}
+}
+
+void Human::CreateVirus()
+{
+	if (!mVirus)
+	{
+		//On détermine combien de tic le virus enlèvera à l'humain
+		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge - 1);
+		mDeathAge -= mVirusKillingSpeed->Generate();
+		mVirus = new Virus();
 	}
 }
 

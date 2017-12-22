@@ -42,6 +42,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	
 	ParamSim *parameters;
 	parameters = new ParamSim();
+
 	Environnement *mMonde;
 	mMonde = new Environnement(parameters);
 

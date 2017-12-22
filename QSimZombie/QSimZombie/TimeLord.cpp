@@ -3,7 +3,7 @@
 #include <Qtimer>
 #include "Environnement.h"
 #include "ParamSim.h"
-
+#include "QParametersTab.h"
 #include <QObject>
 
 TimeLord::TimeLord()
@@ -23,7 +23,7 @@ TimeLord::TimeLord()
 
 void TimeLord::run() {
 
-
+	
 
 	mTimer->start(mDefaultTime);
 

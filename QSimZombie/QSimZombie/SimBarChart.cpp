@@ -40,12 +40,12 @@ void SimBarChart::CreateSerie()
 {
 	QBarSeries * serie = dynamic_cast<QBarSeries * >(mDataSerie);
 	QBarSet * set = new QBarSet("Data");
-	for (auto & value : *mData)
-	{
-		*set << value.second;
-	}
 	if (serie)
 	{
+		for (auto & value : *mData)
+		{
+			*set << value.second;
+		}
 		serie->append(set);
 	}
 }

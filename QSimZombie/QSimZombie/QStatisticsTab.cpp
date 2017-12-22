@@ -15,11 +15,10 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 	mDownLeftLayout = new QHBoxLayout;
 	mDownRightLayout = new QHBoxLayout;
 
-	std::vector<int> test = { 6, 4, 5, 12, 26 };
 
 	//Charts
 	mChart = new QChart();
-	mChart2 = new SimLineChart(&test,"test");
+	mChart2 = new SimLineChart(QStatSim::PopEvol(),"test");
 	mChart3 = new SimBarChart(QStatSim::NbrInstance(), "Nombre de personne par categorie");
 	mChart4 = new SimPieChart(mSimStat.NbrNomVivant(),"Proportion du nombre d'humain selon leur nom");
 	mChart2->CreateChart();

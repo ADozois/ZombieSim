@@ -110,21 +110,29 @@ void QHumanoid::advance(int phase)
 void QHumanoid::ReduceEnergy()
 {
 	--mEnergy;
+	if (mEnergy < 0)
+		mEnergy = 0;
 }
 
 void QHumanoid::ReduceEnergy(int loss)
 {
 	mEnergy -= loss;
+	if (mEnergy < 0)
+		mEnergy = 0;
 }
 
 void QHumanoid::AddEnergy()
 {
 	++mEnergy;
+	if (mEnergy > 100)
+		mEnergy = 100;
 }
 
 void QHumanoid::AddEnergy(int gain)
 {
 	mEnergy += gain;
+	if (mEnergy > 100)
+		mEnergy = 100;
 }
 
 int QHumanoid::Energy()

@@ -3,6 +3,7 @@
 
 #include "QHumanoid.h"
 #include "HumanSpecifier.h"
+#include "newHumanParameters.h"
 
 
 class Zombie;
@@ -15,25 +16,35 @@ class Human : public QHumanoid
 {
 public:
 
-	enum class movementSpeed{walk,run};
+	
 
 	Human() = delete;
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary = false, bool infected = false, QGraphicsItem *parent = nullptr);
-	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
+	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide,newHumanParameters *humanParameters, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
-	void advance(int phase, int index) override;
+	void advance(int phase, int const index) override;
 	bool IsDead();
-	void Reproduction();
+	
 
 	int Age();
 	int DeathAge();
-	int VirusResistance();
+	qreal VirusResistance();
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-	bool IsBecomingZombie(bool biteByZombie = false);
 	void IsBecomingAdult();
 	void IsRetiring();
+	void gainAge() { mAge++; }
+	
+	bool isInfected() { return (mVirus) ? true : false; }
+	HumanSpecifier * Specifier( ) { return mSpecifier; }
+	Environnement * CurrentEnvironnement() { return mEnvironnement; }
+	
+	void transmitVirus(int const index);
+	void becomeZombie();
+	
+
+	qreal fertility() { return mFertility; }
 
 
 protected:
@@ -43,19 +54,19 @@ protected:
 	void InfectedPainter(QPainter * painter);
 	void DeleteSpecifier();
 	void BaseHumanInit();
+	void BaseHumanInit(newHumanParameters *humanParameters);
 	void CreateMilitary();
+	void CreateVirus(double fatherVirusStrenght);
 	void CreateVirus();
 	void CreateChild();
-	void moveInDirection(movementSpeed movementSpeed);
-	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
-	void setDirectionTo(QPointF positionTo);
-	void setDirectionFrom(QPointF positionFrom);
-
-
-protected:
+	
+	
+	
+	
 	int mAge;
 	int mDeathAge;
-	int mVirusResistance;
+	qreal mVirusResistance;
+	qreal mFertility; //Value between 0 and 1
 	HumanSpecifier* mSpecifier;
 	bool mWillBeocmeMilitary;
 	bool mMilitary;
@@ -63,13 +74,15 @@ protected:
 	Virus * mVirus;
 
 private:
-	static RandomNorm * mResistanceGenerator;
+	RandomNorm * mResistanceGenerator;
 	static const double mResistanceMean;
 	static const double mResistanceDeviation;
 
-	static RandomNorm * mDeathAgeGenerator;
+	RandomNorm * mDeathAgeGenerator;
 	static const double mDeathAgeMean;
 	static const double mDeathAgeDeviation;
+
+	RandomIntUnif * mVirusKillingSpeed;
 
 	static const QColor mHumanColor;
 };

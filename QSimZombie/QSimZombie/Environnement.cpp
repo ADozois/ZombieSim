@@ -14,7 +14,9 @@ const int Environnement::mProbEnd{ 100 };
 
 Environnement::Environnement(ParamSim *parameters)
 	:mMeanPeopleDispertion{ 0 },
-	mDevPeopleDispertion{ 10 }
+	mDevPeopleDispertion{ 10 },
+	mMaxDensityPosition{0,0},
+	mMaxDensityValue{ 0 }
 {
 	mScene = new QGraphicsScene(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
@@ -59,6 +61,8 @@ void Environnement::advance()
 			
 		}
 		//On place l'information pour cet humanoide dans le tableau
+		mMaxDensityValue = firstHumanoideInfo->numberOfCloseHumain;
+		mMaxDensityPosition = currentHumanoide->pos();
 		mAdvanceInfoList.append(firstHumanoideInfo);
 
 
@@ -66,7 +70,7 @@ void Environnement::advance()
 		{
 			//On choisit l'humanoide regardé
 			QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[i]);
-			infoForAdvance* currentInfo;
+			infoForAdvance* currentInfo{ nullptr };
 
 			for (int j{ i - 1 }; j>-1; --j)
 			{
@@ -83,6 +87,11 @@ void Environnement::advance()
 				getInformation(comparedHumanoide, distTable[i*currentListOfHumanoides.size() + j], *currentInfo);
 			}
 
+			if (currentInfo->numberOfCloseHumain > mMaxDensityValue)
+			{
+				mMaxDensityValue = currentInfo->numberOfCloseHumain;
+				mMaxDensityPosition = currentHumanoide->pos();
+			}
 			mAdvanceInfoList.append(currentInfo);
 		}
 		

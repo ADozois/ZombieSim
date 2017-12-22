@@ -7,8 +7,8 @@ public:
 	Zombie(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
 	~Zombie();
 	void advance(int phase) override;
-	void advance(int phase, int index) override;
-	bool attack(QGraphicsItem * Human);
+	void advance(int phase, int const index) override;
+	void attack(Human * attackedHuman, int const index);
 
 private:
 	static RandomIntUnif * mDeathGenerator;

@@ -33,7 +33,7 @@ Children::~Children()
 	QStatSim::DecNbrEnfant();
 }
 
-void Children::advance(int phase, int index)
+Human::returnAdvance Children::advance(int phase, int index)
 {
 	if (mHumanLink->IsDead())
 	{
@@ -47,14 +47,12 @@ void Children::advance(int phase, int index)
 		if (mHumanLink->CurrentEnvironnement()->getDistanceToClosestZombie(index) <= mHumanLink->eatingRange())
 		{
 			mMother->LosingChild(this);
-			mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);
+			mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);			
 			
 		}
 		else if (mHumanLink->Age() > mAgeEndChildren)
 		{
-			//L'enfant devient adulte
-			//On doit suprimer l'attribu enfant, mais garder l'humain...
-			//On doit aussi regarder s'il devient militaire
+			return Human::returnAdvance::newAdult;
 
 		}
 		else {
@@ -64,11 +62,12 @@ void Children::advance(int phase, int index)
 		//L'humain viellit d'un tic (mois)
 		mHumanLink->gainAge();
 	}
+	return Human::returnAdvance::noAction;
 }
 
-void Children::advance(int phase)
+Human::returnAdvance Children::advance(int phase)
 {
-	advance(phase, 0);
+	return advance(phase, 0);
 }
 
 int Children::AgeBegin()

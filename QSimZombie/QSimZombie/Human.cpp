@@ -81,7 +81,11 @@ void Human::advance(int phase, int const index)
 		//On fait le advance du specifier si l'humain à un specifier
 		if (mSpecifier)
 		{
-			mSpecifier->advance(phase, index);
+			returnAdvance resultAdvance= mSpecifier->advance(phase, index);
+			if (resultAdvance == returnAdvance::newAdult)
+			{
+				IsBecomingAdult();
+			}
 		}
 		else {			
 			if (IsDead())
@@ -97,13 +101,7 @@ void Human::advance(int phase, int const index)
 				}
 				else if (mIsTurning) {
 					//On est en train de tourner et on continue donc a faire le tournant pré-déterminé
-					mMovementDirection = mTurningDirection[mTurningAtPosition];
-					++mTurningAtPosition;
-					moveInDirection(movementSpeed::run);
-					if (mTurningAtPosition > mNumberOfTurningDirection)
-					{
-						mIsTurning = false;
-					}
+					makeTurn();
 				}
 				else if(mEnvironnement->getDistanceToClosestZombie(index)<=mViewRaySq){
 					//Zombi est visible, court dans le sens inverse					
@@ -139,6 +137,18 @@ void Human::advance(int phase, int const index)
 void Human::advance(int phase)
 {
 	advance(phase, 0);
+}
+
+void Human::makeTurn()
+{
+	mMovementDirection = mTurningDirection[mTurningAtPosition];
+	++mTurningAtPosition;
+	moveInDirection(movementSpeed::run);
+	if (mTurningAtPosition > mNumberOfTurningDirection)
+	{
+		mIsTurning = false;
+	}
+
 }
 
 void Human::moveInDirection(movementSpeed movementSpeed)
@@ -239,11 +249,22 @@ qreal Human::VirusResistance()
 	return mVirusResistance;
 }
 
+void Human::transmitVirus(int const index)
+{
+	Human * closestHuman = mEnvironnement->getClosestHuman(index);
+	if (VirusTransmission() && !closestHuman->isInfected())
+	{
+
+
+	}
+
+}
+
 bool Human::VirusTransmission()
 {
 	if (mVirus)
 	{
-		//Infecte l<humain qui est proche
+		return true;
 	}
 	return false;
 }
@@ -338,7 +359,7 @@ void Human::CreateChild()
 	}
 	else
 	{
-		mSpecifier = new Children(nullPtr,this);
+		mSpecifier = new Children(nullptr,this);
 	}
 }
 
@@ -369,13 +390,10 @@ bool Human::IsBecomingZombie(bool biteByZombie)
 
 void Human::IsBecomingAdult()
 {
-	if (mAge >= Children::AgeEnd())
+	DeleteSpecifier();
+	if (mWillBeocmeMilitary)
 	{
-		DeleteSpecifier();
-		if (mWillBeocmeMilitary)
-		{
-			CreateMilitary();
-		}
+		CreateMilitary();
 	}
 }
 

@@ -13,8 +13,8 @@ public:
 	Children(Woman * mother,Human * humanLink);
 	~Children();
 
-	void advance(int phase) override;
-	void advance(int phase, int index) override;
+	Human::returnAdvance advance(int phase) override;
+	Human::returnAdvance advance(int phase, int index) override;
 	static int AgeBegin();
 	static int AgeEnd();
 	void LosingMother();

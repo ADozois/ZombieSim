@@ -34,6 +34,7 @@ public:
 	void AddEnergy(int gain);
 	int Energy(); //Varies from 1 to 100
 	qreal ViewRay(); 
+	qreal viewRaysq() { return mViewRaySq; }
 	qreal RunSpeed();
 	qreal WalkSpeed();
 	QString Name();

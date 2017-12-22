@@ -27,6 +27,8 @@ private:
 	RandomIntUnif * mPopulationDistribution;
 	double mMeanPeopleDispertion;
 	double mDevPeopleDispertion;
+	QPointF mMaxDensityPosition;
+	int mMaxDensityValue;
 
 	void CreateCity(int nbrPeople);
 	int FindPeoplePerCity(int totalHuman, int nbrCity);
@@ -49,6 +51,7 @@ public:
 	QPointF getClosestZombiPos(int index) { return mAdvanceInfoList[index]->currentPositionClosestZombi; }
 	QPointF getClosestHumanPos(int index) { return mAdvanceInfoList[index]->currentPositionClosestHuman; }
 	int getHumainDensity(int index) { return mAdvanceInfoList[index]->numberOfCloseHumain; }
+	QPointF maxDensityPosition() { return mMaxDensityPosition; }
 	void addDeathHumanoid(int index);
 
 public slots:

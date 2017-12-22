@@ -42,10 +42,14 @@ HumanSpecifier::returnAdvance Military::advance(int phase, int const index)
 	}
 	else
 	{
-		//Le zombi mange l'humain
+		//Le zombi attaque le militaire
 		if (mHumanLink->CurrentEnvironnement()->getDistanceToClosestZombie(index) <= mHumanLink->eatingRange())
 		{
 			fightZombi(mHumanLink->CurrentEnvironnement()->getClosestZombie(index),index);
+		}
+		else if(mHumanLink->Age()>mAgeEndService){
+			//This is the end of the military life
+			return HumanSpecifier::returnAdvance::endMilitary;
 		}
 		else if (mHumanLink->isTurning()) {
 			//On est en train de tourner et on continue donc a faire le tournant pré-déterminé

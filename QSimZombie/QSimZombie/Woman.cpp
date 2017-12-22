@@ -66,6 +66,10 @@ void Woman::advance(int phase, int const index)
 			{
 				IsBecomingAdult();
 			}
+			else if (resultAdvance == HumanSpecifier::returnAdvance::endMilitary)
+			{
+				DeleteSpecifier();
+			}
 		}
 		else {
 			if (IsDead())

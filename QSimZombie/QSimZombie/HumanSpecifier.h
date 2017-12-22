@@ -9,7 +9,7 @@ public:
 	~HumanSpecifier() = default;
 
 
-	enum class returnAdvance { noAction, newAdult };
+	enum class returnAdvance { noAction, newAdult,endMilitary };
 
 	virtual returnAdvance advance(int phase) = 0;
 	virtual returnAdvance advance(int phase, int const index) = 0;

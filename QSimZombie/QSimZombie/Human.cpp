@@ -69,6 +69,11 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 Human::~Human()
 {
 	DeleteSpecifier();
+	if (mVirus)
+	{
+		delete mVirus;
+		mVirus = nullptr;
+	}
 	QStatSim::DecNbrHumain();
 	QStatSim::DecNbrNomVivant(mName);
 	QStatSim::IncNbrNomMort(mName);
@@ -85,6 +90,10 @@ void Human::advance(int phase, int const index)
 			if (resultAdvance == HumanSpecifier::returnAdvance::newAdult)
 			{
 				IsBecomingAdult();
+			}
+			else if (resultAdvance == HumanSpecifier::returnAdvance::endMilitary)
+			{
+				DeleteSpecifier();
 			}
 		}
 		else {			
@@ -396,6 +405,7 @@ void Human::IsBecomingAdult()
 	if (mWillBeocmeMilitary)
 	{
 		CreateMilitary();
+		mWillBeocmeMilitary = false;
 	}
 }
 

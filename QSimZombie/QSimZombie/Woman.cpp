@@ -76,6 +76,7 @@ void Woman::advance(int phase, int const index)
 					child->LosingMother();
 				}
 				mEnvironnement->addDeathHumanoid(index);
+				becomeZombie();
 			}
 			else
 			{

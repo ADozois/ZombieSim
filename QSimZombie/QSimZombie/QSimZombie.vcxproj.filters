@@ -141,6 +141,15 @@
     <ClCompile Include="SimLineChart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QSliderAffiche.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSliderAffiche.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QSliderAffiche.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -168,6 +177,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="QSimChart.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QSliderAffiche.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -227,7 +239,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="newHumanParameters.h">
-	<Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimLineChart.h">
       <Filter>Header Files</Filter>

@@ -20,6 +20,7 @@ private:
 	static const int mDefaultTime{ 1000 };
 
 public:
+	QTimer * Timer() { return mTimer; }
 	//TimeLord(QWidget *parent = Q_NULLPTR);
 	TimeLord();
 	void run();

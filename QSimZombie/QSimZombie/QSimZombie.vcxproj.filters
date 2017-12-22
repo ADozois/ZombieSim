@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+      <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
@@ -28,9 +28,48 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <ClCompile Include="QSliderAffiche.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_Environnement.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QParametersTab.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSimChart.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSimulationTab.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSimZombie.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSliderAffiche.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QStatisticsTab.cpp" />
+    <ClCompile Include="GeneratedFiles\qrc_QSimZombie.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_Environnement.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_QParametersTab.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_QSimChart.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_QSimulationTab.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_QSimZombie.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_QStatisticsTab.cpp" />
+    <ClCompile Include="Environnement.cpp" />
+    <ClCompile Include="Children.cpp" />
+    <ClCompile Include="Human.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Military.cpp" />
+    <ClCompile Include="ParamSim.cpp" />
+    <ClCompile Include="QHumanoid.cpp" />
+    <ClCompile Include="QParametersTab.cpp" />
+    <ClCompile Include="QRandom.cpp" />
+    <ClCompile Include="QSimChart.cpp" />
+    <ClCompile Include="QSimulationTab.cpp" />
+    <ClCompile Include="QSimZombie.cpp" />
+    <ClCompile Include="QStatisticsTab.cpp" />
+    <ClCompile Include="QStatSim.cpp" />
+    <ClCompile Include="SimBarChart.cpp" />
+    <ClCompile Include="SimLineChart.cpp" />
+    <ClCompile Include="SimPieChart.cpp" />
+    <ClCompile Include="TimeLord.cpp" />
+    <ClCompile Include="RandomIntUnif.cpp" />
+    <ClCompile Include="RandomNorm.cpp" />
+    <ClCompile Include="RandomRealUnif.cpp" />
+    <ClCompile Include="Virus.cpp" />
+    <ClCompile Include="Woman.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+      <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QSimZombie.cpp">
@@ -178,9 +217,28 @@
     <CustomBuild Include="QSimChart.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="infoForAdvance.h" />
+    <ClInclude Include="QStatSim.h" />
+    <ClInclude Include="SimBarChart.h" />
+    <ClInclude Include="SimLineChart.h" />
+    <ClInclude Include="SimPieChart.h" />
+    <ClInclude Include="TimeLord.h" />
+    <ClInclude Include="Children.h" />
+    <ClInclude Include="GeneratedFiles\ui_QSimZombie.h" />
+    <ClInclude Include="Human.h" />
+    <ClInclude Include="HumanSpecifier.h" />
+    <ClInclude Include="Military.h" />
+    <ClInclude Include="ParamSim.h" />
+    <ClInclude Include="QRandom.h" />
+    <ClInclude Include="RandomIntUnif.h" />
+    <ClInclude Include="RandomNorm.h" />
+    <ClInclude Include="RandomRealUnif.h" />
+    <ClInclude Include="Virus.h" />
+    <ClInclude Include="Woman.h" />
+    <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_QSimZombie.h">
+      <ClInclude Include="GeneratedFiles\ui_QSimZombie.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ParamSim.h">
@@ -238,5 +296,15 @@
     <ClInclude Include="SimLineChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="QSimZombie.h" />
+    <CustomBuild Include="QSimZombie.ui" />
+    <CustomBuild Include="QSliderAffiche.h" />
+    <CustomBuild Include="QSimChart.h" />
+    <CustomBuild Include="Environnement.h" />
+    <CustomBuild Include="QHumanoid.h" />
+    <CustomBuild Include="QParametersTab.h" />
+    <CustomBuild Include="QStatisticsTab.h" />
+    <CustomBuild Include="QSimulationTab.h" />
+    <CustomBuild Include="QSimZombie.qrc" />
   </ItemGroup>
 </Project>

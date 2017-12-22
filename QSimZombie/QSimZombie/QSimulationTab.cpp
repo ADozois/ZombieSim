@@ -7,6 +7,12 @@
 #include "ParamSim.h"
 #include <QTimer>
 #include "TimeLord.h"
+
+
+
+#include <QDebug>
+
+
 using namespace std;
 
 QSimulationTab::QSimulationTab(QWidget *parent)
@@ -82,8 +88,17 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 
 
+	//Current tic counter connect
+	mTimeLord = new TimeLord;
+	tim = mTimeLord->Timer();
 
-															//Elapsed Tics
+	connect(tim, &QTimer::timeout, this, &QSimulationTab::updateTicLabel);
+	
+	
+
+
+
+	//Elapsed Tics
 	mTicLabel = new QLabel("Elapsed tics: ");
 	mTicValueLabel = new QLabel("");
 
@@ -138,5 +153,6 @@ void QSimulationTab::updateTicLabel() {
 	mTicString->number(mTicValue);
 	mTicValueLabel->setText(*mTicString);
 
+	qInfo() << "C++ Style Info Message";
 
 }

@@ -25,6 +25,9 @@ public:
 
 	QPushButton *getPlayButton() { return mPlayButton; }
 	QPushButton *getStopButton() { return mStopButton; }
+
+
+
 	QTimer* tim;
 public slots:
 

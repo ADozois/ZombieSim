@@ -13,9 +13,6 @@ QSimZombie::QSimZombie(QWidget *parent)
 	mStatTab = new QStatisticsTab;
 	mParamTab = new QParametersTab;
 
-
-
-
 	QPushButton* mPlay = mSimTab->getPlayButton();
 	QPushButton* mStop = mSimTab->getStopButton();
 	QPushButton* mValidate = mParamTab->getValidateButton();
@@ -27,31 +24,15 @@ QSimZombie::QSimZombie(QWidget *parent)
 	connect(mStop,&QPushButton::clicked, this, &QSimZombie::activateParametersTab);
 
 
-
-
 	mTabWidget = new QTabWidget;
-	
-
-
-
 	mSplitter = new QSplitter;
 	mSplitter->addWidget(mTabWidget);
-
 
 	mTabWidget->insertTab(mSimTabIndex, mSimTab, "Simulation") ;
 	mTabWidget->insertTab(mStatTabIndex, mStatTab, "Statistics") ;
 	mTabWidget->insertTab(mParamTabIndex, mParamTab, "Parameters") ;
 
-
-
-
 	setCentralWidget(mSplitter);
-
-
-
-
-
-
 }
 
 

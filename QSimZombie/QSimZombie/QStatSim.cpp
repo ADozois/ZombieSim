@@ -12,7 +12,8 @@ int QStatSim::mNbrMort{ 0 };
 std::map<QString, int> QStatSim::mNbrNomMort{ { "Antoine", 0 }, { "Guillaume", 0 }, { "Olivier", 0 } };
 std::map<QString, int> QStatSim::mNbrNomVivant{ { "Antoine", 0 },{ "Guillaume", 0 },{ "Olivier", 0 } };
 std::map<QString, int> QStatSim::mNbrInstance{ { "Militaire", 0 },{ "Homme", 0 },{ "Femme", 0 },{ "Children", 0 },{ "Zombie", 0 } };
-std::vector<int> QStatSim::mPopEvol{};
+std::vector<int> QStatSim::mPopEvol{0};
+std::vector<int> QStatSim::mZombieEvol{0};
 
 
 QStatSim::QStatSim(ParamSim * params)
@@ -90,7 +91,11 @@ void QStatSim::SetNbrNomVivant(std::map<QString, int> value) {
 }
 void QStatSim::SetPopEvol(std::vector<int> value) {
 	mPopEvol = value;
-};
+}
+void QStatSim::SetZombieEvol(std::vector<int> value)
+{
+	mZombieEvol = value;
+}
 
 std::map<QString, int> * QStatSim::NbrInstance()
 {
@@ -197,6 +202,7 @@ void QStatSim::DecNbrNomVivant(QString name)
 void QStatSim::UpdatePop()
 {
 	mPopEvol.push_back(mNbrHumain);
+	mZombieEvol.push_back(mNbrZombie);
 }
 
 qreal QStatSim::PourcentageZombie(void)

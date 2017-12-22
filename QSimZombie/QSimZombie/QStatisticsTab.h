@@ -26,25 +26,17 @@ public:
 	QStatisticsTab(QWidget *parent = Q_NULLPTR);
 
 
-private:
-	void CreatePieChartSerie(std::map<QString, int> data, QPieSeries* serie);
-	void CreatePieChart(std::map<QString, int> data, QChart * chart, QPieSeries* serie, QString title);
-	void CreateBarChartSerie(std::map<QString, int> data, QBarSeries * serie);
-	QStringList CreateBarCategory(std::map<QString, int> data);
-	void CreateBarChart(std::map<QString, int> data, QChart * chart, QBarSeries* serie, QString title);
-	void PrepChart(QChart * chart, QString title);
-
 protected:
 
-	QChart *mChart;
-	SimLineChart *mChart2;
-	SimBarChart *mChart3;
-	SimPieChart *mChart4;
+	SimLineChart *mChartNbrZombie;
+	SimLineChart *mChartPopulation;
+	SimBarChart *mChartInstance;
+	SimPieChart *mChartNames;
 
-	QChartView *mChartView;
-	QChartView *mChartView2;
-	QChartView *mChartView3;
-	QChartView *mChartView4;
+	QChartView *mChartViewZombie;
+	QChartView *mChartViewPop;
+	QChartView *mChartViewInstance;
+	QChartView *mChartViewNames;
 
 	QLineSeries *mDataSeries;
 	QLineSeries *mDataSeries2;

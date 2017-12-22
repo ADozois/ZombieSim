@@ -24,11 +24,11 @@ public:
 	virtual void CreateChart() = 0;
 	QChart * Chart();
 
-
+public slots:
+	virtual void UpdateGraph() = 0;
 	
 protected:
-	virtual void CreateSerie(std::map<QString, int> data) = 0;
-	virtual void CreateSerie(std::vector<int> data) = 0;
+	virtual void CreateSerie() = 0;
 	void PrepChart(QString title);
 
 

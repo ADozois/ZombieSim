@@ -126,6 +126,7 @@
     <ClCompile Include="QStatisticsTab.cpp" />
     <ClCompile Include="QStatSim.cpp" />
     <ClCompile Include="SimBarChart.cpp" />
+    <ClCompile Include="SimLineChart.cpp" />
     <ClCompile Include="SimPieChart.cpp" />
     <ClCompile Include="TimeLord.cpp" />
     <ClCompile Include="RandomIntUnif.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="newHumanParameters.h" />
     <ClInclude Include="QStatSim.h" />
     <ClInclude Include="SimBarChart.h" />
+    <ClInclude Include="SimLineChart.h" />
     <ClInclude Include="SimPieChart.h" />
     <ClInclude Include="TimeLord.h" />
     <CustomBuild Include="Environnement.h">

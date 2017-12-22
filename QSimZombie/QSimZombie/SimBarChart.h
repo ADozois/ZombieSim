@@ -7,19 +7,21 @@ class SimBarChart :	public QSimChart
 {
 public:
 	SimBarChart() = delete;
-	SimBarChart(QChart * chart, const std::map<QString, int> & data, QString title = "");
-	SimBarChart(QChart * chart, const std::vector<int> & data, QString title = "");
-	SimBarChart(const std::map<QString, int> & data, QString title = "");
-	SimBarChart(const std::vector<int> & data, QString title = "");
+	SimBarChart(QChart * chart, const std::map<QString, int> * data, QString title = "");
+	SimBarChart(const std::map<QString, int> * data, QString title = "");
 	~SimBarChart();
 	void CreateChart() override;
 
+public slots:
+	void UpdateGraph() override;
+
+
 
 protected:
-	void CreateSerie(std::map<QString, int> data) override;
-	void CreateSerie(std::vector<int> data) override;
-	QStringList CreateBarCategory(std::map<QString, int>  data);
+	void CreateSerie() override;
+	QStringList CreateBarCategory();
 	QStringList mCategory;
+	const std::map<QString, int> * mData;
 };
 
 #endif // !SIM_BAR_CHART_H

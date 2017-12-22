@@ -24,6 +24,7 @@ public:
 	static void SetNbrNomMort(std::map<QString, int> value);
 	static void SetNbrNomVivant(std::map<QString, int> value);
 	static void SetPopEvol(std::vector<int> value);
+	static void SetZombieEvol(std::vector<int> value);
 
 	static int NbrZombie() { return mNbrZombie; };
 	static int NbrHumain() { return mNbrHumain; };
@@ -32,10 +33,11 @@ public:
 	static int NbrEnfant() { return mNbrEnfant; };
 	static int NbrMilitaire() { return mNbrMilitaire; };
 	static int NbrMort() { return mNbrMort; };
-	static std::map<QString, int> NbrNomMort() { return mNbrNomMort; };
-	static std::map<QString, int> NbrNomVivant() { return mNbrNomVivant; };
-	static std::map<QString, int> NbrInstance();
-	static std::vector<int> PopEvol() { return mPopEvol; };
+	static std::map<QString, int>* NbrNomMort() { return &mNbrNomMort; };
+	static std::map<QString, int>* NbrNomVivant() { return &mNbrNomVivant; };
+	static std::map<QString, int>* NbrInstance();
+	static std::vector<int>* PopEvol() { return &mPopEvol; };
+	static std::vector<int>* ZombieEvol() { return &mZombieEvol; };
 
 	static void IncNbrZombie();
 	static void IncNbrHumain();
@@ -74,7 +76,9 @@ private:
 	static int mNbrMort;
 	static std::map<QString, int> mNbrNomMort;
 	static std::map<QString, int> mNbrNomVivant;
+	static std::map<QString, int> mNbrInstance;
 	static std::vector<int> mPopEvol;
+	static std::vector<int> mZombieEvol;
 };
 
 

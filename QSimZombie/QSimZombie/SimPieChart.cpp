@@ -1,34 +1,26 @@
 #include "SimPieChart.h"
 #include <QPieSeries>
+#include "QStatSim.h"
 
 
-SimPieChart::SimPieChart(QChart * chart, const std::map<QString, int>& data, QString title)
-	:QSimChart(chart, title)
+
+SimPieChart::SimPieChart(QChart * chart, const std::map<QString, int> * data, QString title)
+	:QSimChart(chart, title),
+	mData{ data }
 {
 	mDataSerie = new QPieSeries;
-	CreateSerie(data);
+	CreateSerie();
 }
 
-SimPieChart::SimPieChart(QChart * chart, const std::vector<int>& data, QString title)
-	: QSimChart(chart, title)
+
+SimPieChart::SimPieChart(const std::map<QString, int> * data, QString title)
+	:QSimChart(title),
+	mData{ data }
 {
 	mDataSerie = new QPieSeries;
-	CreateSerie(data);
+	CreateSerie();
 }
 
-SimPieChart::SimPieChart(const std::map<QString, int>& data, QString title)
-	:QSimChart(title)
-{
-	mDataSerie = new QPieSeries;
-	CreateSerie(data);
-}
-
-SimPieChart::SimPieChart(const std::vector<int>& data, QString title)
-	: QSimChart(title)
-{
-	mDataSerie = new QPieSeries;
-	CreateSerie(data);
-}
 
 SimPieChart::~SimPieChart()
 {
@@ -40,11 +32,11 @@ void SimPieChart::CreateChart()
 	PrepChart(mTitle);
 }
 
-void SimPieChart::CreateSerie(std::map<QString, int> data)
+void SimPieChart::CreateSerie()
 {
 	QPieSeries * serie = dynamic_cast<QPieSeries *>(mDataSerie);
 	int index{ 0 };
-	for (auto & map : data)
+	for (auto & map : *mData)
 	{
 		serie->append(map.first, map.second);
 		serie->slices().at(index)->setLabelVisible();
@@ -52,15 +44,12 @@ void SimPieChart::CreateSerie(std::map<QString, int> data)
 	}
 }
 
-void SimPieChart::CreateSerie(std::vector<int> data)
-{
+
+void SimPieChart::UpdateGraph() {
 	QPieSeries * serie = dynamic_cast<QPieSeries *>(mDataSerie);
-	int index{ 0 };
-	int sum{ 0 };
-	std::for_each(data.begin(), data.end(), [&](int n) { sum += n; });
-	for (auto & vect : data)
+	if (serie)
 	{
-		serie->append(QString::number(vect/sum), vect);
-		index++;
+		serie->clear();
+		CreateSerie();
 	}
 }

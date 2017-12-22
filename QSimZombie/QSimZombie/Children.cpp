@@ -33,7 +33,7 @@ Children::~Children()
 	QStatSim::DecNbrEnfant();
 }
 
-Human::returnAdvance Children::advance(int phase, int index)
+HumanSpecifier::returnAdvance Children::advance(int phase, int index)
 {
 	if (mHumanLink->IsDead())
 	{
@@ -52,7 +52,7 @@ Human::returnAdvance Children::advance(int phase, int index)
 		}
 		else if (mHumanLink->Age() > mAgeEndChildren)
 		{
-			return Human::returnAdvance::newAdult;
+			return HumanSpecifier::returnAdvance::newAdult;
 
 		}
 		else {
@@ -62,10 +62,10 @@ Human::returnAdvance Children::advance(int phase, int index)
 		//L'humain viellit d'un tic (mois)
 		mHumanLink->gainAge();
 	}
-	return Human::returnAdvance::noAction;
+	return HumanSpecifier::returnAdvance::noAction;
 }
 
-Human::returnAdvance Children::advance(int phase)
+HumanSpecifier::returnAdvance Children::advance(int phase)
 {
 	return advance(phase, 0);
 }

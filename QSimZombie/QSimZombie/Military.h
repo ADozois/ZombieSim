@@ -5,6 +5,7 @@
 
 class Zombie;
 class RandomIntUnif;
+class Human;
 
 class Military : public HumanSpecifier
 {
@@ -15,8 +16,8 @@ public:
 
 	~Military();
 
-	Human::returnAdvance advance(int phase) override;
-	Human::returnAdvance advance(int phase, int const index) override;
+	HumanSpecifier::returnAdvance advance(int phase) override;
+	HumanSpecifier::returnAdvance advance(int phase, int const index) override;
 	bool Kill(Zombie * zombie);
 	void fightZombi(Zombie *zombie, int const index);
 	static int AgeBegin();

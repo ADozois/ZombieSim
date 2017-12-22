@@ -81,8 +81,8 @@ void Human::advance(int phase, int const index)
 		//On fait le advance du specifier si l'humain à un specifier
 		if (mSpecifier)
 		{
-			returnAdvance resultAdvance= mSpecifier->advance(phase, index);
-			if (resultAdvance == returnAdvance::newAdult)
+			HumanSpecifier::returnAdvance resultAdvance= mSpecifier->advance(phase, index);
+			if (resultAdvance == HumanSpecifier::returnAdvance::newAdult)
 			{
 				IsBecomingAdult();
 			}
@@ -254,7 +254,10 @@ void Human::transmitVirus(int const index)
 	Human * closestHuman = mEnvironnement->getClosestHuman(index);
 	if (VirusTransmission() && !closestHuman->isInfected())
 	{
-
+		if (closestHuman->VirusResistance() < this->mVirus->Strenght())
+		{
+			closestHuman->CreateVirus();
+		}
 
 	}
 

@@ -32,7 +32,7 @@ Military::~Military()
 }
 
 
-Human::returnAdvance Military::advance(int phase, int const index)
+HumanSpecifier::returnAdvance Military::advance(int phase, int const index)
 {
 	if (mHumanLink->IsDead())
 	{
@@ -80,10 +80,10 @@ Human::returnAdvance Military::advance(int phase, int const index)
 	mHumanLink->gainAge();
 	}
 
-	return Human::returnAdvance::noAction;
+	return HumanSpecifier::returnAdvance::noAction;
 }
 
-Human::returnAdvance Military::advance(int phase)
+HumanSpecifier::returnAdvance Military::advance(int phase)
 {
 	return advance(phase, 0);
 }
@@ -91,7 +91,7 @@ Human::returnAdvance Military::advance(int phase)
 
 void Military::fightZombi(Zombie *zombie, int const index)
 {
-	if (!zombie->Energy)
+	if (!(zombie->Energy()))
 	{
 		//This means the zombi already lost the fight
 		mHumanLink->ReduceEnergy(mFightEnergyLost);

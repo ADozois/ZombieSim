@@ -61,7 +61,11 @@ void Woman::advance(int phase, int const index)
 		//On fait le advance du specifier si l'humain à un specifier
 		if (mSpecifier)
 		{
-			mSpecifier->advance(phase, index);
+			HumanSpecifier::returnAdvance resultAdvance = mSpecifier->advance(phase, index);
+			if (resultAdvance == HumanSpecifier::returnAdvance::newAdult)
+			{
+				IsBecomingAdult();
+			}
 		}
 		else {
 			if (IsDead())
@@ -143,19 +147,24 @@ void Woman::advance(int phase)
 void Woman::GiveBirth()
 {	
 	//We set the position of the new children being born 
-	mCurrentBaby->setPos(this->pos().x+ QHumanoid::mSizeHumanoid,this->pos().y+ QHumanoid::mSizeHumanoid);
-	mListChildren.append(dynamic_cast<Children*>(mCurrentBaby->Specifier()));
-	mCountChildren++;
-	mTickRemaining = mFertilityTime;
+	mCurrentBaby->setPos(this->pos().x()+ QHumanoid::mSizeHumanoid,this->pos().y()+ QHumanoid::mSizeHumanoid);
+	if (dynamic_cast<Children*>(mCurrentBaby->Specifier()))
+	{
+		mListChildren.append(dynamic_cast<Children*>(mCurrentBaby->Specifier()));
 
-	//On ajouter l'enfant à la scene
-	mEnvironnement->scene()->addItem(mCurrentBaby);
-	//On affiche le nouvel humain
-	QPainter *p;
-	mCurrentBaby->paint(p,nullptr,nullptr);
+		mCountChildren++;
+		mTickRemaining = mFertilityTime;
 
-	//On remet le pointeur du baby a nul
-	mCurrentBaby = nullptr;
+		//On ajouter l'enfant à la scene
+		mEnvironnement->scene()->addItem(mCurrentBaby);
+		////On affiche le nouvel humain
+		//QPainter *p;
+		//mCurrentBaby->paint(p, nullptr, nullptr);
+		mCurrentBaby->setVisible(true);
+
+		//On remet le pointeur du baby a nul
+		mCurrentBaby = nullptr;
+	}
 }
 
 int Woman::CountChildren()
@@ -196,7 +205,7 @@ void Woman::createBaby(Human * father)
 
 	//We get all the parameter for the baby and create a human or women that will not show until birth
 	//We do an average of the parameter of the father and the mother to get the average of the new parameter of the baby.
-	newHumanParameters *babyParameters;
+	newHumanParameters *babyParameters = new newHumanParameters;
 	babyParameters->avrgRunSpeed = (this->mRunSpeed + father->RunSpeed()) / 2;
 	babyParameters->avrgWalkSpeed = (this->mWalkSpeed + father->WalkSpeed()) / 2;
 	babyParameters->avrgViewRay = (this->mViewRay + father->ViewRay()) / 2;
@@ -228,7 +237,7 @@ void Woman::createBaby(Human * father)
 	else {
 		mCurrentBaby = new Woman(0, 0, mEnvironnement, QHumanoid::humanoideType::woman, babyParameters);
 	}
-
+	mCurrentBaby->setVisible(false);
 	//We set the current woman as the mother of the child
 	dynamic_cast<Children*>(mCurrentBaby->Specifier())->setMother(this);
 

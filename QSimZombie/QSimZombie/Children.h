@@ -5,16 +5,17 @@
 
 class RandomIntUnif;
 class Woman;
+class Human;
 
 class Children : public HumanSpecifier
 {
 public:
 	Children();
-	Children(Woman * mother,Human * humanLink);
+	Children(Woman * mother, Human * humanLink);
 	~Children();
 
-	Human::returnAdvance advance(int phase) override;
-	Human::returnAdvance advance(int phase, int index) override;
+	HumanSpecifier::returnAdvance advance(int phase) override;
+	HumanSpecifier::returnAdvance advance(int phase, int const index) override;
 	static int AgeBegin();
 	static int AgeEnd();
 	void LosingMother();

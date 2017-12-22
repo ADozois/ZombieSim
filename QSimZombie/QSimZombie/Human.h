@@ -17,7 +17,6 @@ class Human : public QHumanoid
 public:
 
 	enum class movementSpeed{walk,run};
-	enum class returnAdvance{noAction,newAdult};
 
 	Human() = delete;
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);

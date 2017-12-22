@@ -9,22 +9,35 @@
 #include <QLabel>
 #include <QString>
 #include <QFormLayout>
+#include "QSliderAffiche.h"
+#include <QPushbutton>
 
 class ParamSim;
 
 class QParametersTab : public QWidget {
 
 	Q_OBJECT
-	
+
 public:
 	QParametersTab(QWidget *parent = Q_NULLPTR);
 
+	QPushButton *getValidateButton() { return mValidateButton; }
 
+
+	public slots:
+
+
+	void updateParameters();
 
 protected:
 
+
+	QPushButton * mValidateButton;
+
 	//Layouts
 	QHBoxLayout *mMainLayout;
+	QVBoxLayout *mMainLayout2;
+	QHBoxLayout *mValidateLayout;
 	QVBoxLayout *mLeftLayout;
 	QVBoxLayout *mRightLayout;
 
@@ -43,7 +56,7 @@ protected:
 
 	// PARAMETER BUTTONS/SLIDERS
 
-//Entity quantitites
+	//Entity quantitites
 	QSpinBox *mZombieCount;
 	QSpinBox *mHumanCount;
 	QSpinBox *mWomanCount;
@@ -51,30 +64,35 @@ protected:
 	QSpinBox *mVirusCount;
 	QSpinBox *mCityCount;
 
-	//Entity Caracteristics
-	QSlider *mAverageAge;
-	QSlider *mAverageSpeed;
-
-	QSlider *mReproductionProbability;
-	QSlider *mPregnancyDuration;
-	QSlider *mNewMilitaryProbability;
-	QSlider *mWomanProbability;
 
 	//Scene Parameters
-	QSlider *mSceneHeight;
-	QSlider *mSceneWidth;
-	QSlider *mViewHeight;
-	QSlider *mViewWidth;
+	QSliderAffiche *mSceneHeight;
+	QSliderAffiche *mSceneWidth;
+	QSliderAffiche *mViewHeight;
+	QSliderAffiche *mViewWidth;
+
+	//Entity Caracteristics
+	QSliderAffiche *mAverageAge;
+	QSliderAffiche *mAverageSpeed;
+	QSliderAffiche *mReproductionProbability;
+	QSliderAffiche *mPregnancyDuration;
+	QSliderAffiche *mNewMilitaryProbability;
+	QSliderAffiche *mWomanProbability;
+	QSliderAffiche *mProbSpeed;
+
+
 
 	//Environment Caracteristics
-	QSlider *mInfectionProbability;
-	QSlider *mAverageVirusStrenght;
-	QSlider *mAverageVirusResistance;
-	QSlider *mHumanEnergyDropRate;
-	QSlider *mZombieEnergyDropRate;
+	QSliderAffiche *mInfectionProbability;
+	QSliderAffiche *mAverageVirusStrenght;
+	QSliderAffiche *mAverageVirusResistance;
+	QSliderAffiche *mHumanEnergyDropRate;
+	QSliderAffiche *mZombieEnergyDropRate;
+	QSliderAffiche *mViewRay;
+	QSliderAffiche *mRotationAngle;
 
 	//Labels
-//Entity count labels
+	//Entity count labels
 	QLabel *mZombieCountLabel;
 	QLabel *mHumanCountLabel;
 	QLabel *mWomanCountLabel;
@@ -84,28 +102,29 @@ protected:
 	static const int entityMinimum{ 1 };
 	static const int entityMaximum{ 500 };
 
-									//String
+	//String
 	//Entity Quantity QString
 	static const QString mZombieCountString;
 	static const QString mHumanCountString;
 	static const QString mWomanCountString;
 	static const QString mMilitaryCountString;
 	static const QString mVirusCountString;
+	static const QString mCityCountString;
 
-	//Entity Caracteristics
-	static const QString mAverageAgeString;
-	static const QString mAverageSpeedString;
-
-	static const QString mReproductionProbabilityString;
-	static const QString mPregnancyDurationString;
-	static const QString mNewMilitaryProbabilityString;
-	static const QString mWomanProbabilityString;
-	
 	//Scene Parameters
 	static const QString mSceneHeightString;
 	static const QString mSceneWidthString;
 	static const QString mViewHeightString;
 	static const QString mViewWidthString;
+
+	//Entity Caracteristics
+	static const QString mAverageAgeString;
+	static const QString mAverageSpeedString;
+	static const QString mReproductionProbabilityString;
+	static const QString mPregnancyDurationString;
+	static const QString mNewMilitaryProbabilityString;
+	static const QString mWomanProbabilityString;
+	static const QString mProbSpeedString;
 
 	//Environment Parameters
 	static const QString mInfectionProbabilityString;
@@ -113,6 +132,8 @@ protected:
 	static const QString mHumanEnergyDropRateString;
 	static const QString mZombieEnergyDropRateString;
 	static const QString mAverageVirusResistanceString;
+	static const QString mViewRayString;
+	static const QString mRotationAngleString;
 };
 
 

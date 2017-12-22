@@ -7,15 +7,12 @@
 #include "QStatSim.h"
 #include <QPainter>
 
-RandomNorm * Human::mResistanceGenerator{nullptr};
+
 const double Human::mResistanceMean{50.0};
 const double Human::mResistanceDeviation{0.2};
-RandomNorm * Human::mDeathAgeGenerator{nullptr};
-const double Human::mDeathAgeMean{80.0};
+const double Human::mDeathAgeMean{960};
 const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
-
-RandomIntUnif * Human::mVirusKillingSpeed{ nullptr };
 
 //Use to create new humans at the begginning of the simulation
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infected, QGraphicsItem *parent)
@@ -23,6 +20,9 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mAge{age},
 	mSpecifier{nullptr},
 	mVirus{nullptr},
+	mResistanceGenerator{ nullptr },
+	mDeathAgeGenerator{ nullptr },
+	mVirusKillingSpeed{ nullptr },
 	mWillBeocmeMilitary{false}
 {
 	BaseHumanInit();
@@ -42,6 +42,9 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
+	mResistanceGenerator{ nullptr },
+	mDeathAgeGenerator{ nullptr },
+	mVirusKillingSpeed{ nullptr },
 	mWillBeocmeMilitary{ becomeMilitary }
 {
 	BaseHumanInit();
@@ -58,6 +61,9 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
+	mResistanceGenerator{ nullptr },
+	mDeathAgeGenerator{ nullptr },
+	mVirusKillingSpeed{ nullptr },
 	mWillBeocmeMilitary{ humanParameters->isMilitary }
 {
 	BaseHumanInit();

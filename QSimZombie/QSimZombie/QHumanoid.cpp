@@ -8,10 +8,7 @@
 
 
 
-RandomNorm *QHumanoid::mRunGenerator { nullptr };
-RandomNorm *QHumanoid::mWalkGenerator{ nullptr };
-RandomNorm *QHumanoid::mRayGenerator { nullptr };
-RandomIntUnif *QHumanoid::mNameGenerator { nullptr };
+
 const QList<QString> QHumanoid::mNameList{ "Antoine","Guillaume","Olivier" };
 const double QHumanoid::mWalkDev{ 0.1 };
 const double QHumanoid::mRayDev{ 0.3 };
@@ -29,7 +26,6 @@ const QColor QHumanoid::mContourColor{ Qt::black };
 const int QHumanoid::mSizeHumanoid{ 10 };
 const double QHumanoid::mOpacityHumanoid{ 0.60 };
 const qreal QHumanoid::mEatingRange{ pow(static_cast<qreal>(mSizeHumanoid),2) };
-//QRectF QHumanoid::mRectF(QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW));
 
 
 QHumanoid::QHumanoid(double x, double y, Environnement *currentEnvironnement, humanoideType typeOfHumanoide, QGraphicsItem *parent)
@@ -45,15 +41,19 @@ QHumanoid::QHumanoid(double x, double y, Environnement *currentEnvironnement, hu
 	mRectF{ QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW) },
 	mBrushColor{ mHumanoidColor },
 	mPenColor{ mContourColor },
+	mRunGenerator{ nullptr },
+	mWalkGenerator{ nullptr },
+	mRayGenerator{ nullptr },
+	mNameGenerator{ nullptr },
 	mIsTurning{ false }
 {
-	mRunGenerator = new RandomNorm(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mRayDev);
+	mRunGenerator = new RandomNorm(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mRayDev);
 	mRayGenerator = new RandomNorm(ParamSim::ViewRay(), ParamSim::ViewRay()*mRunDev);
-	mWalkGenerator = new RandomNorm(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mWalkDev);
+	mWalkGenerator = new RandomNorm(ParamSim::ProbSpeed() , ParamSim::ProbSpeed()*mWalkDev);
 	mNameGenerator = new RandomIntUnif(mBeginName, mEndName);
-	mWalkSpeed = mWalkGenerator->Generate();
-	mRunSpeed = mRunGenerator->Generate();
-	mViewRay = mRayGenerator->Generate();
+	mWalkSpeed = abs(mWalkGenerator->Generate());
+	mRunSpeed = abs(mRunGenerator->Generate());
+	mViewRay = abs(mRayGenerator->Generate());
 	mViewRaySq = mViewRay*mViewRay;
 	mName = mNameList.at(mNameGenerator->Generate());
 	mTurningDirection = new QVector2D[mNumberOfTurningDirection];
@@ -69,13 +69,17 @@ QHumanoid::QHumanoid(double x, double y, Environnement * currentEnvironnemnt, hu
 	mRectF{ QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW) },
 	mBrushColor{ mHumanoidColor },
 	mPenColor{ mContourColor },
+	mRunGenerator{ nullptr },
+	mWalkGenerator{ nullptr },
+	mRayGenerator{ nullptr },
+	mNameGenerator{ nullptr },
 	mIsTurning{ false }
 {
 	mRunGenerator = new RandomNorm(0, runSpeed*mRunDev);
 	mRayGenerator = new RandomNorm(0, viewRay*mRunDev);
-	mWalkGenerator = new RandomNorm(0, (runSpeed + mOffsetRun)*mWalkDev);
+	mWalkGenerator = new RandomNorm(0, walkSpeed*mWalkDev);
 	mNameGenerator = new RandomIntUnif(mBeginName, mEndName);
-	mWalkSpeed = runSpeed + mWalkGenerator->Generate();
+	mWalkSpeed = walkSpeed + mWalkGenerator->Generate();
 	mViewRay = viewRay + mRayGenerator->Generate();
 	mViewRaySq = mViewRay*mViewRay;
 	mRunSpeed = runSpeed + mRunGenerator->Generate();

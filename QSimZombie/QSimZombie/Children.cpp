@@ -62,7 +62,7 @@ void Children::advance(int phase, int index)
 			mHumanLink->moveInDirection(Human::movementSpeed::walk);
 		}
 		//L'humain viellit d'un tic (mois)
-		//++mAge;  Trouver le moyen d'acceder à l'age de l'humain
+		mHumanLink->gainAge();
 	}
 }
 

@@ -35,6 +35,7 @@ public:
 	bool IsBecomingZombie(bool biteByZombie = false);
 	void IsBecomingAdult();
 	void IsRetiring();
+	void gainAge() { mAge++; }
 	
 	bool isInfected() { return (mVirus) ? true : false; }
 	HumanSpecifier * Specifier( ) { return mSpecifier; }

@@ -56,7 +56,7 @@ protected:
 	void BaseHumanInit();
 	void BaseHumanInit(newHumanParameters *humanParameters);
 	void CreateMilitary();
-	void CreateVirus();
+	void CreateVirus(double fatherVirusStrenght);
 	void CreateChild();
 	
 	
@@ -80,6 +80,8 @@ private:
 	static RandomNorm * mDeathAgeGenerator;
 	static const double mDeathAgeMean;
 	static const double mDeathAgeDeviation;
+
+	static RandomIntUnif * mVirusKillingSpeed;
 
 	static const QColor mHumanColor;
 };

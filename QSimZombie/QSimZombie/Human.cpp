@@ -121,7 +121,7 @@ void Human::advance(int phase, int const index)
 				}
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mEatingRange) {
 					//Si très près d'un autre humain, transmission de virus et s'éloigne de lui en marchant
-					VirusTransmission();
+					transmitVirus(index);
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 					setDirectionFrom(humanPos);
 					moveInDirection(movementSpeed::walk);
@@ -263,11 +263,22 @@ void Human::transmitVirus(int const index)
 	{
 		if (closestHuman->VirusResistance() < this->mVirus->Strenght())
 		{
-			closestHuman->CreateVirus();
+			closestHuman->CreateVirus(this->mVirus->Strenght());
 		}
 
 	}
 
+}
+
+void Human::CreateVirus(double fatherVirusStrenght)
+{
+	if (!mVirus)
+	{
+		//On détermine combien de tic le virus enlèvera à l'humain
+		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge-1);
+		mDeathAge -= mVirusKillingSpeed->Generate();
+		mVirus = new Virus(fatherVirusStrenght);
+	}
 }
 
 bool Human::VirusTransmission()
@@ -353,13 +364,7 @@ void Human::CreateMilitary()
 	}
 }
 
-void Human::CreateVirus()
-{
-	if (!mVirus)
-	{
-		mVirus = new Virus();
-	}
-}
+
 
 void Human::CreateChild()
 {

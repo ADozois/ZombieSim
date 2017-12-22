@@ -3,13 +3,14 @@ class Virus
 {
 public:
 	Virus();
+	Virus(double fatherVirusStrenght);
 	~Virus();
 
-	int Strenght();
-	bool IsBecomingZombit();
+	double Strenght();
+	/*bool IsBecomingZombit();
 	void DecTimeRemaining();
 	void DecTimeRemaining(int decrement);
-	bool WillInfect(int humanStrenght);
+	bool WillInfect(int humanStrenght);*/
 
 
 private:

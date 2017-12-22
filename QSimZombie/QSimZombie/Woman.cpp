@@ -117,7 +117,7 @@ void Woman::advance(int phase, int const index)
 				}
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mEatingRange) {
 					//Si très près d'un autre humain, transmission de virus et s'éloigne de lui en marchant
-					VirusTransmission();
+					transmitVirus(index);
 					tryReproduction(index);
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 					setDirectionFrom(humanPos);

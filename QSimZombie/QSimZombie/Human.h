@@ -26,14 +26,12 @@ public:
 	void advance(int phase) override;
 	void advance(int phase, int const index) override;
 	bool IsDead();
-	void Reproduction();
 	
 
 	int Age();
 	int DeathAge();
 	qreal VirusResistance();
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-	bool IsBecomingZombie(bool biteByZombie = false);
 	void IsBecomingAdult();
 	void IsRetiring();
 	void gainAge() { mAge++; }
@@ -43,6 +41,7 @@ public:
 	Environnement * CurrentEnvironnement() { return mEnvironnement; }
 	
 	void transmitVirus(int const index);
+	void becomeZombie();
 	
 
 	qreal fertility() { return mFertility; }
@@ -59,6 +58,7 @@ protected:
 	void CreateMilitary();
 	void CreateVirus();
 	void CreateChild();
+	
 	
 	
 	

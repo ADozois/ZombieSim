@@ -91,6 +91,7 @@ void Human::advance(int phase, int const index)
 			if (IsDead())
 			{
 				mEnvironnement->addDeathHumanoid(index);
+				becomeZombie();
 			}
 			else
 			{
@@ -230,9 +231,6 @@ bool Human::IsDead()
 	return false;
 }
 
-void Human::Reproduction()
-{
-}
 
 int Human::Age()
 {
@@ -381,14 +379,15 @@ void Human::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, Q
 	InitializeVisual(painter);
 }
 
-bool Human::IsBecomingZombie(bool biteByZombie)
-{
-	if (mVirus->IsBecomingZombit() || biteByZombie)
+
+void Human::becomeZombie() {
+
+	if (mVirus)
 	{
-		DeleteSpecifier();
-		return true;
+		//Create the new zombi where the human was
+		Zombie * newZombie = new Zombie(pos().x(), pos().y(), mEnvironnement, humanoideType::zombi);
+		mEnvironnement->scene()->addItem(newZombie);
 	}
-	return false;
 }
 
 void Human::IsBecomingAdult()

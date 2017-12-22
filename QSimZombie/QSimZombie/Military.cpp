@@ -36,7 +36,8 @@ HumanSpecifier::returnAdvance Military::advance(int phase, int const index)
 {
 	if (mHumanLink->IsDead())
 	{
-		mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);		
+		mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);
+		mHumanLink->becomeZombie();
 
 	}
 	else

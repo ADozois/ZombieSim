@@ -39,6 +39,7 @@ HumanSpecifier::returnAdvance Children::advance(int phase, int index)
 	{
 		mMother->LosingChild(this);
 		mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);
+		mHumanLink->becomeZombie();
 		
 	}
 	else

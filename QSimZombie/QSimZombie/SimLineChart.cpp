@@ -31,6 +31,8 @@ void SimLineChart::CreateChart()
 {
 	QValueAxis * XAxis = new QValueAxis;
 	QValueAxis * YAxis = new QValueAxis;
+	XAxis->setRange(0, mData->size());
+	YAxis->setRange(0, *std::max_element(mData->begin(), mData->end()));
 	mChart->addAxis(XAxis, Qt::AlignBottom);
 	mChart->addAxis(YAxis, Qt::AlignLeft);
 }
@@ -40,7 +42,14 @@ void SimLineChart::CreateSerie()
 	QLineSeries * serie = dynamic_cast<QLineSeries *>(mDataSerie);
 	if (serie)
 	{
-		serie->append(mX, *mData->end());
+		int index{ 0 };
+		for (const auto & value: *mData)
+		{
+			serie->append(index, value);
+			index++;
+		}
+		mX = index;
+		mChart->addSeries(mDataSerie);
 	}
 }
 

@@ -11,6 +11,7 @@ int QStatSim::mNbrMilitaire{ 0 };
 int QStatSim::mNbrMort{ 0 };
 std::map<QString, int> QStatSim::mNbrNomMort{ { "Antoine", 0 }, { "Guillaume", 0 }, { "Olivier", 0 } };
 std::map<QString, int> QStatSim::mNbrNomVivant{ { "Antoine", 0 },{ "Guillaume", 0 },{ "Olivier", 0 } };
+std::map<QString, int> QStatSim::mNbrInstance{ { "Militaire", 0 },{ "Homme", 0 },{ "Femme", 0 },{ "Children", 0 },{ "Zombie", 0 } };
 std::vector<int> QStatSim::mPopEvol{};
 
 
@@ -91,9 +92,16 @@ void QStatSim::SetPopEvol(std::vector<int> value) {
 	mPopEvol = value;
 };
 
-std::map<QString, int> QStatSim::NbrInstance()
+std::map<QString, int> * QStatSim::NbrInstance()
 {
-	return std::map<QString, int>{ {"Militaire", mNbrMilitaire}, { "Homme", NbrHomme() }, { "Femme", mNbrFemme }, { "Children", mNbrEnfant }, { "Zombie", mNbrZombie } };
+	mNbrInstance["Homme"] = NbrHomme();
+	mNbrInstance["Femme"] = NbrFemme();
+	mNbrInstance["Homme"] = NbrHomme();
+	mNbrInstance["Militaire"] = NbrMilitaire();
+	mNbrInstance["Enfant"] = NbrEnfant();
+	mNbrInstance["Zombie"] = NbrZombie();
+
+	return & mNbrInstance;
 }
 
 void QStatSim::IncNbrZombie()

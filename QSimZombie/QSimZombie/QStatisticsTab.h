@@ -11,6 +11,7 @@
 #include "QStatSim.h"
 #include "SimPieChart.h"
 #include "SimBarChart.h"
+#include "SimLineChart.h"
 
 
 using namespace QtCharts;
@@ -36,7 +37,7 @@ private:
 protected:
 
 	QChart *mChart;
-	QChart *mChart2;
+	SimLineChart *mChart2;
 	SimBarChart *mChart3;
 	SimPieChart *mChart4;
 

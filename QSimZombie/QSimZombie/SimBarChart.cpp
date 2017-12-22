@@ -13,7 +13,8 @@ SimBarChart::SimBarChart(QChart * chart, const std::map<QString, int> * data, QS
 
 
 SimBarChart::SimBarChart(const std::map<QString, int> * data, QString title)
-	: QSimChart(title)
+	: QSimChart(title),
+	mData{ data }
 {
 	mDataSerie = new QBarSeries;
 	CreateSerie();

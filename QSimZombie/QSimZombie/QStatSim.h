@@ -32,10 +32,10 @@ public:
 	static int NbrEnfant() { return mNbrEnfant; };
 	static int NbrMilitaire() { return mNbrMilitaire; };
 	static int NbrMort() { return mNbrMort; };
-	static std::map<QString, int> NbrNomMort() { return mNbrNomMort; };
-	static std::map<QString, int> NbrNomVivant() { return mNbrNomVivant; };
-	static std::map<QString, int> NbrInstance();
-	static std::vector<int> PopEvol() { return mPopEvol; };
+	static std::map<QString, int>* NbrNomMort() { return &mNbrNomMort; };
+	static std::map<QString, int>* NbrNomVivant() { return &mNbrNomVivant; };
+	static std::map<QString, int>* NbrInstance();
+	static std::vector<int>* PopEvol() { return &mPopEvol; };
 
 	static void IncNbrZombie();
 	static void IncNbrHumain();
@@ -74,6 +74,7 @@ private:
 	static int mNbrMort;
 	static std::map<QString, int> mNbrNomMort;
 	static std::map<QString, int> mNbrNomVivant;
+	static std::map<QString, int> mNbrInstance;
 	static std::vector<int> mPopEvol;
 };
 

@@ -15,11 +15,14 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 	mDownLeftLayout = new QHBoxLayout;
 	mDownRightLayout = new QHBoxLayout;
 
+	std::vector<int> test = { 6, 4, 5, 12, 26 };
+
 	//Charts
 	mChart = new QChart();
-	mChart2 = new QChart();
-	mChart3 = new SimBarChart(&QStatSim::NbrInstance(), "Nombre de personne par categorie");
-	mChart4 = new SimPieChart(&mSimStat.NbrNomVivant(),"Proportion du nombre d'humain selon leur nom");
+	mChart2 = new SimLineChart(&test,"test");
+	mChart3 = new SimBarChart(QStatSim::NbrInstance(), "Nombre de personne par categorie");
+	mChart4 = new SimPieChart(mSimStat.NbrNomVivant(),"Proportion du nombre d'humain selon leur nom");
+	mChart2->CreateChart();
 	mChart3->CreateChart();
 	mChart4->CreateChart();
 
@@ -33,8 +36,6 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 	mXAxis = new QValueAxis;
 	mYAxis = new QValueAxis;
 
-	mXAxis2 = new QValueAxis;
-	mYAxis2 = new QValueAxis;
 
 	mXAxis3 = new QValueAxis;
 	mYAxis3 = new QValueAxis;
@@ -43,34 +44,28 @@ QStatisticsTab::QStatisticsTab(QWidget *parent)
 	mChart->addAxis(mXAxis,Qt::AlignBottom);
 	mChart->addAxis(mYAxis,Qt::AlignLeft);
 
-	mChart2->addAxis(mXAxis2, Qt::AlignBottom);
-	mChart2->addAxis(mYAxis2, Qt::AlignLeft);
 
 	//mChart3->addAxis(mXAxis3, Qt::AlignBottom);
 	//mChart3->addAxis(mYAxis3, Qt::AlignLeft);
 
 
-	mXAxis->setRange(0, 30);
-	mYAxis->setRange(0, 30);
+	mXAxis->setRange(0, 5);
+	mYAxis->setRange(0, 20);
 
-	mXAxis2->setRange(0, 30);
-	mYAxis2->setRange(0, 30);
 
 	mXAxis3->setRange(0, 30);
 	mYAxis3->setRange(0, 30);
 
 
-	*mDataSeries << QPointF(0, 6) << QPointF(9, 4) << QPointF(15, 40) << QPointF(25, 12) << QPointF(29, 26);
-	*mDataSeries2 << QPointF(5, 16) << QPointF(19, 4) << QPointF(15, 20) << QPointF(25, 12) << QPointF(29, 26);
+	*mDataSeries << QPointF(0, 6) << QPointF(1, 4) << QPointF(2, 5) << QPointF(3, 12) << QPointF(4, 26);
 	//CreateBarChart(mSimStat.NbrNomVivant(), mChart3, mDataSeries3, "ttt");
 	//CreatePieChart(mSimStat.NbrNomVivant(), mChart4, mDataSeries4, "Proportion du nombre d'humain selon leur nom");
 
 	mChart->addSeries(mDataSeries);
-	mChart2->addSeries(mDataSeries2);
 	//mChart3->addSeries(mDataSeries3);
 
 	mChartView = new QChartView(mChart);
-	mChartView2 = new QChartView(mChart2);
+	mChartView2 = new QChartView(mChart2->Chart());
 	mChartView3 = new QChartView(mChart3->Chart());
 	mChartView4 = new QChartView(mChart4->Chart());
 

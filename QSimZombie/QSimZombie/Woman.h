@@ -13,7 +13,7 @@ public:
 	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
 	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, newHumanParameters *humanParameters, QGraphicsItem *parent = nullptr);
 	~Woman();
-	Children* GiveBirth();
+	void GiveBirth();
 	int CountChildren();
 	bool Reproduction();
 	void LosingChild(Children * child);

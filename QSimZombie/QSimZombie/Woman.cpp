@@ -15,7 +15,6 @@ const QColor Woman::mWomanColor{ 242, 229, 135 };
 
 Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infection, QGraphicsItem *parent)
 	:Human(x, y, currentEnvironnemnt, typeOfHumanoide, age, military, infection,parent),
-	mReproduction{false},
 	mCountChildren{0},
 	mTickRemaining{mFertilityTime},
 	mCurrentBaby{nullptr}
@@ -128,6 +127,7 @@ void Woman::advance(int phase, int const index)
 			}
 			if (mCurrentBaby)
 			{
+				mTickRemaining--;
 
 			}
 
@@ -140,13 +140,22 @@ void Woman::advance(int phase)
 	advance(phase, 0);
 }
 
-Children * Woman::GiveBirth()
+void Woman::GiveBirth()
 {	
-	Children * newChild = new Children(this);
-	mListChildren.append(newChild);
+	//We set the position of the new children being born 
+	mCurrentBaby->setPos(this->pos().x+ QHumanoid::mSizeHumanoid,this->pos().y+ QHumanoid::mSizeHumanoid);
+	mListChildren.append(dynamic_cast<Children*>(mCurrentBaby->Specifier()));
 	mCountChildren++;
 	mTickRemaining = mFertilityTime;
-	return newChild;
+
+	//On ajouter l'enfant à la scene
+	mEnvironnement->scene()->addItem(mCurrentBaby);
+	//On affiche le nouvel humain
+	QPainter *p;
+	mCurrentBaby->paint(p,nullptr,nullptr);
+
+	//On remet le pointeur du baby a nul
+	mCurrentBaby = nullptr;
 }
 
 int Woman::CountChildren()
@@ -214,11 +223,14 @@ void Woman::createBaby(Human * father)
 	//one chance on two to get a girl or a boy
 	if (mDoesReproduce->Generate() > 0.5)
 	{
-		mCurrentBaby = new Human(0, 0, mEnvironnement, QHumanoid::humanoideType::human, babyParameters);
+		mCurrentBaby = new Human(0, 0, mEnvironnement, QHumanoid::humanoideType::human, babyParameters);		
 	}
 	else {
 		mCurrentBaby = new Woman(0, 0, mEnvironnement, QHumanoid::humanoideType::woman, babyParameters);
 	}
+
+	//We set the current woman as the mother of the child
+	dynamic_cast<Children*>(mCurrentBaby->Specifier())->setMother(this);
 
 }
 
@@ -233,6 +245,7 @@ void Woman::LosingChild(Children * child)
 		}
 		i++;
 	}
+	mCountChildren--;
 }
 
 

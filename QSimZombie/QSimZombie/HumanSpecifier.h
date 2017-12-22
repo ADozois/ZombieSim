@@ -1,7 +1,6 @@
 #ifndef HUMAN_SPECIFIER_H
 #define HUMAN_SPECIFIER_H
 
-#include <QObject>
 
 class HumanSpecifier
 {
@@ -9,9 +8,11 @@ public:
 	HumanSpecifier() = default;
 	~HumanSpecifier() = default;
 
-public slots:
-	virtual void advance(int phase) = 0;
-	virtual void advance(int phase, int index) = 0;
+
+	enum class returnAdvance { noAction, newAdult,endMilitary };
+
+	virtual returnAdvance advance(int phase) = 0;
+	virtual returnAdvance advance(int phase, int const index) = 0;
 };
 
 

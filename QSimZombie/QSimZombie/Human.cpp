@@ -15,7 +15,9 @@ const double Human::mDeathAgeMean{80.0};
 const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
 
+RandomIntUnif * Human::mVirusKillingSpeed{ nullptr };
 
+//Use to create new humans at the begginning of the simulation
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infected, QGraphicsItem *parent)
 	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide,parent),
 	mAge{age},
@@ -34,6 +36,7 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	}
 }
 
+//Use to create new baby with no parents (this one should not be very used)
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary, bool infected, QGraphicsItem *parent)
 	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, parent),
 	mAge{ 0 },
@@ -49,15 +52,16 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	CreateChild();
 }
 
-Human::Human(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool becomeMilitary, bool infected, QGraphicsItem * parent)
-	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, runSpeed, walkSpeed, viewRay, parent),
+//Used to create a new baby from two parents
+Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, newHumanParameters *humanParameters, QGraphicsItem *parent)
+	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, humanParameters->avrgRunSpeed,humanParameters->avrgWalkSpeed,humanParameters->avrgViewRay, parent),
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
-	mWillBeocmeMilitary{ becomeMilitary }
+	mWillBeocmeMilitary{ humanParameters->isMilitary }
 {
 	BaseHumanInit();
-	if (infected)
+	if (humanParameters->isInfected)
 	{
 		CreateVirus();
 	}
@@ -67,24 +71,38 @@ Human::Human(double x, double y, Environnement * currentEnvironnemnt, humanoideT
 Human::~Human()
 {
 	DeleteSpecifier();
+	if (mVirus)
+	{
+		delete mVirus;
+		mVirus = nullptr;
+	}
 	QStatSim::DecNbrHumain();
 	QStatSim::DecNbrNomVivant(mName);
 	QStatSim::IncNbrNomMort(mName);
 }
 
-void Human::advance(int phase, int index)
+void Human::advance(int phase, int const index)
 {
 	if (!phase)
 	{
 		//On fait le advance du specifier si l'humain à un specifier
 		if (mSpecifier)
 		{
-			mSpecifier->advance(phase,index);
+			HumanSpecifier::returnAdvance resultAdvance= mSpecifier->advance(phase, index);
+			if (resultAdvance == HumanSpecifier::returnAdvance::newAdult)
+			{
+				IsBecomingAdult();
+			}
+			else if (resultAdvance == HumanSpecifier::returnAdvance::endMilitary)
+			{
+				DeleteSpecifier();
+			}
 		}
-		else {
+		else {			
 			if (IsDead())
 			{
 				mEnvironnement->addDeathHumanoid(index);
+				becomeZombie();
 			}
 			else
 			{
@@ -95,13 +113,7 @@ void Human::advance(int phase, int index)
 				}
 				else if (mIsTurning) {
 					//On est en train de tourner et on continue donc a faire le tournant pré-déterminé
-					mMovementDirection = mTurningDirection[mTurningAtPosition];
-					++mTurningAtPosition;
-					moveInDirection(movementSpeed::run);
-					if (mTurningAtPosition > mNumberOfTurningDirection)
-					{
-						mIsTurning = false;
-					}
+					makeTurn();
 				}
 				else if(mEnvironnement->getDistanceToClosestZombie(index)<=mViewRaySq){
 					//Zombi est visible, court dans le sens inverse					
@@ -111,7 +123,7 @@ void Human::advance(int phase, int index)
 				}
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mEatingRange) {
 					//Si très près d'un autre humain, transmission de virus et s'éloigne de lui en marchant
-					VirusTransmission();
+					transmitVirus(index);
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 					setDirectionFrom(humanPos);
 					moveInDirection(movementSpeed::walk);
@@ -119,13 +131,15 @@ void Human::advance(int phase, int index)
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mViewRaySq) {
 					//Si humain visible, marche vers lui
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
-					setDirectionFrom(humanPos);
+					setDirectionTo(humanPos);
 					moveInDirection(movementSpeed::walk);
 				}
 				else {
 					//Si humain et zombi trop loin pour les voir, marche dans la direction qu'il allait déjà
 					moveInDirection(movementSpeed::walk);
 				}
+				//L<humain viellit d'un tic (mois)
+				++mAge;
 			}
 
 		}
@@ -136,77 +150,89 @@ void Human::advance(int phase)
 {
 	advance(phase, 0);
 }
-
-void Human::moveInDirection(movementSpeed movementSpeed)
-{
-	if (movementSpeed == movementSpeed::run)
-	{
-		if (mEnergy)
-		{
-			QPointF newPosition(pos().x() + mMovementDirection.x()*mRunSpeed, pos().y() + mMovementDirection.y()*mRunSpeed);
-			checkForWalls(newPosition,mRunSpeed);
-			this->setPos(newPosition);
-			ReduceEnergy();
-		}
-		else
-		{
-			QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
-			checkForWalls(newPosition,mWalkSpeed);
-			this->setPos(newPosition);
-		}
-	}
-	else {
-		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
-		checkForWalls(newPosition,mWalkSpeed);
-		this->setPos(newPosition);
-		AddEnergy();
-	}
-}
-
-void Human::checkForWalls(QPointF &newPosition,qreal movementSpeed)
-{
-	//Si on tourne déjà, on continue dans les direction de tournant donné
-	if (!mIsTurning)
-	{
-		//Si on s'en va dans un mur, on ajuste la direction et on calcul les direction a prendre pour faire le tournant au complet
-		if ((newPosition.x() < mSizeHumanoid * 2) || (newPosition.x() > ParamSim::SceneWidth() - (mSizeHumanoid * 2)) ||
-			(newPosition.y() < mSizeHumanoid*2) || (newPosition.y() > ParamSim::SceneHeight()-(mSizeHumanoid*2)))
-		{
-			mIsTurning = true;
-			//On trouve l'angle de mouvement actuel
-			qreal directionAngle = atan(mMovementDirection.y() / mMovementDirection.x());
-			for (int i{ 0 }; i < mNumberOfTurningDirection; ++i)
-			{
-				qreal newAngle = directionAngle + (mRotationAngle / mNumberOfTurningDirection);
-				QVector2D newDirection(cos(newAngle), sin(newAngle));
-				mTurningDirection[i] = newDirection;
-			}
-			mTurningAtPosition = 1;
-			newPosition = QPointF(pos().x() + mTurningDirection[0].x()*movementSpeed, pos().y() + mTurningDirection[0].y()*movementSpeed);
-			mMovementDirection = mTurningDirection[0];
-		}
-	}
-}
-
-void Human::setDirectionTo(QPointF positionTo)
-{
-	//We set the direction of the entity going to that entity
-	qreal movementX = ( positionTo.x()- pos().x());
-	qreal movementY = ( positionTo.y()- pos().y());
-	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
-	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
-
-}
-
-void Human::setDirectionFrom(QPointF positionFrom)
-{
-	//We set the direction of the entity going away from that point
-	qreal movementX = (pos().x() - positionFrom.x());
-	qreal movementY = (pos().y() - positionFrom.y());
-	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
-	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
-
-}
+//
+//void Human::makeTurn()
+//{
+//	mMovementDirection = mTurningDirection[mTurningAtPosition];
+//	++mTurningAtPosition;
+//	moveInDirection(movementSpeed::run);
+//	if (mTurningAtPosition > mNumberOfTurningDirection)
+//	{
+//		mIsTurning = false;
+//	}
+//
+//}
+//
+//void Human::moveInDirection(movementSpeed movementSpeed)
+//{
+//	if (movementSpeed == movementSpeed::run)
+//	{
+//		if (mEnergy)
+//		{
+//			QPointF newPosition(pos().x() + mMovementDirection.x()*mRunSpeed, pos().y() + mMovementDirection.y()*mRunSpeed);
+//			checkForWalls(newPosition,mRunSpeed);
+//			this->setPos(newPosition);
+//			ReduceEnergy();
+//		}
+//		else
+//		{
+//			QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
+//			checkForWalls(newPosition,mWalkSpeed);
+//			this->setPos(newPosition);
+//		}
+//	}
+//	else {
+//		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
+//		checkForWalls(newPosition,mWalkSpeed);
+//		this->setPos(newPosition);
+//		AddEnergy();
+//	}
+//}
+//
+//void Human::checkForWalls(QPointF &newPosition,qreal movementSpeed)
+//{
+//	//Si on tourne déjà, on continue dans les direction de tournant donné
+//	if (!mIsTurning)
+//	{
+//		//Si on s'en va dans un mur, on ajuste la direction et on calcul les direction a prendre pour faire le tournant au complet
+//		if ((newPosition.x() < mSizeHumanoid * 2) || (newPosition.x() > ParamSim::SceneWidth() - (mSizeHumanoid * 2)) ||
+//			(newPosition.y() < mSizeHumanoid*2) || (newPosition.y() > ParamSim::SceneHeight()-(mSizeHumanoid*2)))
+//		{
+//			mIsTurning = true;
+//			//On trouve l'angle de mouvement actuel
+//			qreal directionAngle = atan(mMovementDirection.y() / mMovementDirection.x());
+//			for (int i{ 0 }; i < mNumberOfTurningDirection; ++i)
+//			{
+//				qreal newAngle = directionAngle + (mRotationAngle / mNumberOfTurningDirection);
+//				QVector2D newDirection(cos(newAngle), sin(newAngle));
+//				mTurningDirection[i] = newDirection;
+//			}
+//			mTurningAtPosition = 1;
+//			newPosition = QPointF(pos().x() + mTurningDirection[0].x()*movementSpeed, pos().y() + mTurningDirection[0].y()*movementSpeed);
+//			mMovementDirection = mTurningDirection[0];
+//		}
+//	}
+//}
+//
+//void Human::setDirectionTo(QPointF positionTo)
+//{
+//	//We set the direction of the entity going to that entity
+//	qreal movementX = ( positionTo.x()- pos().x());
+//	qreal movementY = ( positionTo.y()- pos().y());
+//	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
+//	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
+//
+//}
+//
+//void Human::setDirectionFrom(QPointF positionFrom)
+//{
+//	//We set the direction of the entity going away from that point
+//	qreal movementX = (pos().x() - positionFrom.x());
+//	qreal movementY = (pos().y() - positionFrom.y());
+//	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
+//	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
+//
+//}
 
 bool Human::IsDead()
 {
@@ -216,9 +242,6 @@ bool Human::IsDead()
 	return false;
 }
 
-void Human::Reproduction()
-{
-}
 
 int Human::Age()
 {
@@ -230,14 +253,53 @@ int Human::DeathAge()
 	return mDeathAge;
 }
 
-int Human::VirusResistance()
+qreal Human::VirusResistance()
 {
 	return mVirusResistance;
 }
 
+void Human::transmitVirus(int const index)
+{
+	Human * closestHuman = mEnvironnement->getClosestHuman(index);
+	if (VirusTransmission() && !closestHuman->isInfected())
+	{
+		if (closestHuman->VirusResistance() < this->mVirus->Strenght())
+		{
+			closestHuman->CreateVirus(this->mVirus->Strenght());
+		}
+
+	}
+
+}
+
+void Human::CreateVirus(double fatherVirusStrenght)
+{
+	if (!mVirus)
+	{
+		//On détermine combien de tic le virus enlèvera à l'humain
+		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge-1);
+		mDeathAge -= mVirusKillingSpeed->Generate();
+		mVirus = new Virus(fatherVirusStrenght);
+	}
+}
+
+void Human::CreateVirus()
+{
+	if (!mVirus)
+	{
+		//On détermine combien de tic le virus enlèvera à l'humain
+		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge - 1);
+		mDeathAge -= mVirusKillingSpeed->Generate();
+		mVirus = new Virus();
+	}
+}
+
 bool Human::VirusTransmission()
 {
-	//TODO implemente
+	if (mVirus)
+	{
+		return true;
+	}
 	return false;
 }
 
@@ -290,6 +352,19 @@ void Human::BaseHumanInit()
 	QStatSim::IncNbrNomVivant(mName);
 }
 
+void Human::BaseHumanInit(newHumanParameters *humanParameters) 
+{
+	mBrushColor = mHumanColor;
+	mPenColor = mHumanColor;
+	mResistanceGenerator = new RandomNorm(humanParameters->avrgVirusResistance, humanParameters->avrgVirusResistance*mResistanceDeviation);
+	mDeathAgeGenerator = new RandomNorm(humanParameters->avrgDeathAge, humanParameters->avrgDeathAge*mDeathAgeDeviation);
+	mVirusResistance = abs(mResistanceGenerator->Generate());
+	mDeathAge = abs(mDeathAgeGenerator->Generate());
+	QStatSim::IncNbrHumain();
+	QStatSim::IncNbrNomVivant(mName);
+
+}
+
 void Human::CreateMilitary()
 {
 	if (mSpecifier)
@@ -298,17 +373,11 @@ void Human::CreateMilitary()
 	}
 	else
 	{
-		mSpecifier = new Military();
+		mSpecifier = new Military(this);
 	}
 }
 
-void Human::CreateVirus()
-{
-	if (!mVirus)
-	{
-		mVirus = new Virus();
-	}
-}
+
 
 void Human::CreateChild()
 {
@@ -318,7 +387,7 @@ void Human::CreateChild()
 	}
 	else
 	{
-		mSpecifier = new Children();
+		mSpecifier = new Children(nullptr,this);
 	}
 }
 
@@ -337,25 +406,24 @@ void Human::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, Q
 	InitializeVisual(painter);
 }
 
-bool Human::IsBecomingZombie(bool biteByZombie)
-{
-	if (mVirus->IsBecomingZombit() || biteByZombie)
+
+void Human::becomeZombie() {
+
+	if (mVirus)
 	{
-		DeleteSpecifier();
-		return true;
+		//Create the new zombi where the human was
+		Zombie * newZombie = new Zombie(pos().x(), pos().y(), mEnvironnement, humanoideType::zombi);
+		mEnvironnement->scene()->addItem(newZombie);
 	}
-	return false;
 }
 
 void Human::IsBecomingAdult()
 {
-	if (mAge >= Children::AgeEnd())
+	DeleteSpecifier();
+	if (mWillBeocmeMilitary)
 	{
-		DeleteSpecifier();
-		if (mWillBeocmeMilitary)
-		{
-			CreateMilitary();
-		}
+		CreateMilitary();
+		mWillBeocmeMilitary = false;
 	}
 }
 

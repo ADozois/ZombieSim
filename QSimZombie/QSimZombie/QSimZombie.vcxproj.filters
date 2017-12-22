@@ -226,6 +226,9 @@
     <ClInclude Include="SimBarChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="newHumanParameters.h">
+	<Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="SimLineChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>

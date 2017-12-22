@@ -1,39 +1,30 @@
 #include "Children.h"
 #include "RandomIntUnif.h"
 #include "Woman.h"
+#include "Human.h"
+#include "Environnement.h"
 #include "QStatSim.h"
 
 RandomIntUnif * Children::mDistribution{nullptr};
-int Children::mBegin{0};
-int Children::mEnd{100};
-int Children::mMilitaryProb{20};
-int Children::mWomanProb{50};
+//int Children::mBegin{0};
+//int Children::mEnd{100};
 bool Children::mBecomeMilitary{ false };
 bool Children::mBecomeWoman{ false };
 const int Children::mAgeBeginChildren{ 0 };
-const int Children::mAgeEndChildren{ 18 };
+const int Children::mAgeEndChildren{ 215 };
 
 Children::Children()
-	:Children(nullptr)
+	:Children(nullptr,nullptr)
 {	
 	QStatSim::IncNbrEnfant();
 }
 
-Children::Children(Woman * mother)
-	:mMother{mother}
+Children::Children(Woman * mother, Human * humanLink)
+	:mMother{mother},
+	mHumanLink{ humanLink }
+
 {
-	mDistribution = new RandomIntUnif(mBegin, mEnd);
-	if (mDistribution->Generate() >= mWomanProb)
-	{
-		mBecomeWoman = true;
-	}
-	else
-	{
-		if (mDistribution->Generate() >= mMilitaryProb)
-		{
-			mBecomeMilitary = true;
-		}
-	}
+	
 	QStatSim::IncNbrEnfant();
 }
 
@@ -42,13 +33,42 @@ Children::~Children()
 	QStatSim::DecNbrEnfant();
 }
 
-void Children::advance(int phase, int index)
+HumanSpecifier::returnAdvance Children::advance(int phase, int index)
 {
+	if (mHumanLink->IsDead())
+	{
+		mMother->LosingChild(this);
+		mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);
+		mHumanLink->becomeZombie();
+		
+	}
+	else
+	{
+		//Le zombi mange l'humain
+		if (mHumanLink->CurrentEnvironnement()->getDistanceToClosestZombie(index) <= mHumanLink->eatingRange())
+		{
+			mMother->LosingChild(this);
+			mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);			
+			
+		}
+		else if (mHumanLink->Age() > mAgeEndChildren)
+		{
+			return HumanSpecifier::returnAdvance::newAdult;
+
+		}
+		else {
+			mHumanLink->setDirectionTo(mMother->pos());
+			mHumanLink->moveInDirection(Human::movementSpeed::walk);
+		}
+		//L'humain viellit d'un tic (mois)
+		mHumanLink->gainAge();
+	}
+	return HumanSpecifier::returnAdvance::noAction;
 }
 
-void Children::advance(int phase)
+HumanSpecifier::returnAdvance Children::advance(int phase)
 {
-	advance(phase, 0);
+	return advance(phase, 0);
 }
 
 int Children::AgeBegin()
@@ -69,5 +89,10 @@ void Children::LosingMother()
 Woman * Children::Mother()
 {
 	return mMother;
+}
+
+void Children::setMother(Woman * mother)
+{
+	mMother = mother;
 }
 

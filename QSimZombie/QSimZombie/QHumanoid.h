@@ -17,6 +17,7 @@ class QHumanoid : public QGraphicsItem
 public:
 
 	enum class humanoideType { human, zombi, woman, children, military };
+	enum class movementSpeed { walk, run };
 
 	QHumanoid() = delete;
 	QHumanoid(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
@@ -27,31 +28,34 @@ public:
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void advance(int phase) override;
-	virtual void advance(int phase, int index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
+	virtual void advance(int phase, int const index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
 	void ReduceEnergy();
 	void ReduceEnergy(int loss);
 	void AddEnergy();
 	void AddEnergy(int gain);
-	int Energy();
-	qreal ViewRay();
+	int Energy(); //Varies from 1 to 100
+	qreal ViewRay(); 
+	qreal viewRaysq() { return mViewRaySq; }
 	qreal RunSpeed();
 	qreal WalkSpeed();
 	QString Name();
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
 	humanoideType who() { return mHumanoideType; }
+	qreal eatingRange() { return mEatingRange; }
 	//qreal eatingDistance() { return static_cast<qreal>(mSizeHumanoid); }
+	void moveInDirection(movementSpeed movementSpeed);
+	void setDirectionTo(QPointF positionTo);
+	void setDirectionFrom(QPointF positionFrom);
+	void makeTurn();
+	bool isTurning() { return mIsTurning; }
+	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
 
 	
 
 protected:
 	QVector2D Position();
-
-
-protected:
 	void InitializeVisual(QPainter * painter);
-
-protected:
 	int mEnergy;
 	qreal mViewRay;
 	qreal mViewRaySq;

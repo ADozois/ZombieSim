@@ -35,7 +35,13 @@ public:
 	bool IsBecomingZombie(bool biteByZombie = false);
 	void IsBecomingAdult();
 	void IsRetiring();
+	
 	bool isInfected() { return (mVirus) ? true : false; }
+	HumanSpecifier * Specifier( ) { return mSpecifier; }
+	Environnement * CurrentEnvironnement() { return mEnvironnement; }
+	void moveInDirection(movementSpeed movementSpeed);
+	void setDirectionTo(QPointF positionTo);
+	void setDirectionFrom(QPointF positionFrom);
 
 	qreal fertility() { return mFertility; }
 
@@ -47,13 +53,13 @@ protected:
 	void InfectedPainter(QPainter * painter);
 	void DeleteSpecifier();
 	void BaseHumanInit();
+	void BaseHumanInit(newHumanParameters *humanParameters);
 	void CreateMilitary();
 	void CreateVirus();
 	void CreateChild();
-	void moveInDirection(movementSpeed movementSpeed);
+	
 	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
-	void setDirectionTo(QPointF positionTo);
-	void setDirectionFrom(QPointF positionFrom);
+	
 	int mAge;
 	int mDeathAge;
 	qreal mVirusResistance;

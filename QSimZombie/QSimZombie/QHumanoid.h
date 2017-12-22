@@ -40,18 +40,14 @@ public:
 	qreal RotationAngle();
 	QVector2D MouvementDirection();
 	humanoideType who() { return mHumanoideType; }
+	qreal eatingRange() { return mEatingRange; }
 	//qreal eatingDistance() { return static_cast<qreal>(mSizeHumanoid); }
 
 	
 
 protected:
 	QVector2D Position();
-
-
-protected:
 	void InitializeVisual(QPainter * painter);
-
-protected:
 	int mEnergy;
 	qreal mViewRay;
 	qreal mViewRaySq;

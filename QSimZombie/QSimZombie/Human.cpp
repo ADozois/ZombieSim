@@ -121,7 +121,7 @@ void Human::advance(int phase, int const index)
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mViewRaySq) {
 					//Si humain visible, marche vers lui
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
-					setDirectionFrom(humanPos);
+					setDirectionTo(humanPos);
 					moveInDirection(movementSpeed::walk);
 				}
 				else {
@@ -297,6 +297,19 @@ void Human::BaseHumanInit()
 	QStatSim::IncNbrNomVivant(mName);
 }
 
+void Human::BaseHumanInit(newHumanParameters *humanParameters) 
+{
+	mBrushColor = mHumanColor;
+	mPenColor = mHumanColor;
+	mResistanceGenerator = new RandomNorm(humanParameters->avrgVirusResistance, humanParameters->avrgVirusResistance*mResistanceDeviation);
+	mDeathAgeGenerator = new RandomNorm(humanParameters->avrgDeathAge, humanParameters->avrgDeathAge*mDeathAgeDeviation);
+	mVirusResistance = abs(mResistanceGenerator->Generate());
+	mDeathAge = abs(mDeathAgeGenerator->Generate());
+	QStatSim::IncNbrHumain();
+	QStatSim::IncNbrNomVivant(mName);
+
+}
+
 void Human::CreateMilitary()
 {
 	if (mSpecifier)
@@ -325,7 +338,7 @@ void Human::CreateChild()
 	}
 	else
 	{
-		mSpecifier = new Children();
+		mSpecifier = new Children(nullPtr,this);
 	}
 }
 

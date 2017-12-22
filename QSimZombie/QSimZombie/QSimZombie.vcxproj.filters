@@ -129,6 +129,9 @@
     <ClCompile Include="QSliderAffiche.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QEntityStats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -206,6 +209,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QStatSim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QEntityStats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

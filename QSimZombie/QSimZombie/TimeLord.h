@@ -27,6 +27,10 @@ public:
 	void stop();
 	void step();
 
+
+	QTimer *Timer() { return mTimer; }
+
+
 };
 
 #endif //TIME_LORD_H

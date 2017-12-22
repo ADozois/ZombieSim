@@ -44,6 +44,8 @@ QParametersTab::QParametersTab(QWidget *parent)
 										//Create things
 	//Layouts
 	mMainLayout = new QHBoxLayout;
+	mMainLayout2 = new QVBoxLayout;
+	mValidateLayout = new QHBoxLayout;
 	mLeftLayout = new QVBoxLayout;
 	mRightLayout = new QVBoxLayout;
 
@@ -63,12 +65,25 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mHumanCountLabel = new QLabel(mHumanCountString);
 
 	//Main layouts (left/right)
+	mMainLayout2->addLayout(mMainLayout);
 	mMainLayout->addLayout(mLeftLayout);
 	mMainLayout->addLayout(mRightLayout);
 
 	//Add groupboxed parameters to layouts
 	mLeftLayout->addWidget(mEntityQtyGB);
 	mLeftLayout->addWidget(mEntityCarGB);
+
+	//Add generate button
+	mValidateButton = new QPushButton("Validate");
+	//mValidate->set
+	mMainLayout2->addLayout(mValidateLayout);
+
+	mValidateLayout->addStretch();
+	mValidateLayout->addWidget(mValidateButton);
+	mValidateLayout->addStretch();
+
+	
+
 
 	mRightLayout->addWidget(mEnvironmentCarGB);
 	mRightLayout->addWidget(mSceneParamGB);
@@ -211,7 +226,7 @@ QParametersTab::QParametersTab(QWidget *parent)
 	connect(mRotationAngle, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
 
 
-	setLayout(mMainLayout);
+	setLayout(mMainLayout2);
 }
 
 
@@ -243,3 +258,4 @@ void QParametersTab::updateParameters()
 	ParamSim::setProbSpeed(mProbSpeed->value());
 
 }
+

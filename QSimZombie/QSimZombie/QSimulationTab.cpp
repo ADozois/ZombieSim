@@ -1,14 +1,20 @@
 #include "QSimulationTab.h"
-
+#include <iostream>
 #include <Qgraphicsscene>
 #include <Qgraphicsview>
-
+#include <QAbstractButton>
 #include "Environnement.h"
 #include "ParamSim.h"
+#include <QTimer>
+#include "TimeLord.h"
+using namespace std;
 
 QSimulationTab::QSimulationTab(QWidget *parent)
 	: QWidget(parent)
 {
+
+	mTicString = new QString;
+
 	//Layouts
 	mMainLayout = new QHBoxLayout;
 	mWorldLayout = new QHBoxLayout;
@@ -40,6 +46,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	/* Simulation View goes in mLeftLayout */
 	//Add simulation graphic view in this layout!*************************
 	
+
 	ParamSim *parameters;
 	parameters = new ParamSim();
 
@@ -64,12 +71,38 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	
 	mLeftLayout->addWidget(view);
 	
+	//connect(mPlayButton,&QPushButton::released, this, &fooo);
+
 
 	//Add Buttons to groupbox
 	mSimGroupBoxLayout->addWidget(mPlayButton);
 	mSimGroupBoxLayout->addWidget(mPauseButton);
 	mSimGroupBoxLayout->addWidget(mStepButton);
 	mSimGroupBoxLayout->addWidget(mStopButton);
+
+
+
+
+															//Elapsed Tics
+	mTicLabel = new QLabel("Elapsed tics: ");
+	mTicValueLabel = new QLabel("");
+
+	mTicLayout = new QHBoxLayout;
+	mTicLayout->addWidget(mTicLabel);
+	mTicLayout->addWidget(mTicValueLabel);
+
+	
+	
+	
+	
+
+
+
+
+
+
+
+
 	//Set a groupbox inner layout
 	mSimGroupBox->setLayout(mSimGroupBoxLayout);
 	
@@ -80,7 +113,10 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mPushRightLayout->addStretch();
 	mPushRightLayout->addWidget(mSimGroupBox);
 
+
+
 	mRightLayout->addLayout(mPushRightLayout);
+	mRightLayout->addLayout(mTicLayout);
 	mRightLayout->addStretch();
 	
 	
@@ -93,4 +129,14 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	//set this layout
 	setLayout(mMainLayout);
+}
+
+void QSimulationTab::updateTicLabel() {
+
+
+	mTicValue += 1;
+	mTicString->number(mTicValue);
+	mTicValueLabel->setText(*mTicString);
+
+
 }

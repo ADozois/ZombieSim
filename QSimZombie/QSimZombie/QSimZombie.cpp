@@ -1,5 +1,5 @@
 #include "QSimZombie.h"
-
+#include <iostream>
 QSimZombie::QSimZombie(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -13,20 +13,62 @@ QSimZombie::QSimZombie(QWidget *parent)
 	mStatTab = new QStatisticsTab;
 	mParamTab = new QParametersTab;
 
-	mSplitter = new QSplitter;
+
+
+
+	QPushButton* mPlay = mSimTab->getPlayButton();
+	QPushButton* mStop = mSimTab->getStopButton();
+	QPushButton* mValidate = mParamTab->getValidateButton();
+
+
+	connect(mValidate, &QPushButton::clicked, this, &QSimZombie::disableParametersTab);
+	connect(mPlay,&QPushButton::clicked,this, &QSimZombie::disableParametersTab);
+
+	connect(mStop,&QPushButton::clicked, this, &QSimZombie::activateParametersTab);
+
+
+
 
 	mTabWidget = new QTabWidget;
-	mTabWidget->addTab(mSimTab, "Simulation");
-	mTabWidget->addTab(mStatTab, "Statistics");
-	mTabWidget->addTab(mParamTab, "Parameters");
+	
 
 
+
+	mSplitter = new QSplitter;
 	mSplitter->addWidget(mTabWidget);
+
+
+	mTabWidget->insertTab(mSimTabIndex, mSimTab, "Simulation") ;
+	mTabWidget->insertTab(mStatTabIndex, mStatTab, "Statistics") ;
+	mTabWidget->insertTab(mParamTabIndex, mParamTab, "Parameters") ;
+
+
+
+
 	setCentralWidget(mSplitter);
 
 
 
 
+
+
+}
+
+
+
+
+void QSimZombie::activateParametersTab() {
+
+
+	mTabWidget->setTabEnabled(mParamTabIndex,true);
+
+}
+
+void QSimZombie::disableParametersTab() {
+
+
+	mTabWidget->setCurrentIndex(mSimTabIndex);
+	mTabWidget->setTabEnabled(mParamTabIndex,false);
 
 
 }

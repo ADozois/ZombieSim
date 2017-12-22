@@ -10,6 +10,7 @@
 #include <QString>
 #include <QFormLayout>
 #include "QSliderAffiche.h"
+#include <QPushbutton>
 
 class ParamSim;
 
@@ -20,17 +21,23 @@ class QParametersTab : public QWidget {
 public:
 	QParametersTab(QWidget *parent = Q_NULLPTR);
 	
+	QPushButton *getValidateButton() { return mValidateButton; }
 
 
 public slots:
 
-
+	
 	void updateParameters();
 
 protected:
 
+
+	QPushButton *mValidateButton;
+
 	//Layouts
 	QHBoxLayout *mMainLayout;
+	QVBoxLayout *mMainLayout2;
+	QHBoxLayout *mValidateLayout;
 	QVBoxLayout *mLeftLayout;
 	QVBoxLayout *mRightLayout;
 

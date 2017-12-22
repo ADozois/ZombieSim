@@ -11,7 +11,9 @@
 #include <QPixmap>
 #include <QIcon>
 #include <QImage>
-#include <QSizePolicy>
+#include "TimeLord.h"
+
+
 
 class QSimulationTab : public QWidget
 {
@@ -19,9 +21,29 @@ class QSimulationTab : public QWidget
 
 
 public:
-	QSimulationTab(QWidget *parent = Q_NULLPTR);
+	QSimulationTab(QWidget *parent = nullptr);
+
+	QPushButton *getPlayButton() { return mPlayButton; }
+	QPushButton *getStopButton() { return mStopButton; }
+	QTimer* tim;
+public slots:
+
+	void updateTicLabel();
+
+	
 
 protected:
+
+	int mTicValue;
+	QString* mTicString;
+
+	TimeLord* mTimeLord;
+	
+	QLabel* mTicLabel;
+	QLabel* mTicValueLabel;
+	QHBoxLayout* mTicLayout;
+
+	
 
 	//Layouts
 	QHBoxLayout *mMainLayout;
@@ -44,18 +66,8 @@ protected:
 
 	//Label
 	QLabel *mIconLabel;
+	
 
-	//Size policy
-	QSizePolicy *mSizePolicy;
+
 };
-
-
-
-
-
-
-
-
-
-
 #endif //Q_SIMUlATION_TAB_H

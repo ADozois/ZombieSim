@@ -5,7 +5,7 @@
 #include "ParamSim.h"
 #include "QParametersTab.h"
 #include <QObject>
-
+#include <QTimer>
 TimeLord::TimeLord()
 {
 
@@ -47,3 +47,4 @@ void TimeLord::step() {
 	QTimer::singleShot(mDefaultTime, mMonde->scene(), &QGraphicsScene::advance);
 
 }
+

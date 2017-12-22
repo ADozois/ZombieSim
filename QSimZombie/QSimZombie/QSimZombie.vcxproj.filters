@@ -138,6 +138,9 @@
     <ClCompile Include="SimBarChart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SimLineChart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -221,6 +224,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimBarChart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimLineChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

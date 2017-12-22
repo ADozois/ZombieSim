@@ -6,19 +6,18 @@ class SimPieChart : public QSimChart
 {
 public:
 	SimPieChart() = delete;
-	SimPieChart(QChart * chart, const std::map<QString, int> & data, QString title = "");
-	SimPieChart(QChart * chart, const std::vector<int> & data, QString title = "");
-	SimPieChart(const std::map<QString, int> & data, QString title = "");
-	SimPieChart(const std::vector<int> & data, QString title = "");
+	SimPieChart(QChart * chart, const std::map<QString, int> * data, QString title = "");
+	SimPieChart(const std::map<QString, int> * data, QString title = "");
 	~SimPieChart();
 	void CreateChart() override;
 
+public slots:
+	void UpdateGraph() override;
+	
 
 protected:
-	void CreateSerie(std::map<QString, int> data) override;
-	void CreateSerie(std::vector<int> data) override;
-
-
+	void CreateSerie() override;
+	const std::map<QString, int> * mData;
 };
 
 #endif // !SIM_PIE_CHART_H

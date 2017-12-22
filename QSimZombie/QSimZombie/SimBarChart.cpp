@@ -1,35 +1,23 @@
 #include "SimBarChart.h"
+#include "QStatSim.h"
 
 
-
-SimBarChart::SimBarChart(QChart * chart, const std::map<QString, int>& data, QString title)
-	:QSimChart(chart, title)
+SimBarChart::SimBarChart(QChart * chart, const std::map<QString, int> * data, QString title)
+	:QSimChart(chart, title),
+	mData{ data }
 {
 	mDataSerie = new QBarSeries;
-	CreateSerie(data);
-	mCategory = CreateBarCategory(data);
+	CreateSerie();
+	mCategory = CreateBarCategory();
 }
 
-SimBarChart::SimBarChart(QChart * chart, const std::vector<int>& data, QString title)
-	: QSimChart(chart, title)
-{
-	mDataSerie = new QBarSeries;
-	CreateSerie(data);
-}
 
-SimBarChart::SimBarChart(const std::map<QString, int>& data, QString title)
+SimBarChart::SimBarChart(const std::map<QString, int> * data, QString title)
 	: QSimChart(title)
 {
 	mDataSerie = new QBarSeries;
-	CreateSerie(data);
-	mCategory = CreateBarCategory(data);
-}
-
-SimBarChart::SimBarChart(const std::vector<int>& data, QString title)
-	: QSimChart(title)
-{
-	mDataSerie = new QBarSeries;
-	CreateSerie(data);
+	CreateSerie();
+	mCategory = CreateBarCategory();
 }
 
 
@@ -40,42 +28,42 @@ SimBarChart::~SimBarChart()
 void SimBarChart::CreateChart()
 {
 	QBarCategoryAxis *axis = new QBarCategoryAxis();
-	QBarSeries * serie = dynamic_cast<QBarSeries *>(mDataSerie);
 	mChart->addSeries(mDataSerie);
 	PrepChart(mTitle);
 	axis->append(mCategory);
 	mChart->createDefaultAxes();
-	mChart->setAxisX(axis, serie);
+	mChart->setAxisX(axis, mDataSerie);
 }
 
-void SimBarChart::CreateSerie(std::map<QString, int> data)
+void SimBarChart::CreateSerie()
 {
 	QBarSeries * serie = dynamic_cast<QBarSeries * >(mDataSerie);
 	QBarSet * set = new QBarSet("Data");
-	for (auto & value : data)
+	for (auto & value : *mData)
 	{
 		*set << value.second;
 	}
-	serie->append(set);
-}
-
-void SimBarChart::CreateSerie(std::vector<int> data)
-{
-	QBarSeries * serie = dynamic_cast<QBarSeries * >(mDataSerie);
-	QBarSet * set = new QBarSet("Data");
-	for (auto & value : data)
+	if (serie)
 	{
-		*set << value;
+		serie->append(set);
 	}
-	serie->append(set);
 }
 
-QStringList SimBarChart::CreateBarCategory(std::map<QString, int> data)
+
+QStringList SimBarChart::CreateBarCategory()
 {
 	QStringList category;
-	for (auto & value : data)
+	for (auto & value : *mData)
 	{
 		category << value.first;
 	}
 	return category;
+}
+
+void SimBarChart::UpdateGraph() {
+	QBarSeries * serie = dynamic_cast<QBarSeries * >(mDataSerie);
+	if (serie) {
+		serie->clear();
+		CreateSerie();
+	}
 }

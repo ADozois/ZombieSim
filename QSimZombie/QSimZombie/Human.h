@@ -16,7 +16,7 @@ class Human : public QHumanoid
 {
 public:
 
-	enum class movementSpeed{walk,run};
+	
 
 	Human() = delete;
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
@@ -27,7 +27,7 @@ public:
 	void advance(int phase, int const index) override;
 	bool IsDead();
 	void Reproduction();
-	void makeTurn();
+	
 
 	int Age();
 	int DeathAge();
@@ -41,11 +41,9 @@ public:
 	bool isInfected() { return (mVirus) ? true : false; }
 	HumanSpecifier * Specifier( ) { return mSpecifier; }
 	Environnement * CurrentEnvironnement() { return mEnvironnement; }
-	bool isTurning() { return mIsTurning; }
+	
 	void transmitVirus(int const index);
-	void moveInDirection(movementSpeed movementSpeed);
-	void setDirectionTo(QPointF positionTo);
-	void setDirectionFrom(QPointF positionFrom);
+	
 
 	qreal fertility() { return mFertility; }
 
@@ -62,7 +60,7 @@ protected:
 	void CreateVirus();
 	void CreateChild();
 	
-	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
+	
 	
 	int mAge;
 	int mDeathAge;

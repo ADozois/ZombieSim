@@ -17,6 +17,7 @@ class QHumanoid : public QGraphicsItem
 public:
 
 	enum class humanoideType { human, zombi, woman, children, military };
+	enum class movementSpeed { walk, run };
 
 	QHumanoid() = delete;
 	QHumanoid(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem *parent = nullptr);
@@ -43,6 +44,12 @@ public:
 	humanoideType who() { return mHumanoideType; }
 	qreal eatingRange() { return mEatingRange; }
 	//qreal eatingDistance() { return static_cast<qreal>(mSizeHumanoid); }
+	void moveInDirection(movementSpeed movementSpeed);
+	void setDirectionTo(QPointF positionTo);
+	void setDirectionFrom(QPointF positionFrom);
+	void makeTurn();
+	bool isTurning() { return mIsTurning; }
+	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
 
 	
 

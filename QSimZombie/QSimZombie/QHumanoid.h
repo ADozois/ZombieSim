@@ -27,13 +27,13 @@ public:
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void advance(int phase) override;
-	virtual void advance(int phase, int index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
+	virtual void advance(int phase, int const index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
 	void ReduceEnergy();
 	void ReduceEnergy(int loss);
 	void AddEnergy();
 	void AddEnergy(int gain);
-	int Energy();
-	qreal ViewRay();
+	int Energy(); //Varies from 1 to 100
+	qreal ViewRay(); 
 	qreal RunSpeed();
 	qreal WalkSpeed();
 	QString Name();

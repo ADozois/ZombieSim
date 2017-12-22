@@ -3,6 +3,7 @@
 
 #include "QHumanoid.h"
 #include "HumanSpecifier.h"
+#include "newHumanParameters.h"
 
 
 class Zombie;
@@ -20,20 +21,23 @@ public:
 	Human() = delete;
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
 	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary = false, bool infected = false, QGraphicsItem *parent = nullptr);
-	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military = false, bool infected = false, QGraphicsItem *parent = nullptr);
+	Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide,newHumanParameters *humanParameters, QGraphicsItem *parent = nullptr);
 	~Human();
 	void advance(int phase) override;
-	void advance(int phase, int index) override;
+	void advance(int phase, int const index) override;
 	bool IsDead();
 	void Reproduction();
 
 	int Age();
 	int DeathAge();
-	int VirusResistance();
+	qreal VirusResistance();
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	bool IsBecomingZombie(bool biteByZombie = false);
 	void IsBecomingAdult();
 	void IsRetiring();
+	bool isInfected() { return (mVirus) ? true : false; }
+
+	qreal fertility() { return mFertility; }
 
 
 protected:
@@ -50,12 +54,10 @@ protected:
 	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
 	void setDirectionTo(QPointF positionTo);
 	void setDirectionFrom(QPointF positionFrom);
-
-
-protected:
 	int mAge;
 	int mDeathAge;
-	int mVirusResistance;
+	qreal mVirusResistance;
+	qreal mFertility; //Value between 0 and 1
 	HumanSpecifier* mSpecifier;
 	bool mWillBeocmeMilitary;
 	bool mMilitary;

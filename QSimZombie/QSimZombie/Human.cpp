@@ -15,7 +15,7 @@ const double Human::mDeathAgeMean{80.0};
 const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
 
-
+//Use to create new humans at the begginning of the simulation
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infected, QGraphicsItem *parent)
 	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide,parent),
 	mAge{age},
@@ -34,6 +34,7 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	}
 }
 
+//Use to create new baby with no parents (this one should not be very used)
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool becomeMilitary, bool infected, QGraphicsItem *parent)
 	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, parent),
 	mAge{ 0 },
@@ -49,15 +50,16 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	CreateChild();
 }
 
-Human::Human(double x, double y, Environnement * currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool becomeMilitary, bool infected, QGraphicsItem * parent)
-	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, runSpeed, walkSpeed, viewRay, parent),
+//Used to create a new baby from two parents
+Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, newHumanParameters *humanParameters, QGraphicsItem *parent)
+	:QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, humanParameters->avrgRunSpeed,humanParameters->avrgWalkSpeed,humanParameters->avrgViewRay, parent),
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
-	mWillBeocmeMilitary{ becomeMilitary }
+	mWillBeocmeMilitary{ humanParameters->isMilitary }
 {
 	BaseHumanInit();
-	if (infected)
+	if (humanParameters->isInfected)
 	{
 		CreateVirus();
 	}
@@ -72,16 +74,16 @@ Human::~Human()
 	QStatSim::IncNbrNomMort(mName);
 }
 
-void Human::advance(int phase, int index)
+void Human::advance(int phase, int const index)
 {
 	if (!phase)
 	{
 		//On fait le advance du specifier si l'humain à un specifier
 		if (mSpecifier)
 		{
-			mSpecifier->advance(phase,index);
+			mSpecifier->advance(phase, index);
 		}
-		else {
+		else {			
 			if (IsDead())
 			{
 				mEnvironnement->addDeathHumanoid(index);
@@ -126,6 +128,8 @@ void Human::advance(int phase, int index)
 					//Si humain et zombi trop loin pour les voir, marche dans la direction qu'il allait déjà
 					moveInDirection(movementSpeed::walk);
 				}
+				//L<humain viellit d'un tic (mois)
+				++mAge;
 			}
 
 		}
@@ -230,14 +234,17 @@ int Human::DeathAge()
 	return mDeathAge;
 }
 
-int Human::VirusResistance()
+qreal Human::VirusResistance()
 {
 	return mVirusResistance;
 }
 
 bool Human::VirusTransmission()
 {
-	//TODO implemente
+	if (mVirus)
+	{
+		//Infecte l<humain qui est proche
+	}
 	return false;
 }
 

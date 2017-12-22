@@ -11,25 +11,28 @@ public:
 	Woman() = delete;
 	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age = 0, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
 	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
-	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, qreal runSpeed, qreal walkSpeed, qreal viewRay, bool military = false, bool infection = false, QGraphicsItem *parent = nullptr);
+	Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, newHumanParameters *humanParameters, QGraphicsItem *parent = nullptr);
 	~Woman();
 	Children* GiveBirth();
 	int CountChildren();
 	bool Reproduction();
 	void LosingChild(Children * child);
 	void advance(int phase) override;
-	void advance(int phase, int index) override;
+	void advance(int phase, int const index) override;
+	void tryReproduction(int const index);
+	void createBaby(Human * father);
 
 
 
 private:
 	QList<Children *> mListChildren;
-	bool mReproduction;
+	Human * mCurrentBaby;
 	int mCountChildren;
 	int mTickRemaining;
 
 	static int mMaxChildren;
 	
+	static RandomNorm *mDoesReproduce;
 	static const int mEndFertility;
 	static const int mFertilityTime;
 	static const QColor mWomanColor;

@@ -10,7 +10,7 @@ class Children : public HumanSpecifier
 {
 public:
 	Children();
-	Children(Woman * mother);
+	Children(Woman * mother,Human * humanLink);
 	~Children();
 
 	void advance(int phase) override;
@@ -19,11 +19,13 @@ public:
 	static int AgeEnd();
 	void LosingMother();
 	Woman * Mother();
+	void setMother(Woman * mother);
 
 
 
 private:
 	Woman * mMother;
+	Human * mHumanLink; //To have all the info of the human the humanSpecifier is attached to
 
 	static RandomIntUnif * mDistribution;
 	static int mBegin;

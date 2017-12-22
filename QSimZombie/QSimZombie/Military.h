@@ -15,8 +15,8 @@ public:
 
 	~Military();
 
-	void advance(int phase) override;
-	void advance(int phase, int const index) override;
+	Human::returnAdvance advance(int phase) override;
+	Human::returnAdvance advance(int phase, int const index) override;
 	bool Kill(Zombie * zombie);
 	void fightZombi(Zombie *zombie, int const index);
 	static int AgeBegin();

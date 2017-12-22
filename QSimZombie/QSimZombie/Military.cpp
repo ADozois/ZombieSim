@@ -32,11 +32,11 @@ Military::~Military()
 }
 
 
-void Military::advance(int phase, int const index)
+Human::returnAdvance Military::advance(int phase, int const index)
 {
 	if (mHumanLink->IsDead())
 	{
-		mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);
+		mHumanLink->CurrentEnvironnement()->addDeathHumanoid(index);		
 
 	}
 	else
@@ -46,47 +46,46 @@ void Military::advance(int phase, int const index)
 		{
 			fightZombi(mHumanLink->CurrentEnvironnement()->getClosestZombie(index),index);
 		}
-		else if (mHumanLink->mIsTurning) {
+		else if (mHumanLink->isTurning()) {
 			//On est en train de tourner et on continue donc a faire le tournant pré-déterminé
-			mMovementDirection = mTurningDirection[mTurningAtPosition];
-			++mTurningAtPosition;
-			moveInDirection(movementSpeed::run);
-			if (mTurningAtPosition > mNumberOfTurningDirection)
-			{
-				mIsTurning = false;
-			}
+			mHumanLink->makeTurn();
 		}
-		else if (mHumanLink->CurrentEnvironnement()->getDistanceToClosestZombie(index) <= mViewRaySq) {
-			//Zombi est visible, court dans le sens inverse					
+		else if (mHumanLink->CurrentEnvironnement()->getDistanceToClosestZombie(index) <= mHumanLink->viewRaysq()) {
+			//Zombi est visible, dependant de l'energi du militaire, il court vers ou a l'oposer du zombi				
 			QPointF zombiPos = mHumanLink->CurrentEnvironnement()->getClosestZombiPos(index);
-			setDirectionFrom(zombiPos);
-			moveInDirection(movementSpeed::run);
+			if (mHumanLink->Energy() < 50)
+			{
+				mHumanLink->setDirectionFrom(zombiPos);
+				mHumanLink->moveInDirection(Human::movementSpeed::run);
+			}
+			else
+			{
+				mHumanLink->setDirectionTo(zombiPos);
+				mHumanLink->moveInDirection(Human::movementSpeed::run);
+			}
+			
 		}
-		else if (mHumanLink->CurrentEnvironnement()->getDistanceToclosestHuman(index) <= mEatingRange) {
+		else if (mHumanLink->CurrentEnvironnement()->getDistanceToclosestHuman(index) <= mHumanLink->eatingRange()) {
 			//Si très près d'un autre humain, transmission de virus et s'éloigne de lui en marchant
-			VirusTransmission();
+			mHumanLink->transmitVirus(index);
 			QPointF humanPos = mHumanLink->CurrentEnvironnement()->getClosestHumanPos(index);
-			setDirectionFrom(humanPos);
-			moveInDirection(movementSpeed::walk);
-		}
-		else if (mHumanLink->CurrentEnvironnement()->getDistanceToclosestHuman(index) <= mViewRaySq) {
-			//Si humain visible, marche vers lui
-			QPointF humanPos = mHumanLink->CurrentEnvironnement()->getClosestHumanPos(index);
-			setDirectionTo(humanPos);
-			moveInDirection(movementSpeed::walk);
+			mHumanLink->setDirectionFrom(humanPos);
+			mHumanLink->moveInDirection(Human::movementSpeed::walk);
 		}
 		else {
-			//Si humain et zombi trop loin pour les voir, marche dans la direction qu'il allait déjà
-			moveInDirection(movementSpeed::walk);
+			// marche dans la direction qu'il allait déjà
+			mHumanLink->moveInDirection(Human::movementSpeed::walk);
 		}
 		//L'humain viellit d'un tic (mois)
 	mHumanLink->gainAge();
 	}
+
+	return Human::returnAdvance::noAction;
 }
 
-void Military::advance(int phase)
+Human::returnAdvance Military::advance(int phase)
 {
-	advance(phase, 0);
+	return advance(phase, 0);
 }
 
 

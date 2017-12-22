@@ -318,7 +318,7 @@ void Human::CreateMilitary()
 	}
 	else
 	{
-		mSpecifier = new Military();
+		mSpecifier = new Military(this);
 	}
 }
 

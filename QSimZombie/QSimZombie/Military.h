@@ -9,16 +9,21 @@ class RandomIntUnif;
 class Military : public HumanSpecifier
 {
 public:
+
 	Military();
+	Military(Human *humanLink);
+
 	~Military();
 
 	void advance(int phase) override;
-	void advance(int phase, int index) override;
+	void advance(int phase, int const index) override;
 	bool Kill(Zombie * zombie);
+	void fightZombi(Zombie *zombie, int const index);
 	static int AgeBegin();
 	static int AgeEnd();
 
 private:
+	Human * mHumanLink;
 	static RandomIntUnif * mKillGenerator;
 	static int mKillTreshold;
 
@@ -26,6 +31,7 @@ private:
 	static const int mEndDist;
 	static const int mAgeBeginService;
 	static const int mAgeEndService;
+	static const int mFightEnergyLost;
 
 };
 

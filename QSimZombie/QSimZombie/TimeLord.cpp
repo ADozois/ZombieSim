@@ -6,8 +6,7 @@
 
 
 TimeLord::TimeLord()
-	:QObject(nullptr),
-	mMonde{nullptr}
+	:mMonde{nullptr}
 {
 	mTimer = new QTimer();
 	mVue = new QGraphicsView();

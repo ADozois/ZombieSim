@@ -43,7 +43,7 @@ QHumanoid::QHumanoid(double x, double y, Environnement *currentEnvironnement, hu
 	mPenColor{ mContourColor },
 	mIsTurning{ false }
 {
-
+	mPainter = new QPainter;
 	mRunSpeed = abs(RandomNorm::Generate(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mRayDev));
 	mViewRay = abs(RandomNorm::Generate(ParamSim::ViewRay(), ParamSim::ViewRay()*mRunDev));
 	mWalkSpeed = abs(RandomNorm::Generate(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mWalkDev));

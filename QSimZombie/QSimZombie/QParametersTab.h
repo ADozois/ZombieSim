@@ -28,10 +28,14 @@ public slots:
 
 	void updateParameters();
 
+protected slots:
+	void showAboutSimulation();
+
 protected:
 
 
 	QPushButton * mValidateButton;
+	QPushButton * mAboutButton;
 
 	//Layouts
 	QHBoxLayout *mMainLayout;

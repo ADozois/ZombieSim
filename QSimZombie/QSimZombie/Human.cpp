@@ -193,7 +193,7 @@ void Human::CreateVirus(double fatherVirusStrenght)
 		//On détermine combien de tic le virus enlèvera à l'humain
 		//mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge-1);
 
-		mDeathAge -= RandomIntUnif::Generate(1, this->mDeathAge - this->mAge - 1);
+		mDeathAge -= RandomIntUnif::Generate(1, this->mDeathAge - this->mAge + 1);
 		mVirus = new Virus(fatherVirusStrenght);
 	}
 }
@@ -204,7 +204,7 @@ void Human::CreateVirus()
 	{
 		//On détermine combien de tic le virus enlèvera à l'humain
 		//mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge - 1);
-		mDeathAge -= RandomIntUnif::Generate(1, this->mDeathAge - this->mAge - 1);
+		mDeathAge -= RandomIntUnif::Generate(1, this->mDeathAge - this->mAge + 1);
 		mVirus = new Virus();
 	}
 }

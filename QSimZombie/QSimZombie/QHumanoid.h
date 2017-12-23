@@ -84,10 +84,6 @@ protected:
 	
 
 private:
-	RandomNorm *mRunGenerator;
-	RandomNorm *mWalkGenerator;
-	RandomNorm *mRayGenerator;
-	RandomIntUnif *mNameGenerator;
 
 	static const QList<QString> mNameList;
 	static const double mWalkDev;

@@ -9,8 +9,8 @@
 
 
 const double Environnement::mDensityRadius{ 200 };
-const int Environnement::mProbBegin{ 0 };
-const int Environnement::mProbEnd{ 100 };
+const int Environnement::mProbBegin{ 216 };
+const int Environnement::mProbEnd{ 1200 };
 
 Environnement::Environnement(ParamSim *parameters)
 	:mMeanPeopleDispertion{ 0 },

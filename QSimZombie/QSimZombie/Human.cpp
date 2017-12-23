@@ -8,9 +8,8 @@
 #include <QPainter>
 
 
-const double Human::mResistanceMean{50.0};
+
 const double Human::mResistanceDeviation{0.2};
-const double Human::mDeathAgeMean{960};
 const double Human::mDeathAgeDeviation{0.3};
 const QColor Human::mHumanColor{ 241, 140, 135 };
 
@@ -20,9 +19,6 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mAge{age},
 	mSpecifier{nullptr},
 	mVirus{nullptr},
-	mResistanceGenerator{ nullptr },
-	mDeathAgeGenerator{ nullptr },
-	mVirusKillingSpeed{ nullptr },
 	mWillBeocmeMilitary{false}
 {
 	BaseHumanInit();
@@ -42,9 +38,6 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
-	mResistanceGenerator{ nullptr },
-	mDeathAgeGenerator{ nullptr },
-	mVirusKillingSpeed{ nullptr },
 	mWillBeocmeMilitary{ becomeMilitary }
 {
 	BaseHumanInit();
@@ -61,9 +54,6 @@ Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideTy
 	mAge{ 0 },
 	mSpecifier{ nullptr },
 	mVirus{ nullptr },
-	mResistanceGenerator{ nullptr },
-	mDeathAgeGenerator{ nullptr },
-	mVirusKillingSpeed{ nullptr },
 	mWillBeocmeMilitary{ humanParameters->isMilitary }
 {
 	BaseHumanInit();
@@ -156,89 +146,7 @@ void Human::advance(int phase)
 {
 	advance(phase, 0);
 }
-//
-//void Human::makeTurn()
-//{
-//	mMovementDirection = mTurningDirection[mTurningAtPosition];
-//	++mTurningAtPosition;
-//	moveInDirection(movementSpeed::run);
-//	if (mTurningAtPosition > mNumberOfTurningDirection)
-//	{
-//		mIsTurning = false;
-//	}
-//
-//}
-//
-//void Human::moveInDirection(movementSpeed movementSpeed)
-//{
-//	if (movementSpeed == movementSpeed::run)
-//	{
-//		if (mEnergy)
-//		{
-//			QPointF newPosition(pos().x() + mMovementDirection.x()*mRunSpeed, pos().y() + mMovementDirection.y()*mRunSpeed);
-//			checkForWalls(newPosition,mRunSpeed);
-//			this->setPos(newPosition);
-//			ReduceEnergy();
-//		}
-//		else
-//		{
-//			QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
-//			checkForWalls(newPosition,mWalkSpeed);
-//			this->setPos(newPosition);
-//		}
-//	}
-//	else {
-//		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
-//		checkForWalls(newPosition,mWalkSpeed);
-//		this->setPos(newPosition);
-//		AddEnergy();
-//	}
-//}
-//
-//void Human::checkForWalls(QPointF &newPosition,qreal movementSpeed)
-//{
-//	//Si on tourne déjà, on continue dans les direction de tournant donné
-//	if (!mIsTurning)
-//	{
-//		//Si on s'en va dans un mur, on ajuste la direction et on calcul les direction a prendre pour faire le tournant au complet
-//		if ((newPosition.x() < mSizeHumanoid * 2) || (newPosition.x() > ParamSim::SceneWidth() - (mSizeHumanoid * 2)) ||
-//			(newPosition.y() < mSizeHumanoid*2) || (newPosition.y() > ParamSim::SceneHeight()-(mSizeHumanoid*2)))
-//		{
-//			mIsTurning = true;
-//			//On trouve l'angle de mouvement actuel
-//			qreal directionAngle = atan(mMovementDirection.y() / mMovementDirection.x());
-//			for (int i{ 0 }; i < mNumberOfTurningDirection; ++i)
-//			{
-//				qreal newAngle = directionAngle + (mRotationAngle / mNumberOfTurningDirection);
-//				QVector2D newDirection(cos(newAngle), sin(newAngle));
-//				mTurningDirection[i] = newDirection;
-//			}
-//			mTurningAtPosition = 1;
-//			newPosition = QPointF(pos().x() + mTurningDirection[0].x()*movementSpeed, pos().y() + mTurningDirection[0].y()*movementSpeed);
-//			mMovementDirection = mTurningDirection[0];
-//		}
-//	}
-//}
-//
-//void Human::setDirectionTo(QPointF positionTo)
-//{
-//	//We set the direction of the entity going to that entity
-//	qreal movementX = ( positionTo.x()- pos().x());
-//	qreal movementY = ( positionTo.y()- pos().y());
-//	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
-//	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
-//
-//}
-//
-//void Human::setDirectionFrom(QPointF positionFrom)
-//{
-//	//We set the direction of the entity going away from that point
-//	qreal movementX = (pos().x() - positionFrom.x());
-//	qreal movementY = (pos().y() - positionFrom.y());
-//	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
-//	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
-//
-//}
+
 
 bool Human::IsDead()
 {
@@ -283,8 +191,9 @@ void Human::CreateVirus(double fatherVirusStrenght)
 	if (!mVirus)
 	{
 		//On détermine combien de tic le virus enlèvera à l'humain
-		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge-1);
-		mDeathAge -= mVirusKillingSpeed->Generate();
+		//mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge-1);
+
+		mDeathAge -= RandomIntUnif::Generate(1, this->mDeathAge - this->mAge - 1);
 		mVirus = new Virus(fatherVirusStrenght);
 	}
 }
@@ -294,8 +203,8 @@ void Human::CreateVirus()
 	if (!mVirus)
 	{
 		//On détermine combien de tic le virus enlèvera à l'humain
-		mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge - 1);
-		mDeathAge -= mVirusKillingSpeed->Generate();
+		//mVirusKillingSpeed = new RandomIntUnif(1, this->mDeathAge - this->mAge - 1);
+		mDeathAge -= RandomIntUnif::Generate(1, this->mDeathAge - this->mAge - 1);
 		mVirus = new Virus();
 	}
 }
@@ -350,10 +259,12 @@ void Human::BaseHumanInit()
 {
 	mBrushColor = mHumanColor;
 	mPenColor = mHumanColor;
-	mResistanceGenerator = new RandomNorm(mResistanceMean, mResistanceMean*mResistanceDeviation);
-	mDeathAgeGenerator = new RandomNorm(mDeathAgeMean, mDeathAgeMean*mDeathAgeDeviation);
-	mVirusResistance = mResistanceGenerator->Generate();
-	mDeathAge = mDeathAgeGenerator->Generate();
+	mVirusResistance = RandomNorm::Generate(ParamSim::VirusResistance(), ParamSim::VirusResistance()*mResistanceDeviation);
+	mDeathAge = ceil(RandomNorm::Generate(ParamSim::MeanAge(), ParamSim::MeanAge()*mResistanceDeviation));
+	if (mDeathAge < mAge)
+	{
+		mDeathAge = mAge + RandomIntUnif::Generate(0, ceil(ParamSim::MeanAge()*mResistanceDeviation));
+	}
 	QStatSim::IncNbrHumain();
 	QStatSim::IncNbrNomVivant(mName);
 }
@@ -362,10 +273,8 @@ void Human::BaseHumanInit(newHumanParameters *humanParameters)
 {
 	mBrushColor = mHumanColor;
 	mPenColor = mHumanColor;
-	mResistanceGenerator = new RandomNorm(humanParameters->avrgVirusResistance, humanParameters->avrgVirusResistance*mResistanceDeviation);
-	mDeathAgeGenerator = new RandomNorm(humanParameters->avrgDeathAge, humanParameters->avrgDeathAge*mDeathAgeDeviation);
-	mVirusResistance = abs(mResistanceGenerator->Generate());
-	mDeathAge = abs(mDeathAgeGenerator->Generate());
+	mVirusResistance =  abs(RandomNorm::Generate(humanParameters->avrgVirusResistance, humanParameters->avrgVirusResistance*mResistanceDeviation));
+	mDeathAge = abs(ceil(RandomNorm::Generate(humanParameters->avrgDeathAge, humanParameters->avrgDeathAge*mResistanceDeviation)));
 	QStatSim::IncNbrHumain();
 	QStatSim::IncNbrNomVivant(mName);
 

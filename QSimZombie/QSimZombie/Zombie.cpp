@@ -6,7 +6,6 @@
 RandomIntUnif * Zombie::mDeathGenerator{nullptr};
 const int Zombie::mBegin{0};
 const int Zombie::mEnd{100};
-const int Zombie::mAttackThreshold{5};
 
 
 Zombie::Zombie(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem * parent)

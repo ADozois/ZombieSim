@@ -23,31 +23,3 @@ double Virus::Strenght()
 {
 	return mStrenght;
 }
-//
-//bool Virus::IsBecomingZombit()
-//{
-//	if (mTicToZombie <= mTimeZombie)
-//	{
-//		return true;
-//	}
-//	return false;
-//}
-//
-//void Virus::DecTimeRemaining()
-//{
-//	mTicToZombie--;
-//}
-//
-//void Virus::DecTimeRemaining(int decrement)
-//{
-//	mTicToZombie -= decrement;
-//}
-//
-//bool Virus::WillInfect(int humanStrenght)
-//{
-//	if (mStrenght > humanStrenght)
-//	{
-//		return true;
-//	}
-//	return false;
-//}

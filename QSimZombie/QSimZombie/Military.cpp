@@ -121,13 +121,6 @@ void Military::fightZombi(Zombie *zombie, int const index)
 }
 
 
-bool Military::Kill(Zombie * zombie)
-{
-	if (mKillGenerator->Generate() >= mHumanLink->Energy()) {
-		return false;
-	}
-	return true;
-}
 
 int Military::AgeBegin()
 {

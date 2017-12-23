@@ -24,8 +24,7 @@ public:
 	QPushButton *getValidateButton() { return mValidateButton; }
 
 
-	public slots:
-
+public slots:
 
 	void updateParameters();
 

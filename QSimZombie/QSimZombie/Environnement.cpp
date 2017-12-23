@@ -24,10 +24,6 @@ Environnement::Environnement(ParamSim *parameters)
 	mHeightDispertion = new RandomIntUnif(0, ParamSim::SceneHeight());
 	mWidthDispertion = new RandomIntUnif(0, ParamSim::SceneWidth());
 
-	initializeWorld();
-
-
-
 	//We create the initial scene with the parameters
 
 	//A partir du nombre de ville, on détermine le nombre d,individus dans chaque ville (sépare également)

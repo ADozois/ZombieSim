@@ -7,13 +7,13 @@
 #include <QObject>
 
 TimeLord::TimeLord()
+	:mMonde{nullptr}
 {
 	mTimer = new QTimer();
 	mVue = new QGraphicsView();
 	mParameters = new ParamSim();
-	mMonde = new Environnement(mParameters);
+	
 
-	QObject::connect(mTimer, &QTimer::timeout, mMonde, &Environnement::advance);
 
 }
 
@@ -44,4 +44,11 @@ void TimeLord::step() {
 
 	//QTimer::singleShot(mDefaultTime, mMonde->scene(), &Environnement::advance);
 
+}
+
+void TimeLord::createWorld()
+{
+	mMonde = new Environnement(mParameters);
+	mMonde->initializeWorld();
+	QObject::connect(mTimer, &QTimer::timeout, mMonde, &Environnement::advance);
 }

@@ -1,5 +1,6 @@
-﻿#include "QParametersTab.h"
+#include "QParametersTab.h"
 #include "ParamSim.h"
+#include "QMessageBox"
 
 
 //QStrings for parameters
@@ -18,12 +19,12 @@ const QString QParametersTab::mReproductionProbabilityString{ "Reproduction Prob
 const QString QParametersTab::mPregnancyDurationString{ "Pregnancy Duration" };
 const QString QParametersTab::mNewMilitaryProbabilityString{ "New Military Probability" };
 const QString QParametersTab::mWomanProbabilityString{ "Woman Probability" };
-
-//Scene Parameter Strings
-const QString QParametersTab::mSceneHeightString{ "Scene Height" };
-const QString QParametersTab::mSceneWidthString{ "Scene Width" };
-const QString QParametersTab::mViewHeightString{ "View Height" };
-const QString QParametersTab::mViewWidthString{ "View Width" };
+//
+////Scene Parameter Strings
+//const QString QParametersTab::mSceneHeightString{ "Scene Height" };
+//const QString QParametersTab::mSceneWidthString{ "Scene Width" };
+//const QString QParametersTab::mViewHeightString{ "View Height" };
+//const QString QParametersTab::mViewWidthString{ "View Width" };
 
 //Environment Parameter Strings
 const QString QParametersTab::mInfectionProbabilityString{ "Infection Probability" };
@@ -73,6 +74,9 @@ QParametersTab::QParametersTab(QWidget *parent)
 
 	//Add generate button
 	mValidateButton = new QPushButton("Validate");
+	//add about button
+	mAboutButton = new QPushButton("About this Simulation");
+	connect(mAboutButton, &QPushButton::clicked, this, &QParametersTab::showAboutSimulation);
 	//mValidate->set
 	mMainLayout2->addLayout(mValidateLayout);
 
@@ -84,13 +88,13 @@ QParametersTab::QParametersTab(QWidget *parent)
 
 
 	mRightLayout->addWidget(mEnvironmentCarGB);
-	mRightLayout->addWidget(mSceneParamGB);
+	mRightLayout->addWidget(mAboutButton);
 
 	//Each GroupBox has its Layout
 	mEntityQtyGB->setLayout(mEntityQtyGBL);
 	mEntityCarGB->setLayout(mEntityCarGBL);
 	mEnvironmentCarGB->setLayout(mEnvironmentCarGBL);
-	mSceneParamGB->setLayout(mSceneParamGBL);
+	//mSceneParamGB->setLayout(mSceneParamGBL);
 
 	//Parameter Spinboxes and Sliders
 	////Entity Count
@@ -148,22 +152,22 @@ QParametersTab::QParametersTab(QWidget *parent)
 	/*mProbSpeed = new QSliderAffiche(Qt::Horizontal), mProbSpeed->setToolTip("Set the speed variable");
 	mProbSpeed->setRange(20, 80);*/
 
-	//Scene Parameters
-	mSceneHeight = new QSliderAffiche(Qt::Horizontal), mSceneHeight->setToolTip("Set the Scene Height");
-	mSceneHeight->setRange(500, 5000);
-	mSceneHeight->setValue(1000);
+	////Scene Parameters
+	//mSceneHeight = new QSliderAffiche(Qt::Horizontal), mSceneHeight->setToolTip("Set the Scene Height");
+	//mSceneHeight->setRange(500, 5000);
+	//mSceneHeight->setValue(1000);
 
-	mSceneWidth = new QSliderAffiche(Qt::Horizontal), mSceneWidth->setToolTip("Set the Scene Width");
-	mSceneWidth->setRange(500, 5000);
-	mSceneWidth->setValue(1000);
+	//mSceneWidth = new QSliderAffiche(Qt::Horizontal), mSceneWidth->setToolTip("Set the Scene Width");
+	//mSceneWidth->setRange(500, 5000);
+	//mSceneWidth->setValue(1000);
 
-	mViewHeight = new QSliderAffiche(Qt::Horizontal), mViewHeight->setToolTip("Set the View Height");
-	mViewHeight->setRange(500, 5000);
-	mViewHeight->setValue(1000);
+	//mViewHeight = new QSliderAffiche(Qt::Horizontal), mViewHeight->setToolTip("Set the View Height");
+	//mViewHeight->setRange(500, 5000);
+	//mViewHeight->setValue(1000);
 
-	mViewWidth = new QSliderAffiche(Qt::Horizontal), mViewWidth->setToolTip("Set the View Width");
-	mViewWidth->setRange(500, 5000);
-	mViewWidth->setValue(1000);
+	//mViewWidth = new QSliderAffiche(Qt::Horizontal), mViewWidth->setToolTip("Set the View Width");
+	//mViewWidth->setRange(500, 5000);
+	//mViewWidth->setValue(1000);
 
 	//Environment parameters
 	mInfectionProbability = new QSliderAffiche(Qt::Horizontal), mInfectionProbability->setToolTip("Set the Infection Probability");
@@ -198,10 +202,10 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mEntityQtyGBL->addRow(mCityCountString, mCityCount);
 
 	//Scene Parameters
-	mSceneParamGBL->addRow(mSceneHeightString, mSceneHeight);
+	/*mSceneParamGBL->addRow(mSceneHeightString, mSceneHeight);
 	mSceneParamGBL->addRow(mSceneWidthString, mSceneWidth);
 	mSceneParamGBL->addRow(mViewHeightString, mViewHeight);
-	mSceneParamGBL->addRow(mViewWidthString, mViewWidth);
+	mSceneParamGBL->addRow(mViewWidthString, mViewWidth);*/
 
 	//Entity Caracteristics
 	mEntityCarGBL->addRow(mAverageAgeString, mAverageAge);
@@ -251,3 +255,23 @@ void QParametersTab::updateParameters()
 
 }
 
+void QParametersTab::showAboutSimulation()
+{
+	QString titreSimulationWindow{ "À propos de ZombiSimulation" };
+	QString messageAboutSim{ R"-%-(Cette simulation permet de voir les effets d'un virus zombitisant sur une population.
+Dans la simulation, les hommes sont en bleu, les femmes sont en rose, les militaires sont en vert, les enfants sont en jaune et les zombis sont en noir.
+Une personne infectée aura un contour noir.
+
+Ce programme est réalisé par:
+	-Antoine Dozois
+	-Guillaume Chabot-Nobert
+	-Olivier Carrier
+
+Dans le cadre du cours:
+	-GPA789 - Analyse et conception orientées objet
+	-Laboratoire 3
+
+Version 1.0)-%-" };
+
+	QMessageBox::about(this, titreSimulationWindow, messageAboutSim);
+}

@@ -127,7 +127,7 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mAverageSpeed = new QSliderAffiche(Qt::Horizontal), mAverageSpeed->setToolTip("Set the initial Average Speed");
 	mAverageSpeed->setRange(10, 50);
 	mAverageVirusResistance = new QSliderAffiche(Qt::Horizontal), mAverageVirusResistance->setToolTip("Set the initial Average Virus Resistance");
-	mAverageSpeed->setRange(10, 100);
+	mAverageVirusResistance->setRange(10, 100);
 	mReproductionProbability = new QSliderAffiche(Qt::Horizontal), mReproductionProbability->setToolTip("Set the initial Reproduction Probability");
 	mReproductionProbability->setRange(20, 80);
 	mPregnancyDuration = new QSliderAffiche(Qt::Horizontal), mPregnancyDuration->setToolTip("Set the initial Pregnancy Duration");

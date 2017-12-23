@@ -136,6 +136,20 @@ void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance
 
 }
 
+void Environnement::prepWorld()
+{
+	QList<QGraphicsItem *> entity = mScene->items();
+	if (entity.size() > 0)
+	{
+		for (auto & item: entity)
+		{
+			mScene->removeItem(item);
+			delete[] item;
+			item = nullptr;
+		}
+	}
+}
+
 
 void Environnement::addDeathHumanoid(int index) 
 { 

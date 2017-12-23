@@ -23,7 +23,7 @@ const double QHumanoid::mRectW{ 10.0 };
 const double QHumanoid::mPenWidth{ 2.0 };
 const QColor QHumanoid::mHumanoidColor{ Qt::black };
 const QColor QHumanoid::mContourColor{ Qt::black };
-const int QHumanoid::mSizeHumanoid{ 10 };
+const int QHumanoid::mSizeHumanoid{ 5 };
 const double QHumanoid::mOpacityHumanoid{ 0.60 };
 const qreal QHumanoid::mEatingRange{ pow(static_cast<qreal>(mSizeHumanoid),2) };
 

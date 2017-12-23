@@ -144,6 +144,6 @@ void QSimulationTab::updateTicLabel() {
 }
 
 void QSimulationTab::setWorld(Environnement * monde) {
-	monde->setScene();
+	//monde->setScene();
 	mView->setScene(monde->scene());
 }

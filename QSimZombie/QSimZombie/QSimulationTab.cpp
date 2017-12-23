@@ -125,6 +125,11 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mMainLayout->addLayout(mLeftLayout);
 	mMainLayout->addLayout(mRightLayout);
 
+	//Connection for buttons
+	connect(mPlayButton, &QPushButton::clicked, mTimeLord, &TimeLord::run);
+	connect(mPauseButton, &QPushButton::clicked, mTimeLord, &TimeLord::pause);
+	connect(mStepButton, &QPushButton::clicked, mTimeLord, &TimeLord::step);
+	connect(mStopButton, &QPushButton::clicked, mTimeLord, &TimeLord::stop);
 
 
 

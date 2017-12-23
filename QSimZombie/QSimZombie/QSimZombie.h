@@ -27,11 +27,21 @@ public:
 	QSimZombie(QWidget *parent = Q_NULLPTR);
 
 public slots:
+<<<<<<< HEAD
 
 	
 	void activateParametersTab();
 	void disableParametersTab();
 
+=======
+	void setupSim();
+	void activateParametersTab();
+	void disableParametersTab();
+
+	void activateStatTab();
+	void disableStatTab();
+
+>>>>>>> master
 private:
 	Ui::QSimZombieClass ui;
 	QMenuBar *mMenuBar;
@@ -42,9 +52,18 @@ private:
 	QSimulationTab *mSimTab;
 	QStatisticsTab *mStatTab;
 	QParametersTab *mParamTab;
+<<<<<<< HEAD
+=======
+	TimeLord * mLord;
+>>>>>>> master
 
 	int mSimTabIndex{ 0 };
 	int mStatTabIndex{ 1 };
 	int mParamTabIndex{ 2 };
+<<<<<<< HEAD
+=======
+
+	void setupSimTab();
+>>>>>>> master
 };
-#endif //Q_SIM_ZOMBIE_H
+#endif //Q_SIM_ZOMBIE_H	

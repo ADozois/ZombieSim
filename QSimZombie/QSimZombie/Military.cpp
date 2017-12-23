@@ -61,12 +61,12 @@ HumanSpecifier::returnAdvance Military::advance(int phase, int const index)
 			if (mHumanLink->Energy() < 50)
 			{
 				mHumanLink->setDirectionFrom(zombiPos);
-				mHumanLink->moveInDirection(Human::movementSpeed::run);
+				mHumanLink->moveInDirection(Human::movementSpeed::run,1);
 			}
 			else
 			{
 				mHumanLink->setDirectionTo(zombiPos);
-				mHumanLink->moveInDirection(Human::movementSpeed::run);
+				mHumanLink->moveInDirection(Human::movementSpeed::run,1);
 			}
 			
 		}
@@ -75,11 +75,11 @@ HumanSpecifier::returnAdvance Military::advance(int phase, int const index)
 			mHumanLink->transmitVirus(index);
 			QPointF humanPos = mHumanLink->CurrentEnvironnement()->getClosestHumanPos(index);
 			mHumanLink->setDirectionFrom(humanPos);
-			mHumanLink->moveInDirection(Human::movementSpeed::walk);
+			mHumanLink->moveInDirection(Human::movementSpeed::walk,1);
 		}
 		else {
 			// marche dans la direction qu'il allait déjà
-			mHumanLink->moveInDirection(Human::movementSpeed::walk);
+			mHumanLink->moveInDirection(Human::movementSpeed::walk,1);
 		}
 		//L'humain viellit d'un tic (mois)
 	mHumanLink->gainAge();
@@ -121,13 +121,6 @@ void Military::fightZombi(Zombie *zombie, int const index)
 }
 
 
-bool Military::Kill(Zombie * zombie)
-{
-	if (mKillGenerator->Generate() >= mHumanLink->Energy()) {
-		return false;
-	}
-	return true;
-}
 
 int Military::AgeBegin()
 {

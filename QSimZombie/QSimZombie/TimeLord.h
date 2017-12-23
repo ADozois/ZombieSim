@@ -1,15 +1,16 @@
 #ifndef TIME_LORD_H
 #define TIME_LORD_H
 
-#include <qwidget.h>
+#include <QWidget>
 
 class QTimer;
 class ParamSim;
 class Environnement;
 class QGraphicsView;
 
-class TimeLord {
-
+class TimeLord : public QWidget
+{
+	Q_OBJECT
 
 private:
 	QTimer *mTimer;
@@ -17,11 +18,16 @@ private:
 	Environnement *mMonde;
 	ParamSim *mParameters;
 
-	static const int mDefaultTime{ 1000 };
+	static const int mDefaultTime{ 100 };
 
 public:
-	//TimeLord(QWidget *parent = Q_NULLPTR);
-	TimeLord();
+	TimeLord();	
+	QTimer * Timer() { return mTimer; }
+	void createWorld();
+	Environnement * Monde() { return mMonde; }
+
+public slots:
+
 	void run();
 	void pause();
 	void stop();

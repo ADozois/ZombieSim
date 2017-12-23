@@ -6,12 +6,12 @@
 RandomIntUnif * Zombie::mDeathGenerator{nullptr};
 const int Zombie::mBegin{0};
 const int Zombie::mEnd{100};
-const int Zombie::mAttackThreshold{5};
 
 
 Zombie::Zombie(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem * parent)
 	: QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, parent)
 {
+	mName = "JC";
 	mDeathGenerator = new RandomIntUnif(mBegin, mEnd);
 	QStatSim::IncNbrZombie();
 }
@@ -36,21 +36,21 @@ void Zombie::advance(int phase, int const index)
 		{
 			QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 			setDirectionTo(humanPos);
-			moveInDirection(movementSpeed::run);
+			moveInDirection(movementSpeed::run,1);
 
 		}
 		else if (mEnvironnement->getDistanceToClosestZombie(index) <= mEatingRange)
 		{
 			QPointF zombiPos = mEnvironnement->getClosestZombiPos(index);
 			setDirectionFrom(zombiPos);
-			moveInDirection(movementSpeed::walk);
+			moveInDirection(movementSpeed::walk,1);
 
 		}
 		else
 		{
 			//If no human are in sight, the zombi simply walk to the most populated are
 			setDirectionTo(mEnvironnement->maxDensityPosition());
-			moveInDirection(movementSpeed::walk);
+			moveInDirection(movementSpeed::walk,1);
 		}
 		//We reduce energy twice so the zombi looses energy while walking and also more energy when running
 		ReduceEnergy();

@@ -5,6 +5,7 @@
 #include <Qlist>
 #include "infoForAdvance.h"
 #include <QObject>
+#include <algorithm>
 
 class ParamSim;
 class RandomNorm;
@@ -32,17 +33,17 @@ private:
 
 	void CreateCity(int nbrPeople);
 	int FindPeoplePerCity(int totalHuman, int nbrCity);
-	void initializeWorld();
 
 	static const int mProbBegin;
 	static const int mProbEnd;
 
 	void getInformation(QHumanoid * comparedHumanoide, qreal distance, infoForAdvance &infoToFill);
-	
+
 	static const double mDensityRadius;
 public:
 	Environnement(ParamSim *parameters);
 	~Environnement();
+	void initializeWorld();
 	QGraphicsScene *scene() { return mScene; }
 	Zombie* getClosestZombie(int index) { return mAdvanceInfoList[index]->closestZombie; }
 	Human* getClosestHuman(int index) { return mAdvanceInfoList[index]->closestHuman; }
@@ -53,6 +54,8 @@ public:
 	int getHumainDensity(int index) { return mAdvanceInfoList[index]->numberOfCloseHumain; }
 	QPointF maxDensityPosition() { return mMaxDensityPosition; }
 	void addDeathHumanoid(int index);
+	void prepWorld();
+	void setScene();
 
 public slots:
 	void advance();

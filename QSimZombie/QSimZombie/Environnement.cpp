@@ -8,25 +8,19 @@
 #include "Woman.h"
 
 
-const double Environnement::mDensityRadius{ 200 };
+const double Environnement::mDensityRadius{ 50 };
 const int Environnement::mProbBegin{ 0 };
 const int Environnement::mProbEnd{ 100 };
 
 Environnement::Environnement(ParamSim *parameters)
 	:mMeanPeopleDispertion{ 0 },
-	mDevPeopleDispertion{ 10 },
+	mDevPeopleDispertion{ 50 },
 	mMaxDensityPosition{0,0},
 	mMaxDensityValue{ 0 }
 {
 	mScene = new QGraphicsScene(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
 	mProbabilityType = new RandomIntUnif(mProbBegin, mProbEnd);
-	mHeightDispertion = new RandomIntUnif(0, ParamSim::SceneHeight());
-	mWidthDispertion = new RandomIntUnif(0, ParamSim::SceneWidth());
-
-	initializeWorld();
-
-
 
 	//We create the initial scene with the parameters
 
@@ -140,6 +134,25 @@ void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance
 
 }
 
+void Environnement::prepWorld()
+{
+	QList<QGraphicsItem *> entity = mScene->items();
+	if (entity.size() > 0)
+	{
+		for (auto & item: entity)
+		{
+			mScene->removeItem(item);
+			delete[] item;
+			item = nullptr;
+		}
+	}
+}
+
+void Environnement::setScene()
+{
+	mScene->setSceneRect(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
+}
+
 
 void Environnement::addDeathHumanoid(int index) 
 { 
@@ -151,15 +164,13 @@ void Environnement::addDeathHumanoid(int index)
 Environnement::~Environnement()
 {
 	delete mPeopleDispertion;
-	delete mHeightDispertion;
-	delete mWidthDispertion;
 }
 
 inline void Environnement::CreateCity(int nbrPeople)
 {
 	QHumanoid * newItem{ nullptr };
-	int x{ mWidthDispertion->Generate() };
-	int y{ mHeightDispertion->Generate() };
+	int x{ RandomIntUnif::Generate(0, ParamSim::SceneWidth()) };
+	int y{ RandomIntUnif::Generate(0, ParamSim::SceneHeight()) };
 	bool virus{ false };
 	bool military{ false };
 	int age{ 0 };
@@ -173,7 +184,7 @@ inline void Environnement::CreateCity(int nbrPeople)
 		{
 			military = true;
 		}
-		age = mProbabilityType->Generate();
+		age = RandomIntUnif::Generate(216, 1200);
 		if (mProbabilityType->Generate() <= ParamSim::ProbWoman())
 		{
 			newItem = new Woman(x + mPeopleDispertion->Generate(), y + mPeopleDispertion->Generate(),this,QHumanoid::humanoideType::woman, age, military, virus);

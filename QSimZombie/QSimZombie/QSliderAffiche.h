@@ -14,5 +14,9 @@ protected:
 	virtual void sliderChange(SliderChange change);
 };
 
+<<<<<<< HEAD
 #endif // QSliderAffiche_H
 
+=======
+#endif // QSliderAffiche_H
+>>>>>>> master

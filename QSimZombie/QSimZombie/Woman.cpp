@@ -10,7 +10,7 @@ RandomNorm *Woman::mDoesReproduce{ nullptr };
 int Woman::mMaxChildren{ 5 };
 const int Woman::mEndFertility{ 480 }; //Age of end of fertility for the women
 const int Woman::mFertilityTime{ 10 };
-const QColor Woman::mWomanColor{ 242, 229, 135 };
+const QColor Woman::mWomanColor{ 255, 122, 232 };
 
 
 Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infection, QGraphicsItem *parent)
@@ -103,7 +103,7 @@ void Woman::advance(int phase, int const index)
 					//On est en train de tourner et on continue donc a faire le tournant pré-déterminé
 					mMovementDirection = mTurningDirection[mTurningAtPosition];
 					++mTurningAtPosition;
-					moveInDirection(movementSpeed::run);
+					moveInDirection(movementSpeed::run, mEnvironnement->getHumainDensity(index) + 1);
 					if (mTurningAtPosition > mNumberOfTurningDirection)
 					{
 						mIsTurning = false;
@@ -113,7 +113,7 @@ void Woman::advance(int phase, int const index)
 					//Zombi est visible, court dans le sens inverse					
 					QPointF zombiPos = mEnvironnement->getClosestZombiPos(index);
 					setDirectionFrom(zombiPos);
-					moveInDirection(movementSpeed::run);
+					moveInDirection(movementSpeed::run, mEnvironnement->getHumainDensity(index) + 1);
 				}
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mEatingRange) {
 					//Si très près d'un autre humain, transmission de virus et s'éloigne de lui en marchant
@@ -121,17 +121,17 @@ void Woman::advance(int phase, int const index)
 					tryReproduction(index);
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 					setDirectionFrom(humanPos);
-					moveInDirection(movementSpeed::walk);
+					moveInDirection(movementSpeed::walk, mEnvironnement->getHumainDensity(index) + 1);
 				}
 				else if (mEnvironnement->getDistanceToclosestHuman(index) <= mViewRaySq) {
 					//Si humain visible, marche vers lui
 					QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 					setDirectionFrom(humanPos);
-					moveInDirection(movementSpeed::walk);
+					moveInDirection(movementSpeed::walk, mEnvironnement->getHumainDensity(index) + 1);
 				}
 				else {
 					//Si humain et zombi trop loin pour les voir, marche dans la direction qu'il allait déjà
-					moveInDirection(movementSpeed::walk);
+					moveInDirection(movementSpeed::walk, mEnvironnement->getHumainDensity(index) + 1);
 				}
 			}
 			if (mCurrentBaby)

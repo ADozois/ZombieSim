@@ -17,22 +17,39 @@ class ParamSim;
 class QParametersTab : public QWidget {
 
 	Q_OBJECT
-	
+
 public:
 	QParametersTab(QWidget *parent = Q_NULLPTR);
 	
 	QPushButton *getValidateButton() { return mValidateButton; }
 
 
+<<<<<<< HEAD
 public slots:
 
 	
 	void updateParameters();
+=======
+	QPushButton *getValidateButton() { return mValidateButton; }
+
+
+public slots:
+
+	void updateParameters();
+
+protected slots:
+	void showAboutSimulation();
+>>>>>>> master
 
 protected:
 
 
+<<<<<<< HEAD
 	QPushButton *mValidateButton;
+=======
+	QPushButton * mValidateButton;
+	QPushButton * mAboutButton;
+>>>>>>> master
 
 	//Layouts
 	QHBoxLayout *mMainLayout;
@@ -57,19 +74,27 @@ protected:
 	// PARAMETER BUTTONS/SLIDERS
 
 	//Entity quantitites
+<<<<<<< HEAD
 	QSpinBox *mZombieCount;
+=======
+>>>>>>> master
 	QSpinBox *mHumanCount;
 	QSpinBox *mWomanCount;
 	QSpinBox *mMilitaryCount;
 	QSpinBox *mVirusCount;
 	QSpinBox *mCityCount;
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	//Scene Parameters
 	QSliderAffiche *mSceneHeight;
 	QSliderAffiche *mSceneWidth;
 	QSliderAffiche *mViewHeight;
 	QSliderAffiche *mViewWidth;
+<<<<<<< HEAD
 
 	//Entity Caracteristics
 	QSliderAffiche *mAverageAge;
@@ -81,6 +106,19 @@ protected:
 	QSliderAffiche *mProbSpeed;
 
 	
+=======
+
+	//Entity Caracteristics
+	QSliderAffiche *mAverageAge;
+	QSliderAffiche *mAverageSpeed;
+	QSliderAffiche *mReproductionProbability;
+	QSliderAffiche *mPregnancyDuration;
+	QSliderAffiche *mNewMilitaryProbability;
+	QSliderAffiche *mWomanProbability;
+	QSliderAffiche *mProbSpeed;
+
+
+>>>>>>> master
 
 	//Environment Caracteristics
 	QSliderAffiche *mInfectionProbability;
@@ -92,19 +130,23 @@ protected:
 	QSliderAffiche *mRotationAngle;
 
 	//Labels
-//Entity count labels
-	QLabel *mZombieCountLabel;
+	//Entity count labels
 	QLabel *mHumanCountLabel;
 	QLabel *mWomanCountLabel;
 	QLabel *mMilitaryCountLabel;
 	QLabel *mVirusCountLabel;
 
-	static const int entityMinimum{ 1 };
+	static const int entityMinimum{ 10 };
 	static const int entityMaximum{ 500 };
+	static const int mTimeConvert{ 12 };
+	static const int entityMaximumRatio{ 90 };
+	static const int entityMinimumRatio{ 10 };
+	static const int entityMinimumTown{ 1 };
+	static const int entityMaximumTown{ 50 };
 
-									//String
+
+	//String
 	//Entity Quantity QString
-	static const QString mZombieCountString;
 	static const QString mHumanCountString;
 	static const QString mWomanCountString;
 	static const QString mMilitaryCountString;

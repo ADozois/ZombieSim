@@ -187,6 +187,21 @@
     <ClCompile Include="SimLineChart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QSliderAffiche.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QSliderAffiche.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QSliderAffiche.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TimeLord.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TimeLord.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QSimZombie.h">
@@ -217,6 +232,7 @@
     <CustomBuild Include="QSimChart.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+<<<<<<< HEAD
     <ClInclude Include="infoForAdvance.h" />
     <ClInclude Include="QStatSim.h" />
     <ClInclude Include="SimBarChart.h" />
@@ -236,15 +252,20 @@
     <ClInclude Include="Virus.h" />
     <ClInclude Include="Woman.h" />
     <ClInclude Include="Zombie.h" />
+=======
+    <CustomBuild Include="QSliderAffiche.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TimeLord.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
       <ClInclude Include="GeneratedFiles\ui_QSimZombie.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ParamSim.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeLord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QRandom.h">
@@ -294,7 +315,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="newHumanParameters.h">
-	<Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimLineChart.h">
       <Filter>Header Files</Filter>

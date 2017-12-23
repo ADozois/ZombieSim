@@ -31,7 +31,6 @@ public:
 	static double ProbInfection(void) { return mProbInfection; }
 	static double ComssumptionRateEnergieHuman(void) { return mComssumptionRateEnergieHuman; }
 	static double ComssumptionRateEnergieZombie(void) { return mComssumptionRateEnergieZombie; }
-	static int PregnancyTime(void) { return mPregnancyTime; }
 	static double ProbSpeed(void) { return mProbSpeed; }
 
 	static void setNbrZombie(int nbr);

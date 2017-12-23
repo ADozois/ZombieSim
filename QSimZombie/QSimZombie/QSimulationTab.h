@@ -26,6 +26,7 @@ public:
 	QPushButton *getPlayButton() { return mPlayButton; }
 	QPushButton *getStopButton() { return mStopButton; }
 
+<<<<<<< HEAD
 
 
 	QTimer* tim;
@@ -37,16 +38,43 @@ public slots:
 
 protected:
 
+=======
+	void setWorld(Environnement * monde);
+
+
+	
+	public slots:
+
+	void updateTicLabel();
+	void disableStart();
+	void activateStart();
+
+
+
+
+protected:
+
+	QTimer * mTim;
+>>>>>>> master
 	int mTicValue;
 	QString* mTicString;
 
 	TimeLord* mTimeLord;
+<<<<<<< HEAD
 	
 	QLabel* mTicLabel;
 	QLabel* mTicValueLabel;
 	QHBoxLayout* mTicLayout;
 
 	
+=======
+
+	QLabel* mTicLabel;
+	QLabel* mTicValueLabel;
+	QHBoxLayout* mTicLayout;
+	QGraphicsView* mView;
+
+>>>>>>> master
 
 	//Layouts
 	QHBoxLayout *mMainLayout;
@@ -69,7 +97,11 @@ protected:
 
 	//Label
 	QLabel *mIconLabel;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 
 
 };

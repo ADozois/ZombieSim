@@ -5,11 +5,7 @@
 #include "Environnement.h"
 #include "QStatSim.h"
 
-//RandomIntUnif * Children::mDistribution{nullptr};
-////int Children::mBegin{0};
-////int Children::mEnd{100};
-//bool Children::mBecomeMilitary{ false };
-//bool Children::mBecomeWoman{ false };
+
 const int Children::mAgeBeginChildren{ 0 };
 const int Children::mAgeEndChildren{ 215 };
 
@@ -58,7 +54,7 @@ HumanSpecifier::returnAdvance Children::advance(int phase, int index)
 		}
 		else {
 			mHumanLink->setDirectionTo(mMother->pos());
-			mHumanLink->moveInDirection(Human::movementSpeed::walk);
+			mHumanLink->moveInDirection(Human::movementSpeed::walk, mHumanLink->CurrentEnvironnement()->getHumainDensity(index) + 1);
 		}
 		//L'humain viellit d'un tic (mois)
 		mHumanLink->gainAge();

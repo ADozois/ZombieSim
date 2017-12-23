@@ -18,7 +18,6 @@ public:
 
 	HumanSpecifier::returnAdvance advance(int phase) override;
 	HumanSpecifier::returnAdvance advance(int phase, int const index) override;
-	bool Kill(Zombie * zombie);
 	void fightZombi(Zombie *zombie, int const index);
 	static int AgeBegin();
 	static int AgeEnd();

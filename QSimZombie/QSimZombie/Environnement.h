@@ -32,7 +32,6 @@ private:
 
 	void CreateCity(int nbrPeople);
 	int FindPeoplePerCity(int totalHuman, int nbrCity);
-	void initializeWorld();
 
 	static const int mProbBegin;
 	static const int mProbEnd;
@@ -43,6 +42,7 @@ private:
 public:
 	Environnement(ParamSim *parameters);
 	~Environnement();
+	void initializeWorld();
 	QGraphicsScene *scene() { return mScene; }
 	Zombie* getClosestZombie(int index) { return mAdvanceInfoList[index]->closestZombie; }
 	Human* getClosestHuman(int index) { return mAdvanceInfoList[index]->closestHuman; }

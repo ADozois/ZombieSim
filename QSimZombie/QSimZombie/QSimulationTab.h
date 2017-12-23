@@ -26,12 +26,14 @@ public:
 	QPushButton *getPlayButton() { return mPlayButton; }
 	QPushButton *getStopButton() { return mStopButton; }
 
+	void setWorld(Environnement * monde);
 
 
 	
 	public slots:
 
 	void updateTicLabel();
+
 
 
 

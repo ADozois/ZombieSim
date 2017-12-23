@@ -24,8 +24,7 @@ public:
 	QPushButton *getValidateButton() { return mValidateButton; }
 
 
-	public slots:
-
+public slots:
 
 	void updateParameters();
 
@@ -101,6 +100,8 @@ protected:
 
 	static const int entityMinimum{ 1 };
 	static const int entityMaximum{ 500 };
+	static const int mTimeConvert{ 12 };
+
 
 	//String
 	//Entity Quantity QString

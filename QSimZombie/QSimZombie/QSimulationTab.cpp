@@ -6,7 +6,6 @@
 #include "Environnement.h"
 #include "ParamSim.h"
 #include <QTimer>
-#include "TimeLord.h"
 
 
 
@@ -52,15 +51,9 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	/* Simulation View goes in mLeftLayout */
 	//Add simulation graphic view in this layout!*************************
 
+	//QGraphicsView* view = new QGraphicsView;
+	//mLeftLayout->addWidget(view);
 
-	ParamSim *parameters;
-	parameters = new ParamSim();
-
-	Environnement *mMonde;
-	mMonde = new Environnement(parameters);
-
-	QGraphicsView* view = new QGraphicsView;
-	view->setScene(mMonde->scene());
 	mMainLayout->addLayout(mLeftLayout);
 	mMainLayout->setStretchFactor(mLeftLayout, 3); //Make the left layout occupy 3 times as much space as the right layout.
 
@@ -75,7 +68,6 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 												   ////scene->addRect(0, 0, 0.5, 0.5);
 
 
-	mLeftLayout->addWidget(view);
 
 	//connect(mPlayButton,&QPushButton::released, this, &fooo);
 
@@ -85,6 +77,10 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mSimGroupBoxLayout->addWidget(mPauseButton);
 	mSimGroupBoxLayout->addWidget(mStepButton);
 	mSimGroupBoxLayout->addWidget(mStopButton);
+	mPlayButton->setDisabled(true);
+	mPauseButton->setDisabled(true);
+	mStepButton->setDisabled(true);
+	mStopButton->setDisabled(true);
 
 
 
@@ -95,9 +91,6 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	connect(mTim, &QTimer::timeout, this, &QSimulationTab::updateTicLabel);
 
 
-
-
-
 	//Elapsed Tics
 	mTicLabel = new QLabel("Elapsed tics: ");
 	mTicValueLabel = new QLabel("");
@@ -105,16 +98,6 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mTicLayout = new QHBoxLayout;
 	mTicLayout->addWidget(mTicLabel);
 	mTicLayout->addWidget(mTicValueLabel);
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -155,4 +138,10 @@ void QSimulationTab::updateTicLabel() {
 
 	qInfo() << "C++ Style Info Message";
 
+}
+
+void QSimulationTab::setWorld(Environnement * monde) {
+	QGraphicsView* view = new QGraphicsView;
+	view->setScene(monde->scene());
+	mLeftLayout->addWidget(view);
 }

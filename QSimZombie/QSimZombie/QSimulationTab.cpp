@@ -96,7 +96,8 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	//Elapsed Tics
 	mTicLabel = new QLabel("Elapsed tics: ");
-	mTicValueLabel = new QLabel("");
+	mTicValueLabel = new QLabel("0");
+	mTicValue = 0;
 
 	mTicLayout = new QHBoxLayout;
 	mTicLayout->addWidget(mTicLabel);
@@ -127,9 +128,19 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 	//Connection for buttons
 	connect(mPlayButton, &QPushButton::clicked, mTimeLord, &TimeLord::run);
+	connect(mPlayButton, &QPushButton::clicked, mStepButton, &QPushButton::setEnabled);
+	connect(mPlayButton, &QPushButton::clicked, mPauseButton, &QPushButton::setDisabled);
+	connect(mPlayButton, &QPushButton::clicked, mStopButton, &QPushButton::setDisabled);
+
 	connect(mPauseButton, &QPushButton::clicked, mTimeLord, &TimeLord::pause);
+	connect(mPauseButton, &QPushButton::clicked, mStepButton, &QPushButton::setDisabled);
+
 	connect(mStepButton, &QPushButton::clicked, mTimeLord, &TimeLord::step);
+
 	connect(mStopButton, &QPushButton::clicked, mTimeLord, &TimeLord::stop);
+	connect(mStopButton, &QPushButton::clicked, mPlayButton, &QPushButton::setEnabled);
+	connect(mStopButton, &QPushButton::clicked, mStepButton, &QPushButton::setEnabled);
+	connect(mStopButton, &QPushButton::clicked, mPauseButton, &QPushButton::setEnabled);
 
 
 
@@ -141,10 +152,10 @@ void QSimulationTab::updateTicLabel() {
 
 
 	mTicValue += 1;
-	mTicString->number(mTicValue);
+	mTicString->setNum(mTicValue);
 	mTicValueLabel->setText(*mTicString);
 
-	qInfo() << "C++ Style Info Message";
+	//qInfo() << "C++ Style Info Message";
 
 }
 

@@ -8,7 +8,7 @@
 #include "Woman.h"
 
 
-const double Environnement::mDensityRadius{ 200 };
+const double Environnement::mDensityRadius{ 50 };
 const int Environnement::mProbBegin{ 0 };
 const int Environnement::mProbEnd{ 100 };
 

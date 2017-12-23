@@ -185,8 +185,8 @@ QParametersTab::QParametersTab(QWidget *parent)
 	//mZombieEnergyDropRate->setRange(10, 80);
 
 	mViewRay = new QSliderAffiche(Qt::Horizontal), mViewRay->setToolTip("Set the average view ray in this environment");
-	mViewRay->setRange(100, 1000);
-	mViewRay->setValue(300);
+	mViewRay->setRange(30, 70);
+	mViewRay->setValue(50);
 
 	mRotationAngle = new QSliderAffiche(Qt::Horizontal), mRotationAngle->setToolTip("Set the rotation angle");
 	mRotationAngle->setRange(10, 180);

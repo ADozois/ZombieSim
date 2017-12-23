@@ -216,7 +216,7 @@ void QParametersTab::updateParameters()
 	ParamSim::setSceneWidth(mSceneWidth->value());
 	ParamSim::setViewHeight(mViewHeight->value());
 	ParamSim::setViewWidth(mViewWidth->value());
-	ParamSim::setMeanAge(mAverageAge->value());
+	ParamSim::setMeanAge(mAverageAge->value() *mTimeConvert);
 	ParamSim::setViewRay(mViewRay->value());
 	ParamSim::setRotationAngle(mRotationAngle->value());
 	ParamSim::setVirusResistance(mAverageVirusResistance->value());
@@ -227,7 +227,7 @@ void QParametersTab::updateParameters()
 	ParamSim::setProbInfection(mInfectionProbability->value());
 	ParamSim::setComssumptionRateEnergieHuman(mHumanEnergyDropRate->value());
 	ParamSim::setComssumptionRateEnergieZombie(mZombieEnergyDropRate->value());
-	ParamSim::setPregnancyTime(mPregnancyDuration->value());
+	ParamSim::setPregnancyTime(mPregnancyDuration->value() * mTimeConvert);
 	ParamSim::setProbSpeed(mProbSpeed->value());
 
 }

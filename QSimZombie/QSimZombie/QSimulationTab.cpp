@@ -54,6 +54,9 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	//QGraphicsView* view = new QGraphicsView;
 	//mLeftLayout->addWidget(view);
 
+	mView = new QGraphicsView;
+	mLeftLayout->addWidget(mView);
+
 	mMainLayout->addLayout(mLeftLayout);
 	mMainLayout->setStretchFactor(mLeftLayout, 3); //Make the left layout occupy 3 times as much space as the right layout.
 
@@ -141,7 +144,5 @@ void QSimulationTab::updateTicLabel() {
 }
 
 void QSimulationTab::setWorld(Environnement * monde) {
-	QGraphicsView* view = new QGraphicsView;
-	view->setScene(monde->scene());
-	mLeftLayout->addWidget(view);
+	mView->setScene(monde->scene());
 }

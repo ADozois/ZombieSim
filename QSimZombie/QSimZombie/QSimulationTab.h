@@ -48,7 +48,7 @@ protected:
 	QLabel* mTicLabel;
 	QLabel* mTicValueLabel;
 	QHBoxLayout* mTicLayout;
-
+	QGraphicsView* mView;
 
 
 	//Layouts

@@ -147,3 +147,13 @@ void QSimulationTab::setWorld(Environnement * monde) {
 	//monde->setScene();
 	mView->setScene(monde->scene());
 }
+
+void QSimulationTab::disableStart()
+{
+	mPlayButton->setDisabled(true);
+}
+
+void QSimulationTab::activateStart()
+{
+	mPlayButton->setEnabled(true);
+}

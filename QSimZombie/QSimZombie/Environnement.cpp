@@ -9,8 +9,8 @@
 
 
 const double Environnement::mDensityRadius{ 200 };
-const int Environnement::mProbBegin{ 216 };
-const int Environnement::mProbEnd{ 1200 };
+const int Environnement::mProbBegin{ 0 };
+const int Environnement::mProbEnd{ 100 };
 
 Environnement::Environnement(ParamSim *parameters)
 	:mMeanPeopleDispertion{ 0 },
@@ -184,7 +184,7 @@ inline void Environnement::CreateCity(int nbrPeople)
 		{
 			military = true;
 		}
-		age = mProbabilityType->Generate();
+		age = RandomIntUnif::Generate(216, 1200);
 		if (mProbabilityType->Generate() <= ParamSim::ProbWoman())
 		{
 			newItem = new Woman(x + mPeopleDispertion->Generate(), y + mPeopleDispertion->Generate(),this,QHumanoid::humanoideType::woman, age, military, virus);

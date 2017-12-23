@@ -33,6 +33,8 @@ public:
 	public slots:
 
 	void updateTicLabel();
+	void disableStart();
+	void activateStart();
 
 
 

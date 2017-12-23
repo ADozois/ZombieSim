@@ -228,7 +228,7 @@ QParametersTab::QParametersTab(QWidget *parent)
 void QParametersTab::updateParameters()
 {
 
-	ParamSim::setNbrWoman(mWomanCount->value());
+	ParamSim::setProbWoman(mWomanCount->value());
 	ParamSim::setNbrMilitary(mMilitaryCount->value());
 	ParamSim::setNbrVirus(mVirusCount->value());
 	ParamSim::setNbrHuman(mHumanCount->value());

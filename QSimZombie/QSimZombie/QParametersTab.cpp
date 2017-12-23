@@ -123,27 +123,45 @@ QParametersTab::QParametersTab(QWidget *parent)
 
 	//Entity Caracteristics
 	mAverageAge = new QSliderAffiche(Qt::Horizontal), mAverageAge->setToolTip("Set the initial Average Age");
+	mAverageAge->setRange(10, 80);
 	mAverageSpeed = new QSliderAffiche(Qt::Horizontal), mAverageSpeed->setToolTip("Set the initial Average Speed");
+	mAverageSpeed->setRange(10, 50);
 	mAverageVirusResistance = new QSliderAffiche(Qt::Horizontal), mAverageVirusResistance->setToolTip("Set the initial Average Virus Resistance");
+	mAverageSpeed->setRange(0, 100);
 	mReproductionProbability = new QSliderAffiche(Qt::Horizontal), mReproductionProbability->setToolTip("Set the initial Reproduction Probability");
+	mReproductionProbability->setRange(20, 80);
 	mPregnancyDuration = new QSliderAffiche(Qt::Horizontal), mPregnancyDuration->setToolTip("Set the initial Pregnancy Duration");
+	mPregnancyDuration->setRange(1, 12);
 	mNewMilitaryProbability = new QSliderAffiche(Qt::Horizontal), mNewMilitaryProbability->setToolTip("Set the probability of a New Military");
+	mNewMilitaryProbability->setRange(10, 90);
 	mWomanProbability = new QSliderAffiche(Qt::Horizontal), mWomanProbability->setToolTip("Set the probability of a woman");
+	mWomanProbability->setRange(10, 90);
 	mProbSpeed = new QSliderAffiche(Qt::Horizontal), mProbSpeed->setToolTip("Set the speed variable");
+	mProbSpeed->setRange(20, 80);
 
 	//Scene Parameters
 	mSceneHeight = new QSliderAffiche(Qt::Horizontal), mSceneHeight->setToolTip("Set the Scene Height");
+	mSceneHeight->setRange(500, 1000);
 	mSceneWidth = new QSliderAffiche(Qt::Horizontal), mSceneWidth->setToolTip("Set the Scene Width");
+	mSceneWidth->setRange(500, 1000);
 	mViewHeight = new QSliderAffiche(Qt::Horizontal), mViewHeight->setToolTip("Set the View Height");
+	mViewHeight->setRange(500, 1000);
 	mViewWidth = new QSliderAffiche(Qt::Horizontal), mViewWidth->setToolTip("Set the View Width");
+	mViewWidth->setRange(500, 1000);
 
 	//Environment parameters
 	mInfectionProbability = new QSliderAffiche(Qt::Horizontal), mInfectionProbability->setToolTip("Set the Infection Probability");
+	mInfectionProbability->setRange(10, 900);
 	mAverageVirusStrenght = new QSliderAffiche(Qt::Horizontal), mAverageVirusStrenght->setToolTip("Set the Average Virus Strenght");
+	mAverageVirusStrenght->setRange(0, 100);
 	mHumanEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mHumanEnergyDropRate->setToolTip("Set the initial Human Energy Drop Rate");
+	mHumanEnergyDropRate->setRange(10, 80);
 	mZombieEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mZombieEnergyDropRate->setToolTip("Set the initial Zombie Energy Drop Rate");
+	mZombieEnergyDropRate->setRange(10, 80);
 	mViewRay = new QSliderAffiche(Qt::Horizontal), mViewRay->setToolTip("Set the view ray in this environment");
+	mViewRay->setRange(10, 100);
 	mRotationAngle = new QSliderAffiche(Qt::Horizontal), mRotationAngle->setToolTip("Set the rotation angle");
+	mRotationAngle->setRange(10, 50);
 
 
 	//AddRows to formlayouts
@@ -190,40 +208,7 @@ QParametersTab::QParametersTab(QWidget *parent)
 	| |___| |__| | |\  | |\  | |___| |____   | |   _| || |__| | |\  |____) |
 	\_____\____/|_| \_|_| \_|______\_____|  |_|  |_____\____/|_| \_|_____/
 	*/
-
-
-
-	//Connect Entity Count to ParamSim Variables
-	connect(mZombieCount, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &QParametersTab::updateParameters);
-	connect(mHumanCount, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &QParametersTab::updateParameters);
-	connect(mWomanCount, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &QParametersTab::updateParameters);
-	connect(mMilitaryCount, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &QParametersTab::updateParameters);
-	connect(mVirusCount, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &QParametersTab::updateParameters);
-	connect(mCityCount, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &QParametersTab::updateParameters);
-
-	//Connect Scene Parameters to ParamSim Variables
-	connect(mSceneHeight, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mSceneWidth, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mViewHeight, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mViewWidth, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-
-
-	//Connect Entity Caracteristics to ParamSim Variables
-	connect(mAverageAge, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mNewMilitaryProbability, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mReproductionProbability, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mWomanProbability, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mPregnancyDuration, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mProbSpeed, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-
-	//Connect Environment Caracteristics to ParamSim Variables
-	connect(mInfectionProbability, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mAverageVirusStrenght, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mAverageVirusResistance, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mHumanEnergyDropRate, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mZombieEnergyDropRate, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mViewRay, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
-	connect(mRotationAngle, &QSlider::valueChanged, this, &QParametersTab::updateParameters);
+	
 
 
 	setLayout(mMainLayout2);

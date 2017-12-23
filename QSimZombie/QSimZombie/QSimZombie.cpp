@@ -12,13 +12,14 @@ QSimZombie::QSimZombie(QWidget *parent)
 	mSimTab = new QSimulationTab;
 	mStatTab = new QStatisticsTab;
 	mParamTab = new QParametersTab;
+	mLord = new TimeLord;
 
 	QPushButton* mPlay = mSimTab->getPlayButton();
 	QPushButton* mStop = mSimTab->getStopButton();
 	QPushButton* mValidate = mParamTab->getValidateButton();
 
-
-	connect(mValidate, &QPushButton::clicked, this, &QSimZombie::disableParametersTab);
+	connect(mValidate, &QPushButton::clicked, mParamTab, &QParametersTab::updateParameters);
+	connect(mValidate, &QPushButton::clicked, this, &QSimZombie::setupSim);
 	connect(mPlay, &QPushButton::clicked, this, &QSimZombie::disableParametersTab);
 
 	connect(mStop, &QPushButton::clicked, this, &QSimZombie::activateParametersTab);
@@ -52,4 +53,8 @@ void QSimZombie::disableParametersTab() {
 	mTabWidget->setTabEnabled(mParamTabIndex, false);
 
 
+}
+
+void QSimZombie::setupSim() {
+	mLord->createWorld();
 }

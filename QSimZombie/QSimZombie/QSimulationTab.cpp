@@ -85,6 +85,10 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mSimGroupBoxLayout->addWidget(mPauseButton);
 	mSimGroupBoxLayout->addWidget(mStepButton);
 	mSimGroupBoxLayout->addWidget(mStopButton);
+	mPlayButton->setDisabled(true);
+	mPauseButton->setDisabled(true);
+	mStepButton->setDisabled(true);
+	mStopButton->setDisabled(true);
 
 
 

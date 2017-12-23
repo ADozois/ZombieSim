@@ -26,9 +26,8 @@ class QSimZombie : public QMainWindow
 public:
 	QSimZombie(QWidget *parent = Q_NULLPTR);
 
-	public slots:
-
-
+public slots:
+	void setupSim();
 	void activateParametersTab();
 	void disableParametersTab();
 
@@ -42,6 +41,7 @@ private:
 	QSimulationTab *mSimTab;
 	QStatisticsTab *mStatTab;
 	QParametersTab *mParamTab;
+	TimeLord * mLord;
 
 	int mSimTabIndex{ 0 };
 	int mStatTabIndex{ 1 };

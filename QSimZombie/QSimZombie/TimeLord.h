@@ -20,14 +20,13 @@ private:
 	static const int mDefaultTime{ 1000 };
 
 public:
-	QTimer * Timer() { return mTimer; }
-	//TimeLord(QWidget *parent = Q_NULLPTR);
 	TimeLord();
 	void run();
 	void pause();
 	void stop();
 	void step();
-
+	QTimer * Timer() { return mTimer; }
+	void createWorld();
 };
 
 #endif //TIME_LORD_H

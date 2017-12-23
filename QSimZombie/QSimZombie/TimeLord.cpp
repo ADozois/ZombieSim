@@ -47,3 +47,8 @@ void TimeLord::step() {
 	//QTimer::singleShot(mDefaultTime, mMonde->scene(), &Environnement::advance);
 
 }
+
+void TimeLord::createWorld()
+{
+	mMonde->initializeWorld();
+}

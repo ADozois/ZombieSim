@@ -27,14 +27,6 @@ public:
 private:
 	Woman * mMother;
 	Human * mHumanLink; //To have all the info of the human the humanSpecifier is attached to
-
-	//static RandomIntUnif * mDistribution;
-	//static int mBegin;
-	//static int mEnd;
-	//static int mMilitaryProb;
-	//static int mWomanProb;
-	//static bool mBecomeMilitary;
-	//static bool mBecomeWoman;
 	
 	static const int mAgeBeginChildren;
 	static const int mAgeEndChildren;

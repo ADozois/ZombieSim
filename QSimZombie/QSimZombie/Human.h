@@ -74,15 +74,8 @@ protected:
 	Virus * mVirus;
 
 private:
-	RandomNorm * mResistanceGenerator;
-	static const double mResistanceMean;
 	static const double mResistanceDeviation;
-
-	RandomNorm * mDeathAgeGenerator;
-	static const double mDeathAgeMean;
 	static const double mDeathAgeDeviation;
-
-	RandomIntUnif * mVirusKillingSpeed;
 
 	static const QColor mHumanColor;
 };

@@ -8,8 +8,6 @@
 
 TimeLord::TimeLord()
 {
-
-
 	mTimer = new QTimer();
 	mVue = new QGraphicsView();
 	mParameters = new ParamSim();

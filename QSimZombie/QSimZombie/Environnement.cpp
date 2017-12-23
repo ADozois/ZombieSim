@@ -21,8 +21,6 @@ Environnement::Environnement(ParamSim *parameters)
 	mScene = new QGraphicsScene(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
 	mProbabilityType = new RandomIntUnif(mProbBegin, mProbEnd);
-	mHeightDispertion = new RandomIntUnif(0, ParamSim::SceneHeight());
-	mWidthDispertion = new RandomIntUnif(0, ParamSim::SceneWidth());
 
 	//We create the initial scene with the parameters
 
@@ -150,6 +148,11 @@ void Environnement::prepWorld()
 	}
 }
 
+void Environnement::setScene()
+{
+	mScene->setSceneRect(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
+}
+
 
 void Environnement::addDeathHumanoid(int index) 
 { 
@@ -161,15 +164,13 @@ void Environnement::addDeathHumanoid(int index)
 Environnement::~Environnement()
 {
 	delete mPeopleDispertion;
-	delete mHeightDispertion;
-	delete mWidthDispertion;
 }
 
 inline void Environnement::CreateCity(int nbrPeople)
 {
 	QHumanoid * newItem{ nullptr };
-	int x{ mWidthDispertion->Generate() };
-	int y{ mHeightDispertion->Generate() };
+	int x{ RandomIntUnif::Generate(0, ParamSim::SceneWidth()) };
+	int y{ RandomIntUnif::Generate(0, ParamSim::SceneHeight()) };
 	bool virus{ false };
 	bool military{ false };
 	int age{ 0 };

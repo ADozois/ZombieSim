@@ -55,7 +55,7 @@ public:
 	QPointF maxDensityPosition() { return mMaxDensityPosition; }
 	void addDeathHumanoid(int index);
 	void prepWorld();
-
+	void setScene();
 
 public slots:
 	void advance();

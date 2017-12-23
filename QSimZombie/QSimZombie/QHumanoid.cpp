@@ -172,11 +172,15 @@ void QHumanoid::InitializeVisual(QPainter * painter)
 {
 	QPen pen(Qt::FlatCap);
 	pen.setWidth(mPenWidth);
-	pen.setColor(mPenColor);
+	pen.setColor(Qt::black);
 	painter->setPen(pen);
+	painter->setOpacity(0.1);
+	painter->setBrush(Qt::black);
+	painter->drawEllipse(QPointF(mPosition.x(), mPosition.y()), 50, 50);
+	pen.setColor(mPenColor);
 	painter->setOpacity(mOpacityHumanoid);
 	painter->setBrush(mBrushColor);
-	painter->drawEllipse(mPosition.x(), mPosition.y(), mSizeHumanoid, mSizeHumanoid);
+	painter->drawEllipse(QPointF(mPosition.x(), mPosition.y()), mSizeHumanoid, mSizeHumanoid);
 }
 
 

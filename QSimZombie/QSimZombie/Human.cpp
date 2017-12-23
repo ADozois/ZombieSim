@@ -327,7 +327,7 @@ void Human::becomeZombie() {
 	if (mVirus)
 	{
 		//Create the new zombi where the human was
-		Zombie * newZombie = new Zombie(pos().x(), pos().y(), mEnvironnement, humanoideType::zombi);
+		Zombie * newZombie = new Zombie(Position().x(), Position().y(), mEnvironnement, humanoideType::zombi);
 		mEnvironnement->scene()->addItem(newZombie);
 	}
 }

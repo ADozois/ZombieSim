@@ -152,7 +152,7 @@ void Woman::advance(int phase)
 void Woman::GiveBirth()
 {	
 	//We set the position of the new children being born 
-	mCurrentBaby->setPos(this->pos().x()+ QHumanoid::mSizeHumanoid,this->pos().y()+ QHumanoid::mSizeHumanoid);
+	mCurrentBaby->setPos(this->Position().x()+ QHumanoid::mSizeHumanoid,this->Position().y()+ QHumanoid::mSizeHumanoid);
 	if (dynamic_cast<Children*>(mCurrentBaby->Specifier()))
 	{
 		mListChildren.append(dynamic_cast<Children*>(mCurrentBaby->Specifier()));

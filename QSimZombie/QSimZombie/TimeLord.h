@@ -18,7 +18,7 @@ private:
 	Environnement *mMonde;
 	ParamSim *mParameters;
 
-	static const int mDefaultTime{ 100 };
+	static const int mDefaultTime{ 200 };
 
 public:
 	TimeLord();	

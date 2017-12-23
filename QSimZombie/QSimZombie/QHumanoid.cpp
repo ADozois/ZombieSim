@@ -18,8 +18,8 @@ const int QHumanoid::mBeginName{ 0 };
 const int QHumanoid::mEndName{ 2 };
 const double QHumanoid::mRectP1{ 5.0 };
 const double QHumanoid::mRectP2{ 5.0 };
-const double QHumanoid::mRectH{ 10.0 };
-const double QHumanoid::mRectW{ 10.0 };
+const double QHumanoid::mRectH{ 100.0 };
+const double QHumanoid::mRectW{ 100.0 };
 const double QHumanoid::mPenWidth{ 2.0 };
 const QColor QHumanoid::mHumanoidColor{ Qt::black };
 const QColor QHumanoid::mContourColor{ Qt::black };
@@ -38,12 +38,12 @@ QHumanoid::QHumanoid(double x, double y, Environnement *currentEnvironnement, hu
 	mEnvironnement{ currentEnvironnement },
 	mHumanoideType{ typeOfHumanoide },
 	mPosition{ x, y },
-	mRectF{ QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW) },
+	mRectF{ QPointF(-ParamSim::ViewRay()/2, -ParamSim::ViewRay() / 2), QSizeF(ParamSim::ViewRay()+5, ParamSim::ViewRay()+5) },
 	mBrushColor{ mHumanoidColor },
 	mPenColor{ mContourColor },
 	mIsTurning{ false }
 {
-
+	setPos(mPosition);
 	mRunSpeed = abs(RandomNorm::Generate(ParamSim::ProbSpeed() + mOffsetRun, (ParamSim::ProbSpeed() + mOffsetRun)*mRayDev));
 	mViewRay = abs(RandomNorm::Generate(ParamSim::ViewRay(), ParamSim::ViewRay()*mRunDev));
 	mWalkSpeed = abs(RandomNorm::Generate(ParamSim::ProbSpeed(), ParamSim::ProbSpeed()*mWalkDev));
@@ -60,11 +60,12 @@ QHumanoid::QHumanoid(double x, double y, Environnement * currentEnvironnemnt, hu
 	mEnvironnement{ currentEnvironnemnt },
 	mHumanoideType{ typeOfHumanoide },
 	mPosition{ x, y },
-	mRectF{ QPointF(mRectP1, mRectP2), QSizeF(mRectH, mRectW) },
+	mRectF{ QPointF(- ParamSim::ViewRay() / 2, -ParamSim::ViewRay() / 2), QSizeF(ParamSim::ViewRay(), ParamSim::ViewRay()) },
 	mBrushColor{ mHumanoidColor },
 	mPenColor{ mContourColor },
 	mIsTurning{ false }
 {
+	setPos(mPosition);
 	mWalkSpeed = walkSpeed + RandomNorm::Generate(0, walkSpeed*mWalkDev);
 	mViewRay = viewRay + RandomNorm::Generate(0, viewRay*mWalkDev);
 	mViewRaySq = mViewRay*mViewRay;
@@ -163,7 +164,7 @@ QVector2D QHumanoid::MouvementDirection()
 	return mMovementDirection;
 }
 
-QVector2D QHumanoid::Position()
+QPointF QHumanoid::Position()
 {
 	return mPosition;
 }
@@ -172,16 +173,16 @@ void QHumanoid::InitializeVisual(QPainter * painter)
 {
 	QPen pen(Qt::FlatCap);
 	pen.setWidth(mPenWidth);
-	pen.setColor(Qt::black);
+	/*pen.setColor(Qt::black);
 	painter->setPen(pen);
 	painter->setOpacity(0.05);
 	painter->setBrush(Qt::black);
-	painter->drawEllipse(QPointF(mPosition.x(), mPosition.y()), ParamSim::ViewRay(), ParamSim::ViewRay());
+	painter->drawEllipse(QPointF(0, 0), ParamSim::ViewRay(), ParamSim::ViewRay());*/
 	pen.setColor(mPenColor);
 	painter->setPen(pen);
 	painter->setOpacity(mOpacityHumanoid);
 	painter->setBrush(mBrushColor);
-	painter->drawEllipse(QPointF(mPosition.x(), mPosition.y()), mSizeHumanoid, mSizeHumanoid);
+	painter->drawEllipse(QPointF(0, 0), mSizeHumanoid, mSizeHumanoid);
 }
 
 
@@ -204,20 +205,20 @@ void QHumanoid::moveInDirection(movementSpeed movementSpeed,int const densityMod
 		if (mEnergy)
 		{
 			//int densityModifier = mEnvironnement->getHumainDensity();
-			QPointF newPosition(pos().x() + mMovementDirection.x()*(mRunSpeed/ densityModifier), pos().y() + mMovementDirection.y()*(mRunSpeed/ densityModifier));
+			QPointF newPosition(Position().x() + mMovementDirection.x()*(mRunSpeed/ densityModifier), Position().y() + mMovementDirection.y()*(mRunSpeed/ densityModifier));
 			checkForWalls(newPosition, mRunSpeed);
 			this->setPos(newPosition);
 			ReduceEnergy();
 		}
 		else
 		{
-			QPointF newPosition(pos().x() + mMovementDirection.x()*(mWalkSpeed/ densityModifier), pos().y() + mMovementDirection.y()*mWalkSpeed/ densityModifier);
+			QPointF newPosition(Position().x() + mMovementDirection.x()*(mWalkSpeed/ densityModifier), Position().y() + mMovementDirection.y()*mWalkSpeed/ densityModifier);
 			checkForWalls(newPosition, mWalkSpeed);
 			this->setPos(newPosition);
 		}
 	}
 	else {
-		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed/ densityModifier, pos().y() + mMovementDirection.y()*mWalkSpeed/ densityModifier);
+		QPointF newPosition(Position().x() + mMovementDirection.x()*mWalkSpeed/ densityModifier, Position().y() + mMovementDirection.y()*mWalkSpeed/ densityModifier);
 		checkForWalls(newPosition, mWalkSpeed);
 		this->setPos(newPosition);
 		AddEnergy();
@@ -243,7 +244,7 @@ void QHumanoid::checkForWalls(QPointF &newPosition, qreal movementSpeed)
 				mTurningDirection[i] = newDirection;
 			}
 			mTurningAtPosition = 1;
-			newPosition = QPointF(pos().x() + mTurningDirection[0].x()*movementSpeed, pos().y() + mTurningDirection[0].y()*movementSpeed);
+			newPosition = QPointF(Position().x() + mTurningDirection[0].x()*movementSpeed, Position().y() + mTurningDirection[0].y()*movementSpeed);
 			mMovementDirection = mTurningDirection[0];
 		}
 	}
@@ -252,8 +253,8 @@ void QHumanoid::checkForWalls(QPointF &newPosition, qreal movementSpeed)
 void QHumanoid::setDirectionTo(QPointF positionTo)
 {
 	//We set the direction of the entity going to that entity
-	qreal movementX = (positionTo.x() - pos().x());
-	qreal movementY = (positionTo.y() - pos().y());
+	qreal movementX = (positionTo.x() - Position().x());
+	qreal movementY = (positionTo.y() - Position().y());
 	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
 	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
 
@@ -262,8 +263,8 @@ void QHumanoid::setDirectionTo(QPointF positionTo)
 void QHumanoid::setDirectionFrom(QPointF positionFrom)
 {
 	//We set the direction of the entity going away from that point
-	qreal movementX = (pos().x() - positionFrom.x());
-	qreal movementY = (pos().y() - positionFrom.y());
+	qreal movementX = (Position().x() - positionFrom.x());
+	qreal movementY = (Position().y() - positionFrom.y());
 	qreal directionNorm = sqrt(movementX*movementX + movementY*movementY);
 	mMovementDirection = QVector2D(movementX / directionNorm, movementY / directionNorm);
 

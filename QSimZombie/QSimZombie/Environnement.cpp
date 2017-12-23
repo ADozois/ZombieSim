@@ -8,6 +8,7 @@
 #include "Woman.h"
 
 
+
 const double Environnement::mDensityRadius{ 50 };
 const int Environnement::mProbBegin{ 0 };
 const int Environnement::mProbEnd{ 100 };
@@ -19,6 +20,7 @@ Environnement::Environnement(ParamSim *parameters)
 	mMaxDensityValue{ 0 }
 {
 	mScene = new QGraphicsScene(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
+	//mScene->setSceneRect(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 	mPeopleDispertion = new RandomNorm(mMeanPeopleDispertion, mDevPeopleDispertion);
 	mProbabilityType = new RandomIntUnif(mProbBegin, mProbEnd);
 
@@ -34,6 +36,14 @@ Environnement::Environnement(ParamSim *parameters)
 
 void Environnement::advance()
 {
+		/*QList<QGraphicsItem *> currentListOfHumanoides = mScene->items();
+
+		for (auto newHumanoide : currentListOfHumanoides)
+		{
+			newHumanoide->setPos(newHumanoide->pos().x() + 1, newHumanoide->pos().y() + 1);
+		}
+*/
+
 		//On calcul les données qui nous seront nécessaire pour chacun des humanoïde dans la scene
 		mAdvanceInfoList.clear();
 		//On récupère tous les items de la scene (donc tous les humanoides)
@@ -45,18 +55,19 @@ void Environnement::advance()
 
 		//On regarde les distance avec le premier hors de la boucle pour évité de toujours faire la vérification si c'est le premier (pour évité de recalculer les distance déjà calculé
 		QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[0]);
-		infoForAdvance* firstHumanoideInfo{ nullptr };
+		infoForAdvance* firstHumanoideInfo= new infoForAdvance;
 		for (int j{ 1 }; j<currentListOfHumanoides.size(); ++j)
 		{
 			QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[j]);
-			distTable[j] = pow(currentHumanoide->pos().x() - comparedHumanoide->pos().x(), 2) + pow(currentHumanoide->pos().y() - comparedHumanoide->pos().y(), 2);
+			qreal posX = currentHumanoide->Position().x();
+			distTable[j] = pow(currentHumanoide->Position().x() - comparedHumanoide->Position().x(), 2) + pow(currentHumanoide->Position().y() - comparedHumanoide->Position().y(), 2);
 			distTable[j*currentListOfHumanoides.size()] = distTable[j];
 			getInformation(comparedHumanoide, distTable[j], *firstHumanoideInfo);
 			
 		}
 		//On place l'information pour cet humanoide dans le tableau
 		mMaxDensityValue = firstHumanoideInfo->numberOfCloseHumain;
-		mMaxDensityPosition = currentHumanoide->pos();
+		mMaxDensityPosition = currentHumanoide->Position();
 		mAdvanceInfoList.append(firstHumanoideInfo);
 
 
@@ -64,7 +75,7 @@ void Environnement::advance()
 		{
 			//On choisit l'humanoide regardé
 			QHumanoid * currentHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[i]);
-			infoForAdvance* currentInfo{ nullptr };
+			infoForAdvance* currentInfo=new infoForAdvance;
 
 			for (int j{ i - 1 }; j>-1; --j)
 			{
@@ -76,7 +87,7 @@ void Environnement::advance()
 			for (int j{ i+1 }; j<currentListOfHumanoides.size(); ++j)
 			{
 				QHumanoid * comparedHumanoide = dynamic_cast<QHumanoid *>(currentListOfHumanoides[j]);
-				distTable[i*currentListOfHumanoides.size()+j] = pow(currentHumanoide->pos().x() - comparedHumanoide->pos().x(), 2) + pow(currentHumanoide->pos().y() - comparedHumanoide->pos().y(), 2);
+				distTable[i*currentListOfHumanoides.size()+j] = pow(currentHumanoide->Position().x() - comparedHumanoide->Position().x(), 2) + pow(currentHumanoide->Position().y() - comparedHumanoide->Position().y(), 2);
 				distTable[j*currentListOfHumanoides.size() + i] = distTable[i*currentListOfHumanoides.size() + j];
 				getInformation(comparedHumanoide, distTable[i*currentListOfHumanoides.size() + j], *currentInfo);
 			}
@@ -84,7 +95,7 @@ void Environnement::advance()
 			if (currentInfo->numberOfCloseHumain > mMaxDensityValue)
 			{
 				mMaxDensityValue = currentInfo->numberOfCloseHumain;
-				mMaxDensityPosition = currentHumanoide->pos();
+				mMaxDensityPosition = currentHumanoide->Position();
 			}
 			mAdvanceInfoList.append(currentInfo);
 		}
@@ -100,6 +111,7 @@ void Environnement::advance()
 		//On détruit les humanoides qui sont mort ce tic-ci
 		for (auto deadIndex : mDeathList)
 		{
+			mScene->removeItem(deadIndex);
 			delete deadIndex;
 			deadIndex = nullptr;
 		}
@@ -115,7 +127,7 @@ void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance
 		{
 			infoToFill.closestZombie = dynamic_cast<Zombie *>(comparedHumanoide);
 			infoToFill.distanceToClosestZombie = distance;
-			infoToFill.currentPositionClosestZombi = comparedHumanoide->pos();
+			infoToFill.currentPositionClosestZombi = comparedHumanoide->Position();
 		}
 
 	}
@@ -124,7 +136,7 @@ void Environnement::getInformation(QHumanoid * comparedHumanoide, qreal distance
 		{
 			infoToFill.closestHuman = dynamic_cast<Human *>(comparedHumanoide);
 			infoToFill.distanceToClosestHuman = distance;
-			infoToFill.currentPositionClosestHuman = comparedHumanoide->pos();
+			infoToFill.currentPositionClosestHuman = comparedHumanoide->Position();
 		}
 		if (distance < mDensityRadius)
 		{

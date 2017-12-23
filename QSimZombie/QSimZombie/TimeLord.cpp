@@ -52,6 +52,6 @@ void TimeLord::createWorld()
 {
 	mMonde->prepWorld();
 	mMonde->initializeWorld();
-	QObject::connect(mTimer, &QTimer::timeout, mMonde, &Environnement::advance);
+	connect(mTimer, &QTimer::timeout, mMonde, &Environnement::advance);
 }
 >>>>>>> master

@@ -25,6 +25,8 @@ public:
 
 	QPushButton *getPlayButton() { return mPlayButton; }
 	QPushButton *getStopButton() { return mStopButton; }
+	QPushButton *getStepButton() { return mStepButton; }
+	QPushButton *getPauseButton() { return mPauseButton; }
 
 <<<<<<< HEAD
 

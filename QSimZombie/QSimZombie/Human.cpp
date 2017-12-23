@@ -11,7 +11,7 @@
 
 const double Human::mResistanceDeviation{0.2};
 const double Human::mDeathAgeDeviation{0.3};
-const QColor Human::mHumanColor{ 241, 140, 135 };
+const QColor Human::mHumanColor{ 66, 134, 244 };
 
 //Use to create new humans at the begginning of the simulation
 Human::Human(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infected, QGraphicsItem *parent)
@@ -223,8 +223,8 @@ void Human::MilitaryPainter(QPainter * painter)
 	Military * military = dynamic_cast<Military*>(mSpecifier);
 	if (military)
 	{
-		mBrushColor = Qt::darkGreen;
-		mPenColor = Qt::darkGreen;
+		mBrushColor = QColor(146, 255, 121);
+		mPenColor = QColor(146, 255, 121);
 	}
 }
 
@@ -233,8 +233,8 @@ void Human::ChildrenPainter(QPainter * painter)
 	Children * child = dynamic_cast<Children*>(mSpecifier);
 	if (child)
 	{
-		mBrushColor = Qt::darkYellow;
-		mPenColor = Qt::darkYellow;
+		mBrushColor = QColor(247, 224, 76);
+		mPenColor = QColor(247, 224, 76);
 	}
 }
 

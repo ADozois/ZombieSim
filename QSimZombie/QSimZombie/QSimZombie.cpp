@@ -20,9 +20,9 @@ QSimZombie::QSimZombie(QWidget *parent)
 
 	connect(mValidate, &QPushButton::clicked, mParamTab, &QParametersTab::updateParameters);
 	connect(mValidate, &QPushButton::clicked, this, &QSimZombie::setupSim);
+	connect(mValidate, &QPushButton::clicked, mSimTab, &QSimulationTab::activateStart);
 	connect(mPlay, &QPushButton::clicked, this, &QSimZombie::disableParametersTab);
 	connect(mPlay, &QPushButton::clicked, this, &QSimZombie::disableStatTab);
-
 	connect(mStop, &QPushButton::clicked, this, &QSimZombie::activateParametersTab);
 
 

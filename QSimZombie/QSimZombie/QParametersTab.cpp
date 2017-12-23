@@ -232,15 +232,11 @@ QParametersTab::QParametersTab(QWidget *parent)
 void QParametersTab::updateParameters()
 {
 
-	ParamSim::setNbrWoman(mWomanCount->value());
+	ParamSim::setProbWoman(mWomanCount->value());
 	ParamSim::setNbrMilitary(mMilitaryCount->value());
 	ParamSim::setNbrVirus(mVirusCount->value());
 	ParamSim::setNbrHuman(mHumanCount->value());
 	ParamSim::setNbrCity(mCityCount->value());
-	ParamSim::setSceneHeight(mSceneHeight->value());
-	ParamSim::setSceneWidth(mSceneWidth->value());
-	ParamSim::setViewHeight(mViewHeight->value());
-	ParamSim::setViewWidth(mViewWidth->value());
 	ParamSim::setMeanAge(mAverageAge->value() *mTimeConvert);
 	ParamSim::setViewRay(mViewRay->value());
 	ParamSim::setRotationAngle(mRotationAngle->value());
@@ -249,8 +245,6 @@ void QParametersTab::updateParameters()
 	ParamSim::setProbNewMilitary(mNewMilitaryProbability->value());
 	ParamSim::setProbReproduction(mReproductionProbability->value());
 	ParamSim::setProbInfection(mInfectionProbability->value());
-	//ParamSim::setComssumptionRateEnergieHuman(mHumanEnergyDropRate->value());
-	//ParamSim::setComssumptionRateEnergieZombie(mZombieEnergyDropRate->value());
 	ParamSim::setProbSpeed(mAverageSpeed->value());
 
 }

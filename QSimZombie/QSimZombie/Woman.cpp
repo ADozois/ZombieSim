@@ -10,7 +10,7 @@ RandomNorm *Woman::mDoesReproduce{ nullptr };
 int Woman::mMaxChildren{ 5 };
 const int Woman::mEndFertility{ 480 }; //Age of end of fertility for the women
 const int Woman::mFertilityTime{ 10 };
-const QColor Woman::mWomanColor{ 242, 229, 135 };
+const QColor Woman::mWomanColor{ 255, 122, 232 };
 
 
 Woman::Woman(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, int age, bool military, bool infection, QGraphicsItem *parent)

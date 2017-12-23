@@ -153,6 +153,15 @@ void Environnement::setScene()
 	mScene->setSceneRect(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 }
 
+void Environnement::createZombie(QPoint pos)
+{
+	QHumanoid * newItem{ new Zombie(pos.x(), pos.y(), this, QHumanoid::humanoideType::zombi) };
+	if (newItem)
+	{
+		mScene->addItem(newItem);
+	}
+}
+
 
 void Environnement::addDeathHumanoid(int index) 
 { 

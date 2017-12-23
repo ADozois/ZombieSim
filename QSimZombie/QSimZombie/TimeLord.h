@@ -2,13 +2,15 @@
 #define TIME_LORD_H
 
 #include <qwidget.h>
+#include <QObject>
+
 
 class QTimer;
 class ParamSim;
 class Environnement;
 class QGraphicsView;
 
-class TimeLord {
+class TimeLord : public QObject{
 
 
 private:
@@ -19,6 +21,10 @@ private:
 
 	static const int mDefaultTime{ 1000 };
 
+public slots:
+	void actOfGood(QPoint pos);
+
+
 public:
 	TimeLord();
 	void run();
@@ -27,7 +33,7 @@ public:
 	void step();
 	QTimer * Timer() { return mTimer; }
 	void createWorld();
-	Environnement * Monde() { return mMonde; }
+	Environnement * Monde() { return mMonde; };
 
 };
 

@@ -25,8 +25,8 @@ public:
 	~QHumanoid();
 
 	
-	QRectF boundingRect() const;
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+	QRectF boundingRect() const override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void advance(int phase) override;
 	virtual void advance(int phase, int const index);		//On surcharge advance afin d'introduire l'index de l'humanoide qui doit bouger si nécessaire
 	void ReduceEnergy();

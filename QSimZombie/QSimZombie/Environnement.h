@@ -56,6 +56,7 @@ public:
 	void addDeathHumanoid(int index);
 	void prepWorld();
 	void setScene();
+	void createZombie(QPoint pos);
 
 public slots:
 	void advance();

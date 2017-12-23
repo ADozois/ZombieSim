@@ -4,10 +4,10 @@
 #include "Environnement.h"
 #include "ParamSim.h"
 
-#include <QObject>
 
 TimeLord::TimeLord()
-	:mMonde{nullptr}
+	:QObject(nullptr),
+	mMonde{nullptr}
 {
 	mTimer = new QTimer();
 	mVue = new QGraphicsView();
@@ -30,7 +30,6 @@ void TimeLord::run() {
 
 void TimeLord::pause() {
 	mTimer->stop();
-
 }
 
 
@@ -51,4 +50,9 @@ void TimeLord::createWorld()
 	mMonde->prepWorld();
 	mMonde->initializeWorld();
 	QObject::connect(mTimer, &QTimer::timeout, mMonde, &Environnement::advance);
+}
+
+void TimeLord::actOfGood(QPoint pos)
+{
+	mMonde->createZombie(pos);
 }

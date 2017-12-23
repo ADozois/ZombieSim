@@ -24,6 +24,7 @@ QSimZombie::QSimZombie(QWidget *parent)
 	connect(mPlay, &QPushButton::clicked, this, &QSimZombie::disableParametersTab);
 	connect(mPlay, &QPushButton::clicked, this, &QSimZombie::disableStatTab);
 	connect(mStop, &QPushButton::clicked, this, &QSimZombie::activateParametersTab);
+	connect(mSimTab, &QSimulationTab::mousePressed, mLord, &TimeLord::actOfGood);
 
 
 	mTabWidget = new QTabWidget;

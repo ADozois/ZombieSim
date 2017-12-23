@@ -17,7 +17,7 @@ using namespace std;
 QSimulationTab::QSimulationTab(QWidget *parent)
 	: QWidget(parent)
 {
-
+	setMouseTracking(true);
 	mTicString = new QString;
 
 	//Layouts
@@ -156,4 +156,9 @@ void QSimulationTab::disableStart()
 void QSimulationTab::activateStart()
 {
 	mPlayButton->setEnabled(true);
+}
+
+void QSimulationTab::mousePressEvent(QMouseEvent * event)
+{
+	emit mousePressed(event->pos());
 }

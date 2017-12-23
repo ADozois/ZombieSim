@@ -11,6 +11,7 @@
 #include <QPixmap>
 #include <QIcon>
 #include <QImage>
+#include <QMouseEvent>
 #include "TimeLord.h"
 
 
@@ -29,8 +30,10 @@ public:
 	void setWorld(Environnement * monde);
 
 
+signals:
+	void mousePressed(QPoint pos);
 	
-	public slots:
+public slots:
 
 	void updateTicLabel();
 	void disableStart();
@@ -75,6 +78,7 @@ protected:
 	//Label
 	QLabel *mIconLabel;
 
+	virtual void mousePressEvent(QMouseEvent *event) override;
 
 
 };

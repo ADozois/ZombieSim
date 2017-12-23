@@ -4,7 +4,6 @@
 
 //QStrings for parameters
 //Entity Quantities
-const QString QParametersTab::mZombieCountString{ "Zombie Count" };
 const QString QParametersTab::mHumanCountString{ "Human Count" };
 const QString QParametersTab::mWomanCountString{ "Woman Count" };
 const QString QParametersTab::mMilitaryCountString{ "Military Count" };
@@ -61,7 +60,6 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mSceneParamGB = new QGroupBox(tr("Scene Parameters"));
 
 	//Labels
-	mZombieCountLabel = new QLabel(mZombieCountString);
 	mHumanCountLabel = new QLabel(mHumanCountString);
 
 	//Main layouts (left/right)
@@ -95,78 +93,103 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mSceneParamGB->setLayout(mSceneParamGBL);
 
 	//Parameter Spinboxes and Sliders
-	//Entity Count
-	mZombieCount = new QSpinBox;
-	mZombieCount->setToolTip("Set the number of roaming zombies");
-	mZombieCount->setRange(entityMinimum, entityMaximum);
+	////Entity Count
+	//mZombieCount = new QSpinBox;
+	//mZombieCount->setToolTip("Set the number of roaming zombies");
+	//mZombieCount->setRange(entityMinimum, entityMaximum);
 
 	mHumanCount = new QSpinBox;
 	mHumanCount->setToolTip("Set the initial number of humans");
 	mHumanCount->setRange(entityMinimum, entityMaximum);
+	mHumanCount->setValue(100);
 
 	mWomanCount = new QSpinBox;
-	mWomanCount->setToolTip("Set the initial number of women");
-	mWomanCount->setRange(entityMinimum, entityMaximum); //Faudra g�rer que mWomanCount + mMilitaryCount <= mHumanCount
+	mWomanCount->setToolTip("Set the probability a human will be a women");
+	mWomanCount->setRange(entityMinimumRatio, entityMaximumRatio); //Faudra g�rer que mWomanCount + mMilitaryCount <= mHumanCount
+	mWomanCount->setValue(50);
 
 	mMilitaryCount = new QSpinBox;
-	mMilitaryCount->setToolTip("Set the initial number of military");
-	mMilitaryCount->setRange(entityMinimum, entityMaximum);
+	mMilitaryCount->setToolTip("Set the probability a human will be military");
+	mMilitaryCount->setRange(entityMinimumRatio, entityMaximumRatio);
+	mMilitaryCount->setValue(25);
 
 	mVirusCount = new QSpinBox;
-	mVirusCount->setToolTip("Set the initial virus count");
-	mVirusCount->setRange(entityMinimum, entityMaximum);
+	mVirusCount->setToolTip("Set the probability a human will be infected");
+	mVirusCount->setRange(entityMinimumRatio, entityMaximumRatio);
+	mVirusCount->setValue(10);
 
 	mCityCount = new QSpinBox;
-	mCityCount->setToolTip("Set the initial virus count");
-	mCityCount->setRange(entityMinimum, entityMaximum);
+	mCityCount->setToolTip("Set the initial nomber of cities");
+	mCityCount->setRange(entityMinimumTown, entityMaximumTown);
+	mCityCount->setValue(5);
 
 
 	//Entity Caracteristics
 	mAverageAge = new QSliderAffiche(Qt::Horizontal), mAverageAge->setToolTip("Set the initial Average Age");
 	mAverageAge->setRange(10, 80);
+	mAverageAge->setValue(40);
+
 	mAverageSpeed = new QSliderAffiche(Qt::Horizontal), mAverageSpeed->setToolTip("Set the initial Average Speed");
 	mAverageSpeed->setRange(10, 50);
+
 	mAverageVirusResistance = new QSliderAffiche(Qt::Horizontal), mAverageVirusResistance->setToolTip("Set the initial Average Virus Resistance");
-	mAverageSpeed->setRange(10, 100);
+	mAverageVirusResistance->setRange(10, 100);
+	mAverageVirusResistance->setValue(50);
+
 	mReproductionProbability = new QSliderAffiche(Qt::Horizontal), mReproductionProbability->setToolTip("Set the initial Reproduction Probability");
 	mReproductionProbability->setRange(20, 80);
-	mPregnancyDuration = new QSliderAffiche(Qt::Horizontal), mPregnancyDuration->setToolTip("Set the initial Pregnancy Duration");
-	mPregnancyDuration->setRange(1, 12);
+	mReproductionProbability->setValue(50);
+
 	mNewMilitaryProbability = new QSliderAffiche(Qt::Horizontal), mNewMilitaryProbability->setToolTip("Set the probability of a New Military");
 	mNewMilitaryProbability->setRange(10, 90);
-	mWomanProbability = new QSliderAffiche(Qt::Horizontal), mWomanProbability->setToolTip("Set the probability of a woman");
-	mWomanProbability->setRange(10, 90);
-	mProbSpeed = new QSliderAffiche(Qt::Horizontal), mProbSpeed->setToolTip("Set the speed variable");
-	mProbSpeed->setRange(20, 80);
+	mNewMilitaryProbability->setValue(20);
+
+	/*mProbSpeed = new QSliderAffiche(Qt::Horizontal), mProbSpeed->setToolTip("Set the speed variable");
+	mProbSpeed->setRange(20, 80);*/
 
 	//Scene Parameters
 	mSceneHeight = new QSliderAffiche(Qt::Horizontal), mSceneHeight->setToolTip("Set the Scene Height");
-	mSceneHeight->setRange(500, 1000);
+	mSceneHeight->setRange(500, 5000);
+	mSceneHeight->setValue(1000);
+
 	mSceneWidth = new QSliderAffiche(Qt::Horizontal), mSceneWidth->setToolTip("Set the Scene Width");
-	mSceneWidth->setRange(500, 1000);
+	mSceneWidth->setRange(500, 5000);
+	mSceneWidth->setValue(1000);
+
 	mViewHeight = new QSliderAffiche(Qt::Horizontal), mViewHeight->setToolTip("Set the View Height");
-	mViewHeight->setRange(500, 1000);
+	mViewHeight->setRange(500, 5000);
+	mViewHeight->setValue(1000);
+
 	mViewWidth = new QSliderAffiche(Qt::Horizontal), mViewWidth->setToolTip("Set the View Width");
-	mViewWidth->setRange(500, 1000);
+	mViewWidth->setRange(500, 5000);
+	mViewWidth->setValue(1000);
 
 	//Environment parameters
 	mInfectionProbability = new QSliderAffiche(Qt::Horizontal), mInfectionProbability->setToolTip("Set the Infection Probability");
-	mInfectionProbability->setRange(10, 900);
+	mInfectionProbability->setRange(10, 90);
+	mInfectionProbability->setValue(10);
+
 	mAverageVirusStrenght = new QSliderAffiche(Qt::Horizontal), mAverageVirusStrenght->setToolTip("Set the Average Virus Strenght");
 	mAverageVirusStrenght->setRange(10, 100);
-	mHumanEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mHumanEnergyDropRate->setToolTip("Set the initial Human Energy Drop Rate");
-	mHumanEnergyDropRate->setRange(10, 80);
-	mZombieEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mZombieEnergyDropRate->setToolTip("Set the initial Zombie Energy Drop Rate");
-	mZombieEnergyDropRate->setRange(10, 80);
-	mViewRay = new QSliderAffiche(Qt::Horizontal), mViewRay->setToolTip("Set the view ray in this environment");
-	mViewRay->setRange(10, 100);
+	mAverageVirusStrenght->setValue(30);
+
+
+	//mHumanEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mHumanEnergyDropRate->setToolTip("Set the initial Human Energy Drop Rate");
+	//mHumanEnergyDropRate->setRange(10, 80);
+	//mZombieEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mZombieEnergyDropRate->setToolTip("Set the initial Zombie Energy Drop Rate");
+	//mZombieEnergyDropRate->setRange(10, 80);
+
+	mViewRay = new QSliderAffiche(Qt::Horizontal), mViewRay->setToolTip("Set the average view ray in this environment");
+	mViewRay->setRange(100, 1000);
+	mViewRay->setValue(300);
+
 	mRotationAngle = new QSliderAffiche(Qt::Horizontal), mRotationAngle->setToolTip("Set the rotation angle");
-	mRotationAngle->setRange(10, 50);
+	mRotationAngle->setRange(10, 180);
+	mRotationAngle->setValue(90);
 
 
 	//AddRows to formlayouts
 	//Entity Quantities
-	mEntityQtyGBL->addRow(mZombieCountString, mZombieCount);
 	mEntityQtyGBL->addRow(mHumanCountString, mHumanCount);
 	mEntityQtyGBL->addRow(mWomanCountString, mWomanCount);
 	mEntityQtyGBL->addRow(mMilitaryCountString, mMilitaryCount);
@@ -183,19 +206,17 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mEntityCarGBL->addRow(mAverageAgeString, mAverageAge);
 	mEntityCarGBL->addRow(mAverageSpeedString, mAverageSpeed);
 	mEntityCarGBL->addRow(mReproductionProbabilityString, mReproductionProbability);
-	mEntityCarGBL->addRow(mPregnancyDurationString, mPregnancyDuration);
 	mEntityCarGBL->addRow(mNewMilitaryProbabilityString, mNewMilitaryProbability);
-	mEntityCarGBL->addRow(mWomanProbabilityString, mWomanProbability);
-	mEnvironmentCarGBL->addRow(mProbSpeedString, mProbSpeed);
+	/*mEnvironmentCarGBL->addRow(mProbSpeedString, mProbSpeed);*/
 
 
 
 	//Environment Parameters
 	mEnvironmentCarGBL->addRow(mInfectionProbabilityString, mInfectionProbability);
 	mEnvironmentCarGBL->addRow(mAverageVirusStrenghtString, mAverageVirusStrenght);
-	mEnvironmentCarGBL->addRow(mAverageVirusResistanceString, mAverageVirusResistance);
-	mEnvironmentCarGBL->addRow(mHumanEnergyDropRateString, mHumanEnergyDropRate);
-	mEnvironmentCarGBL->addRow(mZombieEnergyDropRateString, mZombieEnergyDropRate);
+	//mEnvironmentCarGBL->addRow(mAverageVirusResistanceString, mAverageVirusResistance);
+	//mEnvironmentCarGBL->addRow(mHumanEnergyDropRateString, mHumanEnergyDropRate);
+	//mEnvironmentCarGBL->addRow(mZombieEnergyDropRateString, mZombieEnergyDropRate);
 	mEnvironmentCarGBL->addRow(mViewRayString, mViewRay);
 	mEnvironmentCarGBL->addRow(mRotationAngleString, mRotationAngle);
 
@@ -206,7 +227,6 @@ QParametersTab::QParametersTab(QWidget *parent)
 void QParametersTab::updateParameters()
 {
 
-	ParamSim::setNbrZombie(mZombieCount->value());
 	ParamSim::setNbrWoman(mWomanCount->value());
 	ParamSim::setNbrMilitary(mMilitaryCount->value());
 	ParamSim::setNbrVirus(mVirusCount->value());
@@ -223,12 +243,10 @@ void QParametersTab::updateParameters()
 	ParamSim::setMeanVirusForce(mAverageVirusStrenght->value());
 	ParamSim::setProbNewMilitary(mNewMilitaryProbability->value());
 	ParamSim::setProbReproduction(mReproductionProbability->value());
-	ParamSim::setProbWoman(mWomanProbability->value());
 	ParamSim::setProbInfection(mInfectionProbability->value());
-	ParamSim::setComssumptionRateEnergieHuman(mHumanEnergyDropRate->value());
-	ParamSim::setComssumptionRateEnergieZombie(mZombieEnergyDropRate->value());
-	ParamSim::setPregnancyTime(mPregnancyDuration->value() * mTimeConvert);
-	ParamSim::setProbSpeed(mProbSpeed->value());
+	//ParamSim::setComssumptionRateEnergieHuman(mHumanEnergyDropRate->value());
+	//ParamSim::setComssumptionRateEnergieZombie(mZombieEnergyDropRate->value());
+	ParamSim::setProbSpeed(mAverageSpeed->value());
 
 }
 

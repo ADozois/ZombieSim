@@ -31,6 +31,9 @@ public slots:
 	void activateParametersTab();
 	void disableParametersTab();
 
+	void activateStatTab();
+	void disableStatTab();
+
 private:
 	Ui::QSimZombieClass ui;
 	QMenuBar *mMenuBar;
@@ -46,5 +49,7 @@ private:
 	int mSimTabIndex{ 0 };
 	int mStatTabIndex{ 1 };
 	int mParamTabIndex{ 2 };
+
+	void setupSimTab();
 };
 #endif //Q_SIM_ZOMBIE_H	

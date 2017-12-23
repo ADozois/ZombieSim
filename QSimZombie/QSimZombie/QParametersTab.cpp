@@ -199,18 +199,6 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mEnvironmentCarGBL->addRow(mViewRayString, mViewRay);
 	mEnvironmentCarGBL->addRow(mRotationAngleString, mRotationAngle);
 
-
-	/*
-	_____ ____  _   _ _   _ ______ _____ _______ _____ ____  _   _  _____
-	/ ____/ __ \| \ | | \ | |  ____/ ____|__   __|_   _/ __ \| \ | |/ ____|
-	| |   | |  | |  \| |  \| | |__ | |       | |    | || |  | |  \| | (___
-	| |   | |  | | . ` | . ` |  __|| |       | |    | || |  | | . ` |\___ \
-	| |___| |__| | |\  | |\  | |___| |____   | |   _| || |__| | |\  |____) |
-	\_____\____/|_| \_|_| \_|______\_____|  |_|  |_____\____/|_| \_|_____/
-	*/
-	
-
-
 	setLayout(mMainLayout2);
 }
 

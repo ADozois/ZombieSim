@@ -27,6 +27,8 @@ public:
 	void step();
 	QTimer * Timer() { return mTimer; }
 	void createWorld();
+	Environnement * Monde() { return mMonde; }
+
 };
 
 #endif //TIME_LORD_H

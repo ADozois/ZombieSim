@@ -14,7 +14,7 @@ const int Environnement::mProbEnd{ 1200 };
 
 Environnement::Environnement(ParamSim *parameters)
 	:mMeanPeopleDispertion{ 0 },
-	mDevPeopleDispertion{ 10 },
+	mDevPeopleDispertion{ 50 },
 	mMaxDensityPosition{0,0},
 	mMaxDensityValue{ 0 }
 {

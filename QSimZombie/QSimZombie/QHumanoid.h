@@ -50,11 +50,13 @@ public:
 	void makeTurn();
 	bool isTurning() { return mIsTurning; }
 	void checkForWalls(QPointF &newPosition, qreal movementSpeed);
+	QPointF Position();
+	QPainter* painter() { return mPainter; }
 
 	
 
 protected:
-	QVector2D Position();
+	
 	void InitializeVisual(QPainter * painter);
 	int mEnergy;
 	qreal mViewRay;
@@ -68,7 +70,7 @@ protected:
 	QVector2D mMovementDirection;
 	Environnement * mEnvironnement;
 	humanoideType mHumanoideType;
-	QVector2D mPosition;
+	QPointF mPosition;
 	QRectF mRectF;
 	QColor mBrushColor;
 	QColor mPenColor;

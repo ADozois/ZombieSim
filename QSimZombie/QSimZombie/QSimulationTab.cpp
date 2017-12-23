@@ -55,6 +55,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	//mLeftLayout->addWidget(view);
 
 	mView = new QGraphicsView;
+	//mView->setSceneRect(0, 0, ParamSim::SceneWidth(), ParamSim::SceneHeight());
 	mLeftLayout->addWidget(mView);
 
 	mMainLayout->addLayout(mLeftLayout);
@@ -88,10 +89,10 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 
 
 	//Current tic counter connect
-	mTimeLord = new TimeLord;
+	/*mTimeLord = new TimeLord;
 	mTim = mTimeLord->Timer();
 
-	connect(mTim, &QTimer::timeout, this, &QSimulationTab::updateTicLabel);
+	connect(mTim, &QTimer::timeout, this, &QSimulationTab::updateTicLabel);*/
 
 
 	//Elapsed Tics
@@ -126,21 +127,7 @@ QSimulationTab::QSimulationTab(QWidget *parent)
 	mMainLayout->addLayout(mLeftLayout);
 	mMainLayout->addLayout(mRightLayout);
 
-	//Connection for buttons
-	connect(mPlayButton, &QPushButton::clicked, mTimeLord, &TimeLord::run);
-	connect(mPlayButton, &QPushButton::clicked, mStepButton, &QPushButton::setEnabled);
-	connect(mPlayButton, &QPushButton::clicked, mPauseButton, &QPushButton::setDisabled);
-	connect(mPlayButton, &QPushButton::clicked, mStopButton, &QPushButton::setDisabled);
-
-	connect(mPauseButton, &QPushButton::clicked, mTimeLord, &TimeLord::pause);
-	connect(mPauseButton, &QPushButton::clicked, mStepButton, &QPushButton::setDisabled);
-
-	connect(mStepButton, &QPushButton::clicked, mTimeLord, &TimeLord::step);
-
-	connect(mStopButton, &QPushButton::clicked, mTimeLord, &TimeLord::stop);
-	connect(mStopButton, &QPushButton::clicked, mPlayButton, &QPushButton::setEnabled);
-	connect(mStopButton, &QPushButton::clicked, mStepButton, &QPushButton::setEnabled);
-	connect(mStopButton, &QPushButton::clicked, mPauseButton, &QPushButton::setEnabled);
+	
 
 
 

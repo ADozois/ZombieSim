@@ -7,10 +7,6 @@ public:
 	~Virus();
 
 	double Strenght();
-	/*bool IsBecomingZombit();
-	void DecTimeRemaining();
-	void DecTimeRemaining(int decrement);
-	bool WillInfect(int humanStrenght);*/
 
 
 private:

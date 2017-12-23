@@ -54,7 +54,7 @@ HumanSpecifier::returnAdvance Children::advance(int phase, int index)
 		}
 		else {
 			mHumanLink->setDirectionTo(mMother->pos());
-			mHumanLink->moveInDirection(Human::movementSpeed::walk);
+			mHumanLink->moveInDirection(Human::movementSpeed::walk, mHumanLink->CurrentEnvironnement()->getHumainDensity(index) + 1);
 		}
 		//L'humain viellit d'un tic (mois)
 		mHumanLink->gainAge();

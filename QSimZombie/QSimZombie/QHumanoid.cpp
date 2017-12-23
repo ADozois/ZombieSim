@@ -188,7 +188,7 @@ void QHumanoid::makeTurn()
 {
 	mMovementDirection = mTurningDirection[mTurningAtPosition];
 	++mTurningAtPosition;
-	moveInDirection(movementSpeed::run);
+	moveInDirection(movementSpeed::run,1);
 	if (mTurningAtPosition > mNumberOfTurningDirection)
 	{
 		mIsTurning = false;
@@ -196,26 +196,27 @@ void QHumanoid::makeTurn()
 
 }
 
-void QHumanoid::moveInDirection(movementSpeed movementSpeed)
+void QHumanoid::moveInDirection(movementSpeed movementSpeed,int const densityModifier)
 {
 	if (movementSpeed == movementSpeed::run)
 	{
 		if (mEnergy)
 		{
-			QPointF newPosition(pos().x() + mMovementDirection.x()*mRunSpeed, pos().y() + mMovementDirection.y()*mRunSpeed);
+			//int densityModifier = mEnvironnement->getHumainDensity();
+			QPointF newPosition(pos().x() + mMovementDirection.x()*(mRunSpeed/ densityModifier), pos().y() + mMovementDirection.y()*(mRunSpeed/ densityModifier));
 			checkForWalls(newPosition, mRunSpeed);
 			this->setPos(newPosition);
 			ReduceEnergy();
 		}
 		else
 		{
-			QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
+			QPointF newPosition(pos().x() + mMovementDirection.x()*(mWalkSpeed/ densityModifier), pos().y() + mMovementDirection.y()*mWalkSpeed/ densityModifier);
 			checkForWalls(newPosition, mWalkSpeed);
 			this->setPos(newPosition);
 		}
 	}
 	else {
-		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed, pos().y() + mMovementDirection.y()*mWalkSpeed);
+		QPointF newPosition(pos().x() + mMovementDirection.x()*mWalkSpeed/ densityModifier, pos().y() + mMovementDirection.y()*mWalkSpeed/ densityModifier);
 		checkForWalls(newPosition, mWalkSpeed);
 		this->setPos(newPosition);
 		AddEnergy();

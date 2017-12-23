@@ -36,21 +36,21 @@ void Zombie::advance(int phase, int const index)
 		{
 			QPointF humanPos = mEnvironnement->getClosestHumanPos(index);
 			setDirectionTo(humanPos);
-			moveInDirection(movementSpeed::run);
+			moveInDirection(movementSpeed::run,1);
 
 		}
 		else if (mEnvironnement->getDistanceToClosestZombie(index) <= mEatingRange)
 		{
 			QPointF zombiPos = mEnvironnement->getClosestZombiPos(index);
 			setDirectionFrom(zombiPos);
-			moveInDirection(movementSpeed::walk);
+			moveInDirection(movementSpeed::walk,1);
 
 		}
 		else
 		{
 			//If no human are in sight, the zombi simply walk to the most populated are
 			setDirectionTo(mEnvironnement->maxDensityPosition());
-			moveInDirection(movementSpeed::walk);
+			moveInDirection(movementSpeed::walk,1);
 		}
 		//We reduce energy twice so the zombi looses energy while walking and also more energy when running
 		ReduceEnergy();

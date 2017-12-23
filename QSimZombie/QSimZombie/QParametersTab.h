@@ -56,7 +56,6 @@ protected:
 	// PARAMETER BUTTONS/SLIDERS
 
 	//Entity quantitites
-	QSpinBox *mZombieCount;
 	QSpinBox *mHumanCount;
 	QSpinBox *mWomanCount;
 	QSpinBox *mMilitaryCount;
@@ -92,20 +91,22 @@ protected:
 
 	//Labels
 	//Entity count labels
-	QLabel *mZombieCountLabel;
 	QLabel *mHumanCountLabel;
 	QLabel *mWomanCountLabel;
 	QLabel *mMilitaryCountLabel;
 	QLabel *mVirusCountLabel;
 
-	static const int entityMinimum{ 1 };
+	static const int entityMinimum{ 10 };
 	static const int entityMaximum{ 500 };
 	static const int mTimeConvert{ 12 };
+	static const int entityMaximumRatio{ 90 };
+	static const int entityMinimumRatio{ 10 };
+	static const int entityMinimumTown{ 1 };
+	static const int entityMaximumTown{ 50 };
 
 
 	//String
 	//Entity Quantity QString
-	static const QString mZombieCountString;
 	static const QString mHumanCountString;
 	static const QString mWomanCountString;
 	static const QString mMilitaryCountString;

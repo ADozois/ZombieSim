@@ -15,6 +15,5 @@ private:
 
 	static const int mBegin;
 	static const int mEnd;
-	static const int mAttackThreshold;
 };
 

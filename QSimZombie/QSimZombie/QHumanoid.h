@@ -44,7 +44,7 @@ public:
 	humanoideType who() { return mHumanoideType; }
 	qreal eatingRange() { return mEatingRange; }
 	//qreal eatingDistance() { return static_cast<qreal>(mSizeHumanoid); }
-	void moveInDirection(movementSpeed movementSpeed);
+	void moveInDirection(movementSpeed movementSpeed, int const densityModifier);
 	void setDirectionTo(QPointF positionTo);
 	void setDirectionFrom(QPointF positionFrom);
 	void makeTurn();

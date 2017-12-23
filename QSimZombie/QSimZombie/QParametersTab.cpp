@@ -130,7 +130,8 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mAverageAge->setValue(40);
 
 	mAverageSpeed = new QSliderAffiche(Qt::Horizontal), mAverageSpeed->setToolTip("Set the initial Average Speed");
-	mAverageSpeed->setRange(10, 50);
+	mAverageSpeed->setRange(1, 100);
+	mAverageSpeed->setValue(50);
 
 	mAverageVirusResistance = new QSliderAffiche(Qt::Horizontal), mAverageVirusResistance->setToolTip("Set the initial Average Virus Resistance");
 	mAverageVirusResistance->setRange(10, 100);

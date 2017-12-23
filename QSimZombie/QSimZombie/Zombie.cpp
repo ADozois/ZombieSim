@@ -11,6 +11,7 @@ const int Zombie::mEnd{100};
 Zombie::Zombie(double x, double y, Environnement *currentEnvironnemnt, humanoideType typeOfHumanoide, QGraphicsItem * parent)
 	: QHumanoid(x, y, currentEnvironnemnt, typeOfHumanoide, parent)
 {
+	mName = "JC";
 	mDeathGenerator = new RandomIntUnif(mBegin, mEnd);
 	QStatSim::IncNbrZombie();
 }

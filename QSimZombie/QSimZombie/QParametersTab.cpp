@@ -127,7 +127,7 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mAverageSpeed = new QSliderAffiche(Qt::Horizontal), mAverageSpeed->setToolTip("Set the initial Average Speed");
 	mAverageSpeed->setRange(10, 50);
 	mAverageVirusResistance = new QSliderAffiche(Qt::Horizontal), mAverageVirusResistance->setToolTip("Set the initial Average Virus Resistance");
-	mAverageSpeed->setRange(0, 100);
+	mAverageSpeed->setRange(10, 100);
 	mReproductionProbability = new QSliderAffiche(Qt::Horizontal), mReproductionProbability->setToolTip("Set the initial Reproduction Probability");
 	mReproductionProbability->setRange(20, 80);
 	mPregnancyDuration = new QSliderAffiche(Qt::Horizontal), mPregnancyDuration->setToolTip("Set the initial Pregnancy Duration");
@@ -153,7 +153,7 @@ QParametersTab::QParametersTab(QWidget *parent)
 	mInfectionProbability = new QSliderAffiche(Qt::Horizontal), mInfectionProbability->setToolTip("Set the Infection Probability");
 	mInfectionProbability->setRange(10, 900);
 	mAverageVirusStrenght = new QSliderAffiche(Qt::Horizontal), mAverageVirusStrenght->setToolTip("Set the Average Virus Strenght");
-	mAverageVirusStrenght->setRange(0, 100);
+	mAverageVirusStrenght->setRange(10, 100);
 	mHumanEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mHumanEnergyDropRate->setToolTip("Set the initial Human Energy Drop Rate");
 	mHumanEnergyDropRate->setRange(10, 80);
 	mZombieEnergyDropRate = new QSliderAffiche(Qt::Horizontal), mZombieEnergyDropRate->setToolTip("Set the initial Zombie Energy Drop Rate");
